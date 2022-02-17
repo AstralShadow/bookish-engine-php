@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use Core\Request;
-use Core\Responses\TemplateResponse;
+use function Extend\LayoutResponseFactory as Page;
 use Core\RequestMethods\GET;
 use Core\RequestMethods\PUT;
 use Core\RequestMethods\POST;
@@ -21,7 +21,8 @@ class Home
     #[GET]
     public static function index()
     {
-        $response = new TemplateResponse(file: "index.html", code: 501);
+//        $response = new TemplateResponse(file: "index.html", code: 501);
+        $response = Page("index.html", 501);
 
         return $response;
     }

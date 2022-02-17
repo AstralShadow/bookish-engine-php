@@ -1,5 +1,8 @@
 <?php
 
+define("DEBUG_AUTOLOAD_LOG", 1);
+
+require "Extend/LayoutResponseFactory.php";
 require "Core/autoload.php";
 
 $router = new Core\Router();

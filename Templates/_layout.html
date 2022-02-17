@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="bg">
+    <head>
+        <meta charset="utr-8" />
+        <meta name="viewport"
+           content="width=device-width, inital-scale=1.0">
+
+        <title> ${Title=My site} </title>
+        
+        <link href="${path:style/main.css}"
+              type="text/css"
+              rel="stylesheet" />
+    </head>
+    <body>
+        <main-container class="prim-bg pos-fixed
+                               pos-center round-border"
+        >
+            ${parse:${_page=404}}
+        </main-container>
+    </body>
+</html>
