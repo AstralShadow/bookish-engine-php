@@ -1,5 +1,5 @@
 <?php
-namespace Controllers;
+namespace API;
 
 use \Core\Request;
 use \Core\Responses\ApiResponse;

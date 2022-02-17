@@ -4,8 +4,8 @@ require "Core/autoload.php";
 
 $router = new Core\Router();
 $router->add("\Controllers\Home", "/");
-$router->add("\Controllers\Session", "api/session");
-$router->add("\Controllers\User", "api/user");
+$router->add("\API\Session", "api/session");
+$router->add("\API\User", "api/user");
 
 $engine = new Core\Controller($router);
 
