@@ -1,0 +1,22 @@
+.no-border {
+    border: 0px;
+}
+
+.border {
+    border: 2px solid black;
+    padding: 6px;
+}
+
+.round-border {
+    border: 2px solid black;
+    border-radius: 125px/10px;
+    padding: 10px;
+}
+
+.round-border.pos-left-out {
+    /* border-radius */
+}
+
+.round-border.pos-right-out {
+    /* border-radius */
+}

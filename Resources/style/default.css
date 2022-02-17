@@ -1,0 +1,16 @@
+body {
+    background: url("../img/bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    /*
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bg.jpg', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/bg.jpg', sizingMethod='scale')";
+    */
+}
+
+hr {
+    margin: 0px;
+    border: 1px solid black;
+}

@@ -1,0 +1,63 @@
+.pos-fixed {
+    position: fixed;
+}
+
+.pos-fixed.pos-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pos-center {
+    margin: 0px auto;
+}
+
+.pos-left-out {
+    position: absolute;
+    top: 5%;
+    right: 100%;
+    box-sizing: border-box;
+    height: 90%;
+}
+
+.pos-bottom-out {
+    position: absolute;
+    top: 100%;
+}
+
+.pos-bottom-out.pos-center {
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.pos-right-out {
+    position: absolute;
+    top: 5%;
+    left: 100%;
+    box-sizing: border-box;
+    height: 90%;
+}
+
+h-flex {
+    display: flex;
+}
+
+h-flex > * {
+    flex: 1;
+    margin: 5px;
+}
+
+.hflex {
+    display: flex;
+}
+.hflex > * {
+    margin: 5px;
+}
+
+.fleft {
+    float: left;
+}
+
+.fright {
+    float: right;
+}

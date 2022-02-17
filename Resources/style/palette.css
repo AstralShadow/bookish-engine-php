@@ -1,0 +1,13 @@
+:root {
+    --light-color: #B4EDB8;
+    --prim-color: #6ac66d;
+    --sec-color: #4e9556;
+}
+
+.prim-bg {
+    background-color: var(--prim-color); 
+}
+
+.sec-bg {
+    background-color: var(--sec-color);
+}

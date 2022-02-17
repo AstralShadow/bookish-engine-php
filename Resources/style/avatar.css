@@ -1,0 +1,60 @@
+#user_home_header {
+    padding-bottom: 32pt;
+}
+
+user-avatar {
+    display: block;
+    background-image: url("../img/avatar.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--light-color);
+    border: 2px solid black;
+    border-radius: 256px;
+    overflow: visible;
+    position: relative;
+}
+
+user-currency {
+    display: block;
+    background-image: url("../img/currency.png");
+    background-size: 100%;
+    font-size: 200%;
+}
+
+user-title {
+    display: block;
+    font-size: 200%;
+    background: black;
+    color: white;
+    width: 100%;
+    /*border-radius: 75px 75px 75px 10px/25px 25px 25px 25px;*/
+    border-radius: 75px/25px;
+    z-index: 40;
+}
+
+user-title::after {
+    display: block;
+    content: ".";
+    position: absolute;
+    background: black;
+    left: -5px;
+    bottom: -10px;
+    width: 80px;
+    height: 40px;
+    color: black;
+    overflow: hidden;
+    border-radius: 50px 0px;
+    transform: rotate(5deg) skewX(-30deg);
+    z-index: 49;
+}
+
+user-title > * {
+    z-index: 50;
+    position: relative;
+}
+
+
+user-title.pos-bottom-out {
+    top: 85%;
+}
+

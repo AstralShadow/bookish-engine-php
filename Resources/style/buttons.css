@@ -1,0 +1,37 @@
+.hidden { display: none; }
+
+.button { cursor: pointer; }
+
+.button.upload, .button.config, .button.warning {
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    
+    display: block;
+    box-sizing: border-box;
+    border-radius: 128px;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.button.upload:active, .button.config:active, .button.warning:active {
+    border-width: 3px;
+}
+
+.button.upload, .button.warning {
+    border-color: black;
+    background-color: var(--light-color);
+}
+
+.button.config {
+    background-image: url("../img/config.png");
+    border-color: transparent;
+}
+
+.button.upload {
+    background-image: url("../img/upload.png");
+}
+
+.button.warning {
+    background-image: url("../img/warning.png");
+}

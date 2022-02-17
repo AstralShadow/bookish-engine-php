@@ -1,0 +1,7 @@
+._32px { height: 32px; width: 32px; }
+._48px { height: 48px; width: 48px; }
+._64px { height: 64px; width: 64px; }
+._128px { height: 128px; width: 128px; }
+._256px { height: 256px; width: 256px; }
+
+.width80 { min-width: 80%; }
