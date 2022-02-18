@@ -32,7 +32,7 @@ class User extends Entity
     public string $Name;
     protected string $Password;
 
-    # public ?FileType $AvatarType;
+    public ?FileType $AvatarType;
     public ?string $Avatar = null;
     public \DateTime $CreateTime;
 
