@@ -19,26 +19,39 @@ class User
     #[POST]
     public static function createUser()
     {
-        if (
-            !isset($_POST["name"], $_POST["password"]) ||
+        if (!isset($_POST["name"], $_POST["password"]) ||
             !is_string($_POST["name"]) ||
-            !is_string($_POST["password"])
-        ){
+            !is_string($_POST["password"]))
+        {
             $response = new ApiResponse(400);
             $response->echo([
-                "error" => "Изпратете name и password за да създадете акаунт"
-                // Send name and password to create account
+                "error" => "Въведете name и password " .
+                    "за да създадете акаунт"
+                // Insert name and password
+                // to create account
             ]);
             return $response;
         }
+
         $name = trim($_POST["name"]);
         $pwd = trim($_POST["password"]);
 
         if (strlen($name) < 2){
             $response = new ApiResponse(400);
             $response->echo([
-                "error" => "Моля попълнете име и парола"
-                // Please, fill the name and password fields
+                "error" =>
+                    "Името трябва да съдържа " .
+                    "поне 3 символа"
+            ]);
+            return $response;
+        }
+
+        if (strlen($pwd) < 6){
+            $response = new ApiResponse(400);
+            $response->echo([
+                "error" =>
+                    "Паролата трябва да съдържа".
+                    " поне 6 символа."
             ]);
             return $response;
         }

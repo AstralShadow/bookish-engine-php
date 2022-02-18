@@ -1,6 +1,7 @@
 create database learning_res_simple;
 create user 'student_app_2'@'localhost' identified by 'student_app_2_password';
-grant all privileges on learning_resources.* to 'student_app_2'@'localhost';
+grant all privileges on learning_res_simple.* to 'student_app_2'@'localhost';
+revoke privileges on learning_resources.* from 'student_app_2'@'localhost';
 flush privileges;
 
 use learning_res_simple;
@@ -25,7 +26,7 @@ create table Users(
 	UserId int primary key auto_increment,
 
     Name nvarchar(80) not null,
-    PasswordHash binary(60) not null,
+    Password binary(60) not null,
     # Email nvarchar(120) not null,
     # EmailConfirmed bool not null default false,
 
@@ -42,6 +43,9 @@ create table Users(
     constraint UsersBlockedBy foreign key(BlockedBy)
         references Users(UserId)
 );
+
+# alter table Users drop PasswordHash;
+# alter table Users add Password binary(60) not null;
 
 CREATE TABLE Sessions
 (

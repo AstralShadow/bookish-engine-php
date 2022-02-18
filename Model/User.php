@@ -20,20 +20,20 @@ class User extends Entity
 {
 
     public string $Name;
-    private string $PasswordHash;
+    protected string $Password;
 
-    public string? $Avatar = null;
+    public ?string $Avatar = null;
     public \DateTime $CreateTime;
 
-    public \DateTime? $BlockTime = null;
-    public User? $BlockedBy = null;
-    public string? $BlockReason = null;
+    public ?\DateTime $BlockTime = null;
+    public ?User $BlockedBy = null;
+    public ?string $BlockReason = null;
 
     public function __construct(string $name,
                                 string $password)
     {
         $this->Name = $name;
-        $this->PasswordHash =
+        $this->Password =
             password_hash($password, PASSWORD_BCRYPT);
         $this->CreateTime = new \DateTime();
         parent::__construct();
@@ -47,7 +47,7 @@ class User extends Entity
         if(!isset($user))
             return null;
 
-        if(!password_verify($password, $user->password))
+        if(!password_verify($password, $user->Password))
             return null;
         
         return $user;
