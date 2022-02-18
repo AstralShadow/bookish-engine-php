@@ -70,18 +70,18 @@ create table Roles(
    # CanGiveawayResources bool not null default false, # owner of resource can
 
     CanResolveReports bool not null default false,
-    CanCreateReportReasons bool not null default false,
-    CanReportCustomReasons bool not null default false,
+   # CanCreateReportReasons bool not null default false,
+   # CanReportCustomReasons bool not null default false,
 
     CanApproveResources bool not null default false,
     CanCreateTags bool not null default false,
     CanApproveTags bool not null default false, # owned of resource can
     CanProposeTags bool not null default false # owner of resource can
 );
-insert into Roles value (null, "admin",       1, 1, 1, /*1,*/ 1, 1, 1, 1, 1, 1, 1);
-insert into Roles value (null, "moderator",   0, 0, 1, /*0,*/ 1, 1, 1, 1, 1, 1, 1);
-insert into Roles value (null, "veteran",     0, 0, 0, /*0,*/ 0, 0, 1, 1, 1, 1, 1);
-insert into Roles value (null, "member",      0, 0, 0, /*0,*/ 0, 0, 1, 0, 0, 0, 1);
+insert into Roles value (null, "admin",       1, 1, 1, /*1,*/ 1, /* 1, 1,*/ 1, 1, 1, 1);
+insert into Roles value (null, "moderator",   0, 0, 1, /*0,*/ 1, /* 1, 1,*/ 1, 1, 1, 1);
+insert into Roles value (null, "veteran",     0, 0, 0, /*0,*/ 0, /* 0, 1,*/ 1, 1, 1, 1);
+insert into Roles value (null, "member",      0, 0, 0, /*0,*/ 0, /* 0, 1,*/ 0, 0, 0, 1);
 # There is better version in no-raw sql
 # admin is given to me (as website host)
 # moderator is given to people that admin approves personally.
@@ -89,19 +89,19 @@ insert into Roles value (null, "member",      0, 0, 0, /*0,*/ 0, 0, 1, 0, 0, 0, 
 # member is given to people who actually use the app.
 
 create table UserRoles(
-	UserId int not null,
-    RoleId int not null,
+	User int not null,
+    Role int not null,
     CreateTime datetime not null default current_timestamp,
     AssignedBy int not null,
     Reason text default null,
     
-    primary key (UserId, RoleId),
+    primary key (User, Role),
     
-    CONSTRAINT RoleUsersUser FOREIGN KEY (UserId)
+    CONSTRAINT RoleUsersUser FOREIGN KEY (User)
 		REFERENCES Users(UserId),
     CONSTRAINT RoleUsersAssigner FOREIGN KEY (AssignedBy)
 		REFERENCES Users(UserId),
-    CONSTRAINT RoleUsersRole FOREIGN KEY (RoleId)
+    CONSTRAINT RoleUsersRole FOREIGN KEY (Role)
 		REFERENCES Roles(RoleId)
 );
 

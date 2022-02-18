@@ -6,6 +6,7 @@ define("DEBUG_PRINT_QUERY_TYPES", 1);
 require "Extend/layoutResponseFactory.php";
 require "Extend/generateToken.php";
 require "Extend/redirect.php";
+require "Extend/Permissions.php";
 
 require "Core/autoload.php";
 
