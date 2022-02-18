@@ -15,7 +15,7 @@
 
     <label>
         Парола:
-        <input name="pwd" type="password"
+        <input name="password" type="password"
                autocomplete="current-password" />
     </label>
     <br />
@@ -23,6 +23,9 @@
     <input name="csrf" type="hidden" value="${csrf}" />
 
     <button type="submit">Влез</button>
+    <br />
+
+    <span>${error=}</span>
 </form>
 <footer>
     Нямаш регистрация? <br />

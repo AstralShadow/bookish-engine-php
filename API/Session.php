@@ -26,7 +26,8 @@ class Session
         if (!isset($session)){
             $response = new ApiResponse(404);
             $response->echo([
-                "error" => "Невалидна сесия" // Invalid session
+                "error" => "Невалидна сесия"
+                // Invalid session
             ]);
             return $response;
         }
@@ -50,7 +51,8 @@ class Session
         ){
             $response = new ApiResponse(400);
             $response->echo([
-                "error" => "Изпратете name и password за да влезете"
+                "error" => "Изпратете name и password" .
+                    " за да влезете"
                 // Send name and password to authenticate
             ]);
             return $response;

@@ -94,7 +94,7 @@ class User
         if (!isset($session)){
             $response = new ApiResponse(403);
             $response->echo([
-                "error" => "Достъпът отказан" // Access denied
+                "error" => "Достъпът отказан"
             ]);
             return $response;
         }
