@@ -6,10 +6,18 @@
     text-align: left;
 }
 
+.text-top {
+    vertical-align: text-top;
+}
+
 .text-right {
     text-align: right;
 }
 
 .text-justify {
     text-align: justify;
+}
+
+.white-text {
+    color: white;
 }

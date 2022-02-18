@@ -11,3 +11,7 @@
 .sec-bg {
     background-color: var(--sec-color);
 }
+
+.light-bg {
+    background-color: var(--light-color);
+}
