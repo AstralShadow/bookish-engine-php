@@ -1,0 +1,58 @@
+﻿<aside class="sec-bg round-border pos-right-out">
+    Изисквания за името:
+    <ul class="text-left">
+        <li> asd </li>
+    </ul>
+</aside>
+<aside class="sec-bg round-border pos-left-out">
+    Изисквания за паролата:
+    <ul class="text-left">
+        <li> asd </li>
+    </ul>
+</aside>
+
+<header>
+    ${Title=Заглавие}
+</header>
+
+<form class="border sec-bg" method="post">
+    <header>
+        Регистрация:
+    </header>
+
+    <label>
+        Име:
+        <input name="name" type="text"
+               autocomplete="username" />
+    </label>
+    <br />
+    
+    <label>
+        Парола:
+        <input name="password" type="password"
+               autocomplete="new-password" />
+    </label>
+    <br />
+    
+    <label>
+        Повтори паролата:
+        <input name="password2" type="password"
+               autocomplete="new-password" />
+    </label>
+    <br />
+
+    <input name="csrf" type="hidden" value="${csrf}" />
+
+    <button type="submit">
+        Регистрирай се
+    </button>
+
+    <br />
+    <span> ${error=} </span>
+</form>
+<footer>
+    Вече имаш регистрация? <br />
+    <a href="./login">
+        Влез в профила си!
+    </a>
+</footer>

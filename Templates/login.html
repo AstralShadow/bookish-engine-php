@@ -1,0 +1,32 @@
+﻿<header>
+    ${Title=Заглавие}
+</header>
+<form class="border sec-bg" method="post">
+    <header>
+        Вход:
+    </header>
+
+    <label>
+        Име:
+        <input name="name" type="text"
+               autocomplete="username"/>
+    </label>
+    <br />
+
+    <label>
+        Парола:
+        <input name="pwd" type="password"
+               autocomplete="current-password" />
+    </label>
+    <br />
+
+    <input name="csrf" type="hidden" value="${csrf}" />
+
+    <button type="submit">Влез</button>
+</form>
+<footer>
+    Нямаш регистрация? <br />
+    <a href="./register">
+        Регистрирай се!
+    </a>
+</footer>
