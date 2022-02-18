@@ -5,6 +5,8 @@ define("DEBUG_PRINT_QUERY_TYPES", 1);
 
 require "Extend/layoutResponseFactory.php";
 require "Extend/generateToken.php";
+require "Extend/redirect.php";
+
 require "Core/autoload.php";
 
 $router = new Core\Router();

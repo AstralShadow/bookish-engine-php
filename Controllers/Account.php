@@ -12,6 +12,7 @@ use Core\Responses\InstantResponse;
 
 use function Extend\layoutResponseFactory as Page;
 use function Extend\generateToken;
+use function Extend\redirect;
 use Model\Session;
 use Model\User;
 
@@ -49,12 +50,7 @@ class Account
     {
         $session = Session::fromCookie();
         if(isset($session))
-        {
-            $response = new InstantResponse(303);
-            $next = $_GET["next"] ?? "./";
-            $response->setHeader("Location", $next);
-            return $response;
-        }
+            return redirect();
 
         $response = Page("login.html");
         $response->setValue
@@ -104,12 +100,7 @@ class Account
     {
         $session = Session::fromCookie();
         if(isset($session))
-        {
-            $response =  new InstantResponse(303);
-            $next = $_GET["next"] ?? "./";
-            $response->setHeader("Location", $next);
-            return $response;
-        }
+            return redirect();
 
         $response = Page("register.html");
         $response->setValue
@@ -160,12 +151,7 @@ class Account
         if(isset($session))
             Session::delete($session->getId());
 
-        $next = $_GET["next"] ?? "./";
-        
-        $response =  new InstantResponse(303);
-        $response->setHeader("Location", $next);
-
-        return $response;
+        return redirect();
     }
 
 }
