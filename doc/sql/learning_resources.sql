@@ -1,7 +1,7 @@
 create database learning_res_simple;
 create user 'student_app_2'@'localhost' identified by 'student_app_2_password';
 grant all privileges on learning_res_simple.* to 'student_app_2'@'localhost';
-revoke privileges on learning_resources.* from 'student_app_2'@'localhost';
+# revoke privileges on learning_resources.* from 'student_app_2'@'localhost';
 flush privileges;
 
 use learning_res_simple;
@@ -44,9 +44,6 @@ create table Users(
         references Users(UserId)
 );
 
-# alter table Users drop PasswordHash;
-# alter table Users add Password binary(60) not null;
-
 CREATE TABLE Sessions
 (
     SessionId INT PRIMARY KEY AUTO_INCREMENT,
@@ -74,6 +71,7 @@ create table Roles(
    # CanReportCustomReasons bool not null default false,
 
     CanApproveResources bool not null default false,
+    
     CanCreateTags bool not null default false,
     CanApproveTags bool not null default false, # owned of resource can
     CanProposeTags bool not null default false # owner of resource can
@@ -82,7 +80,6 @@ insert into Roles value (null, "admin",       1, 1, 1, /*1,*/ 1, /* 1, 1,*/ 1, 1
 insert into Roles value (null, "moderator",   0, 0, 1, /*0,*/ 1, /* 1, 1,*/ 1, 1, 1, 1);
 insert into Roles value (null, "veteran",     0, 0, 0, /*0,*/ 0, /* 0, 1,*/ 1, 1, 1, 1);
 insert into Roles value (null, "member",      0, 0, 0, /*0,*/ 0, /* 0, 1,*/ 0, 0, 0, 1);
-# There is better version in no-raw sql
 # admin is given to me (as website host)
 # moderator is given to people that admin approves personally.
 # veteran is given to loyal people (they use the app a lot).
@@ -91,6 +88,7 @@ insert into Roles value (null, "member",      0, 0, 0, /*0,*/ 0, /* 0, 1,*/ 0, 0
 create table UserRoles(
 	User int not null,
     Role int not null,
+    
     CreateTime datetime not null default current_timestamp,
     AssignedBy int not null,
     Reason text default null,
@@ -111,7 +109,7 @@ create table UserRoles(
 create table Resources(
 	ResourceId int primary key auto_increment,
     Name nvarchar(150) not null,
-    OwnerId int not null,
+    Owner int not null,
     Description text default null,
     CreateTime datetime not null default current_timestamp,
     
@@ -126,7 +124,7 @@ create table Resources(
     ApproveNote text default null,
     ApprovedBy int default null,
     
-	Constraint ResourcesDataOwnedId foreign key(OwnerId)
+	Constraint ResourcesDataOwnedId foreign key(Owner)
 		references Users(UserId),
     Constraint ResourcesDataType foreign key(DataType)
 		references FileTypes(FileTypeId),
@@ -137,16 +135,16 @@ create table Resources(
 );
 
 create table UserResourceAccess(
-	UserId int not null,
-    ResourceId int not null,
+	User int not null,
+    Resource int not null,
     AccureTime datetime not null default current_timestamp,
     CurrencyValue int not null default 1, # for the sake of donating custom value
     ProvidedBy int default null, # for the sake of gifting the resource
     
-    primary key (UserId, ResourceId),
-    Constraint UserResourceAccessUserId foreign key(UserId)
+    primary key (User, Resource),
+    Constraint UserResourceAccessUserId foreign key(User)
 		references Users(UserId),
-    Constraint UserResourceAccessResourceId foreign key(ResourceId)
+    Constraint UserResourceAccessResourceId foreign key(Resource)
 		references Resources(ResourceId)
 );
 
@@ -155,47 +153,37 @@ create table UserResourceAccess(
 
 create table ResourceFeedbacks(
     ResourceFeedbackId int primary key auto_increment,
-    ResourceId int not null,
-    UserId int not null,
+    Resource int not null,
+    User int not null,
     Message text,
     Rating tinyint not null, # values between 0 and 100, implementation defined
     # Public bool not null default true, # May change that to more sophiscated comment section
 
-    Constraint ResourceFeedbacksResourceId foreign key(ResourceId)
+    Constraint ResourceFeedbacksResourceId foreign key(Resource)
         references Resources(ResourceId),
-    Constraint ResourceFeedbacksUserID foreign key(UserId)
+    Constraint ResourceFeedbacksUserID foreign key(User)
         references Users(UserId)
 );
 
 
 # Report #
 
-create table ReportReasons(
-    ReportReasonId int primary key auto_increment, # with null meaning Other
-    Name nvarchar(150)
-);
-# example values: inappropriate content; wrongly tagged content; inaccurate info
-# different from the preview; exactly same as the preview (without mentioned)
-
 create table ResourceReports(
     ResourceReportId int primary key auto_increment,
-    ResourceId int not null,
+    Resource int not null,
     CreateTime datetime not null default current_timestamp,
 
     FiredBy int not null,
-    ReportReasonId int default null,
     Message Text default null,
 
     ResolvedBy int default null,
     ResolveMessage Text default null,
     ResolveTime datetime default null,
 
-    constraint ResourceReportsResourceId foreign key(ResourceId)
+    constraint ResourceReportsResourceId foreign key(Resource)
         references Resources(ResourceId),
     constraint ResourceReportsFiredBy foreign key(FiredBy)
         references Users(UserId),
-    constraint ResourceReportsReportReasonId foreign key(ReportReasonId)
-        references ReportReasons(ReportReasonId),
     constraint ResourceReportsResolvedBy foreign key(ResolvedBy)
         references Users(UserId)
 );
@@ -212,29 +200,31 @@ create table Tags(
     Description Text default null,
     # they are really supposed to be self-explainatory, so ideally, don not use this
 
-    CreatorId int not null,
+    Creator int not null,
     CreateTime datetime not null default current_timestamp,
     
-    Constraint TagsCreatorId foreign key(CreatorId)
+    Constraint TagsCreatorId foreign key(Creator)
         references Users(UserId)
 );
 
 create table TagRelations(
-    SuperTagId int not null,
-    SubTagId int not null,
-    CreatorId int not null,
+    SuperTag int not null,
+    SubTag int not null,
+    Creator int not null,
     CreateTime datetime not null default current_timestamp,
 
-    primary key(SuperTagId, SubTagId),
-    Constraint TagRelationsSuperTagId foreign key(SuperTagId)
+    primary key(SuperTag, SubTag),
+    Constraint TagRelationsSuperTagId foreign key(SuperTag)
         references Tags(TagId),
-    Constraint TagRelationsSubTagId foreign key(SubTagId)
+    Constraint TagRelationsSubTagId foreign key(SubTag)
+        references Tags(TagId),
+    Constraint TagRelationsCreatorId foreign key(Creator)
         references Tags(TagId)
 );
 
 create table ResourceTags(
-    ResourceId int not null,
-    TagId int not null,
+    Resource int not null,
+    Tag int not null,
     
     ProposedBy int not null,
     ProposeTime datetime not null default current_timestamp,
@@ -242,10 +232,10 @@ create table ResourceTags(
     ApprovedBy int not null,
     ApproveTime datetime default null,
 
-    primary key(ResourceId, TagId),
-    constraint ResourceTagsResourceId foreign key(ResourceId)
+    primary key(Resource, Tag),
+    constraint ResourceTagsResourceId foreign key(Resource)
         references Resources(ResourceId),
-    constraint ResourceTagsTagId foreign key(TagId)
+    constraint ResourceTagsTagId foreign key(Tag)
         references Tags(TagId),
     constraint ResourceTagsProposedBy foreign key(ProposedBy)
         references Users(UserId),
