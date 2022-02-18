@@ -8,6 +8,7 @@ use Core\RequestMethods\POST;
 use Core\RequestMethods\DELETE;
 use Core\RequestMethods\Fallback;
 use Core\RequestMethods\StartUp;
+use Core\Responses\InstantResponse;
 
 use function Extend\layoutResponseFactory as Page;
 use function Extend\generateToken;
@@ -46,6 +47,15 @@ class Account
     #[POST("/login")]
     public static function login(Request $r)
     {
+        $session = Session::fromCookie();
+        if(isset($session))
+        {
+            $response = new InstantResponse(303);
+            $next = $_GET["next"] ?? "./";
+            $response->setHeader("Location", $next);
+            return $response;
+        }
+
         $response = Page("login.html");
         $response->setValue
             ("csrf", self::generateToken());
@@ -92,6 +102,15 @@ class Account
     #[POST("/register")]
     public static function register(Request $r)
     {
+        $session = Session::fromCookie();
+        if(isset($session))
+        {
+            $response =  new InstantResponse(303);
+            $next = $_GET["next"] ?? "./";
+            $response->setHeader("Location", $next);
+            return $response;
+        }
+
         $response = Page("register.html");
         $response->setValue
             ("csrf", self::generateToken());
@@ -131,6 +150,22 @@ class Account
             </script>
             EOD;
         return $error("Регистрацията беше успешна.$flw");
+    }
+
+    #[GET("/logout")]
+    #[POST("/logout")]
+    public static function logout()
+    {
+        $session = Session::fromCookie();
+        if(isset($session))
+            Session::delete($session->getId());
+
+        $next = $_GET["next"] ?? "./";
+        
+        $response =  new InstantResponse(303);
+        $response->setHeader("Location", $next);
+
+        return $response;
     }
 
 }
