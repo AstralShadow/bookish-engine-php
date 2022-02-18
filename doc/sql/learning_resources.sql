@@ -120,9 +120,9 @@ create table Resources(
     PreviewName nvarchar(150) default null, # as the downloaded file name, if applicable (use for extension)
     Preview blob not null,
     
-    Approved bool default null,
     ApproveNote text default null,
     ApprovedBy int default null,
+    ApproveTime datetime default null,
     
 	Constraint ResourcesDataOwnedId foreign key(Owner)
 		references Users(UserId),
@@ -151,10 +151,13 @@ create table UserResourceAccess(
 
 # Feedback #
 
-create table ResourceFeedbacks(
+create table ResourceFeedback(
     ResourceFeedbackId int primary key auto_increment,
+    
     Resource int not null,
     User int not null,
+    CreateTime datetime not null default current_timestamp,
+
     Message text,
     Rating tinyint not null, # values between 0 and 100, implementation defined
     # Public bool not null default true, # May change that to more sophiscated comment section

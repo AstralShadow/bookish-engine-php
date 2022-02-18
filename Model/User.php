@@ -9,23 +9,30 @@ use Core\Attributes\TraceLazyLoad;
 use Extend\Permissions;
 
 
-#[Table("Users")]
-#[PrimaryKey("UserId")]
 #[TraceLazyLoad("\Model\Session", "Sessions")]
-#[TraceLazyLoad("\Model\Resource",
-                    "OwnedResources")]
-#[TraceLazyLoad("\Model\UserResourceAccess",
+
+#[TraceLazyLoad("\Model\Resource", "OwnedResources")]
+#[TraceLazyLoad("\Model\Resource", "ApprovedResources")]
+#[TraceLazyLoad("\Model\Junction\UserResourceAccess",
                     "AccuredResources")]
+#[TraceLazyLoad("\Model\Junction\UserResourceAccess",
+                    "ProvidedResources")]
+
 #[TraceLazyLoad("\Model\ResourceFeedback",
                     "ProvidedFeedback")]
+
 #[TraceLazyLoad("\Model\ResourceReport",
                     "FiredReports")]
-#[TraceLazyLoad("\Model\ResolvedReports",
+#[TraceLazyLoad("\Model\ResolvedReport",
                     "ResolvedReports")]
+
 #[TraceLazyLoad("\Model\Junction\UserRole",
                     "AssignedRoles")]
 #[TraceLazyLoad("\Model\Junction\UserRole",
                     "Roles")]
+
+#[Table("Users")]
+#[PrimaryKey("UserId")]
 class User extends Entity
 {
 
