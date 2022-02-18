@@ -99,7 +99,7 @@ class User
             return $response;
         }
 
-        $user = $session->user;
+        $user = $session->User;
 
         $response = new ApiResponse(200);
         $response->echo($user);
@@ -117,7 +117,7 @@ class User
             ]);
             return $response;
         }
-        $user = $session->user;
+        $user = $session->User;
         foreach ($user->getSessions() as $session){
             MSession::delete($session);
         }

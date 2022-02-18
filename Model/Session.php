@@ -16,11 +16,11 @@ class Session extends Entity
     const COOKIE_NAME = "LearningResourcesSession";
     const POST_KEY = "token";
 
-    protected string $token;
-    public \DateTime $created;
+    protected string $Token;
+    public \DateTime $Created;
 
-    #[Traceable("sessions")]
-    public User $user;
+    #[Traceable("Sessions")]
+    public User $User;
 
     public function __construct(User $user)
     {
@@ -32,7 +32,7 @@ class Session extends Entity
 
     public function token() : string
     {
-        return $this->token;
+        return $this->Token;
     }
 
     public static function fromToken(string $token)

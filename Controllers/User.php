@@ -26,7 +26,7 @@ class User
     {
         self::$session = Session::fromCookie();
         if(isset(self::$session))
-            self::$user = self::$session->user;
+            self::$user = self::$session->User;
     }
 
     #[GET("/user")]

@@ -50,11 +50,11 @@ create table Users(
 CREATE TABLE Sessions
 (
     SessionId INT PRIMARY KEY AUTO_INCREMENT,
-    token CHAR(36) NOT NULL UNIQUE,
-    user INT NOT NULL,
-    created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Token CHAR(36) NOT NULL UNIQUE,
+    User INT NOT NULL,
+    Created DATETIME DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (user)
+    FOREIGN KEY (User)
         REFERENCES Users(UserId)
 );
 

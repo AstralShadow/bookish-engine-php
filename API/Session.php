@@ -34,8 +34,8 @@ class Session
 
         $response = new ApiResponse(200);
         $response->echo([
-            "user" => $session->user->name,
-            "loginTime" => $session->created,
+            "user" => $session->user->Name,
+            "loginTime" => $session->Created,
             "token" => $session->token()
         ]);
         return $response;
