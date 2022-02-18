@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use Core\Request;
-use function Extend\LayoutResponseFactory as Page;
+use function Extend\layoutResponseFactory as Page;
 use Core\RequestMethods\GET;
 use Core\RequestMethods\PUT;
 use Core\RequestMethods\POST;
