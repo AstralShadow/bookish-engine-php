@@ -211,18 +211,18 @@ create table Tags(
 );
 
 create table TagRelations(
-    SuperTag int not null,
-    SubTag int not null,
+    Supertag int not null,
+    Subtag int not null,
     Creator int not null,
     CreateTime datetime not null default current_timestamp,
 
-    primary key(SuperTag, SubTag),
-    Constraint TagRelationsSuperTagId foreign key(SuperTag)
+    primary key(Supertag, Subtag),
+    Constraint TagRelationsSuperTagId foreign key(Supertag)
         references Tags(TagId),
-    Constraint TagRelationsSubTagId foreign key(SubTag)
+    Constraint TagRelationsSubTagId foreign key(Subtag)
         references Tags(TagId),
     Constraint TagRelationsCreatorId foreign key(Creator)
-        references Tags(TagId)
+        references Users(UserId)
 );
 
 create table ResourceTags(
@@ -232,8 +232,9 @@ create table ResourceTags(
     ProposedBy int not null,
     ProposeTime datetime not null default current_timestamp,
 
-    ApprovedBy int not null,
+    ApprovedBy int default null,
     ApproveTime datetime default null,
+
 
     primary key(Resource, Tag),
     constraint ResourceTagsResourceId foreign key(Resource)

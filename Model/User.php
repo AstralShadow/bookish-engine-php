@@ -31,6 +31,13 @@ use Extend\Permissions;
 #[TraceLazyLoad("\Model\Junction\UserRole",
                     "Roles")]
 
+#[TraceLazyLoad("\Model\Junction\ResourceTag",
+                    "ProposedTags")]
+#[TraceLazyLoad("\Model\Junction\ResourceTag",
+                    "ApprovedTags")]
+#[TraceLazyLoad("\Model\Junction\TagRelation",
+                    "LinkedTags")]
+
 #[Table("Users")]
 #[PrimaryKey("UserId")]
 class User extends Entity

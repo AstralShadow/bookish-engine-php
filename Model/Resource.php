@@ -49,7 +49,7 @@ class Resource extends Entity
         $this->Owner = $owner;
         $this->CreateTime = new \DateTime();
 
-        $this->approve($owner);
+        $this->approve($owner, false);
 
         parent::__construct();
     }
