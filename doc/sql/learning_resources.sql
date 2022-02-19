@@ -1,3 +1,4 @@
+drop database learning_res_simple;
 create database learning_res_simple;
 create user 'student_app_2'@'localhost' identified by 'student_app_2_password';
 grant all privileges on learning_res_simple.* to 'student_app_2'@'localhost';

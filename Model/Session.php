@@ -24,9 +24,9 @@ class Session extends Entity
 
     public function __construct(User $user)
     {
-        $this->user = $user;
-        $this->token = generateToken();
-        $this->created = new \DateTime();
+        $this->User = $user;
+        $this->Token = generateToken();
+        $this->Created = new \DateTime();
         parent::__construct();
     }
 
@@ -38,7 +38,7 @@ class Session extends Entity
     public static function fromToken(string $token)
         : ?Session
     {
-        $sessions = self::find(["token" => $token]);
+        $sessions = self::find(["Token" => $token]);
         return $sessions ? $sessions[0] : null;
     }
 
@@ -60,7 +60,7 @@ class Session extends Entity
 
     public function saveInCookie() : void
     {
-        setcookie(self::COOKIE_NAME, $this->token);
+        setcookie(self::COOKIE_NAME, $this->Token);
     }
 
     public static function fromPOST() : ?Session
