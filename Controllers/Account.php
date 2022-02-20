@@ -13,36 +13,12 @@ use Core\Responses\InstantResponse;
 use function Extend\layoutResponseFactory as Page;
 use function Extend\generateToken;
 use function Extend\redirect;
+use Extend\CSRFTokenManager as CSRF;
 use Model\Session;
 use Model\User;
 
 class Account
 {
-    const TOKEN_COOKIE = "LearningResourcesCSRFToken";
-
-    private static bool $isValidCSRFToken = false;
-
-
-    #[StartUp]
-    public static function verifyCSRFToken()
-    {
-        if(!isset($_POST["csrf"]))
-            return;
-
-        $token = $_COOKIE[self::TOKEN_COOKIE] ?? null;
-
-        if($token === $_POST["csrf"])
-            self::$isValidCSRFToken = true;
-    }
-
-    private static
-    function generateToken() : string
-    {
-        $token = generateToken();
-        setcookie(self::TOKEN_COOKIE, $token);
-
-        return $token;
-    }
 
     #[GET("/login")]
     #[POST("/login")]
@@ -53,8 +29,7 @@ class Account
             return redirect();
 
         $response = Page("login.html");
-        $response->setValue
-            ("csrf", self::generateToken());
+        $response->setValue("csrf", CSRF::get());
 
         if(!isset($_POST["name"], $_POST["password"])
             || !is_string($_POST["name"])
@@ -70,10 +45,11 @@ class Account
             return $response;
         };
 
-        if(!self::$isValidCSRFToken)
+        if(!CSRF::check())
+        {
             return $error("Невалидна сесия. " . 
                           "Моля опитайте отново.");
-
+        }
 
         $api_response = \API\Session::login();
         $code = $api_response->getCode();
@@ -103,8 +79,7 @@ class Account
             return redirect();
 
         $response = Page("register.html");
-        $response->setValue
-            ("csrf", self::generateToken());
+        $response->setValue("csrf", CSRF::get());
 
         if(!isset($_POST["name"],
                   $_POST["password"],
@@ -119,9 +94,11 @@ class Account
             return $response;
         };
 
-        if(!self::$isValidCSRFToken)
+        if(CSRF::check())
+        {
             return $error("Невалидна сесия. " . 
                           "Моля опитайте отново.");
+        }
 
         if($_POST["password"] !== $_POST["password2"])
             return $error("Въвели сте различни пароли.");

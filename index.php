@@ -13,6 +13,7 @@ require "Extend/redirect.php";
 require "Extend/Permissions.php";
 require "Extend/APIError.php";
 require "Extend/isValidString.php";
+require "Extend/CSRFTokenManager.php";
 
 require "Core/autoload.php";
 
