@@ -20,7 +20,7 @@ class CSRFTokenManager
     // No need to do a full CSRF check
     public static function weak_check() : bool
     {
-        if(Session::fromToken() != null)
+        if(Session::fromPOST() != null)
             return true;
 
         return self::check();
