@@ -34,20 +34,23 @@ class CSRFTokenManager
         self::$valid = false;
         if(isValidString($_POST["csrf"], 42))
         {
-            $cookie = $_COOKIE[self::TOKEN_COOKUE];
+            $cookie = $_COOKIE[self::TOKEN_COOKIE];
             self::$valid = $_POST["csrf"] == $cookie;
         }
+
+        return self::$valid;
     }
 
     public static function get() : string
     {
-        check();
+        self::check();
 
         if(!isset(self::$token))
         {
             self::$token = generateToken(42);
             setcookie(self::TOKEN_COOKIE, self::$token);
         }
+
         return self::$token;
     }
     
