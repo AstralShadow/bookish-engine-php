@@ -26,7 +26,7 @@ class Resource extends Entity
     public string $Name;
     #[Traceable("OwnedResources")]
     public User $Owner;
-    public ?string $Description;
+    public ?string $Description; // "info" in apis
     public \DateTime $CreateTime;
     
     public ?FileType $DataType;
@@ -64,6 +64,31 @@ class Resource extends Entity
             if($save)
                 $this->save();
         }
+    }
+    
+    public function overwiev()
+    {
+        $data = [
+            "name" => $this->Name,
+            "owner" => $this->Owner->Name,
+            "created" => $this->CreateTime,
+
+            "approved" => isset($this->ApproveTime),
+            
+            "tags" => [],
+            "data_name" => $this->DataName,
+            //"data_size" => 0,
+
+            "preview_name" => $this->PreviewName
+            //"preview_size" =>
+        ];
+
+        foreach($this->tags as $link)
+        {
+            $data["tags"][] = $link->Tag->data();
+        }
+
+        return $data;
     }
 
 }

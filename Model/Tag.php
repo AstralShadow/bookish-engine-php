@@ -40,5 +40,14 @@ class Tag extends Entity
 
         parent::__construct();
     }
+
+    public function data()
+    {
+        $data = [ "name" => $this->Name ];
+        if(isset($this->Description))
+            $data["info"] = $this->Description;
+
+        return $data;
+    }
 }
 
