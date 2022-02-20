@@ -1,0 +1,134 @@
+<?php
+namespace API;
+
+use \Core\Request;
+use \Core\Responses\ApiResponse;
+use Core\RequestMethods\GET;
+use Core\RequestMethods\PUT;
+use Core\RequestMethods\POST;
+use Core\RequestMethods\DELETE;
+use Core\RequestMethods\Fallback;
+use Core\RequestMethods\StartUp;
+use Extend\APIError;
+use Extend\isValidString;
+
+use \Model\User as MUser;
+use \Model\Resource as MResource;
+
+
+class Resource
+{
+
+    #[POST]
+    public static function createResource()
+    {
+        $user = self::getUser();
+        if(!$user)
+            return APIError(401, "Само регистрирани " .
+                "потребители могат да създават ресурси");
+
+        if(isValidString($_POST["name"], 5))
+            return APIError(400, "Въведете име (name).");
+
+        $res = new Resource(trim($_POST["name"]), $user);
+
+        $state = self::processResourceModification($res);
+        $state->setCode(201);
+        return $state;
+    }
+
+    private static function getUser() : ?User
+    {
+        return Session::current()?->User;
+    }
+
+    private static
+    function applyModifications(Resource &$res)
+    {
+        $response = new ApiResponse(200);
+        $modified = false;
+
+        if(isValidString($_POST["name"]))
+        {
+            $name = trim($_POST["name"]);
+            $resource->Name = $name;
+            $modified = true;
+        }
+
+        if(isValidString($_POST["info"]))
+        {
+            $info = trim($_POST["info"]);
+            $resource->Description = $info;
+            $modified = true;
+        }
+
+        // Data input
+
+        if($modified)
+            $resource->save();
+
+        $response = new ApiResponse(200);
+        $response->echo([
+            "id" => $resource->getId()
+        ]);
+        return $response;
+    }
+
+    #[PUT("/{id}")]
+    public static function modify(Request $req)
+    {
+        $user = self::getUser();
+        if(!$user)
+            return APIError(401, "Не сте в профила си.");
+
+        $id = $req->id;
+        $res = MResource::get($id);
+        if(!$res)
+            return APIError(404, "Няма такъв ресурс.");
+
+        if($res->Owner->getId() != $user->getId())
+            return APIError(403, "Не сте собственик.");
+
+        return self::applyModifications($res);
+    }
+
+    #[GET("/{id}")]
+    public static function overwiev(Request $req)
+    {
+        $id = $req->id;
+        $res = MResource::get($id);
+        if(!$res)
+            return APIError(404, "Няма такъв ресурс.");
+
+        $response = new ApiResponse(200);
+        $response->echo($res->overview());
+        return $response;
+    }
+
+    #[DELETE("/{id}")]
+    public static function delete($req)
+    {
+        $user = self::getUser();
+        if(!$user)
+            return APIError(401, "Не сте в профила си.");
+
+        $id = $req->id;
+        $res = MResource::get($id);
+        if(!$res)
+            return APIError(404, "Няма такъв ресурс.");
+
+        if($res->Owner->getId() != $user->getId())
+            return APIError(403, "Не сте собственик.");
+
+        MResource::delete($res->getId());
+
+        return new ApiResponse(200);
+    }
+
+    #[Fallback]
+    public static function fallback()
+    {
+        return APIError(400, "Невалидна заявка");
+    }
+
+}

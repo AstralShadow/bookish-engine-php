@@ -23,6 +23,8 @@ $router->add("\Controllers\User", "/");
 
 $router->add("\API\Session", "api/session");
 $router->add("\API\User", "api/user");
+$router->add("\API\Resource", "api/resource");
+//$router->add("\API\Resource", "api/resource");
 
 $engine = new Core\Controller($router);
 
