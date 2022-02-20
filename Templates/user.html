@@ -4,7 +4,9 @@
        <a href="#" class="_64px button warning"></a>
     </nav>
     <user-avatar class="_200px pos-center text-center" >
-        <user-currency class="_128px pos-right-out text-left"> 
+        <user-currency class="_128px
+                              pos-right-out
+                              text-left"> 
             550x
         </user-currency>
         <user-title class="pos-bottom-out pos-center">
@@ -16,6 +18,10 @@
     </user-avatar>
 </header>
 <br />
+
+<form id="upload" method="POST" action="/api/resource">
+</form>
+
 <h-flex>
     <section class="round-border sec-bg white-text">
         <h1 class="text-center ">
@@ -30,7 +36,9 @@
                         </h1>
                     </td>
                     <td>
-                        <input class="light-bg" type="text" name="" />
+                        <input name="name" form="upload"
+                               class="light-bg"
+                               type="text"/>
                     </td>
                 </label>
             </tr>
@@ -42,7 +50,10 @@
                         </h1>
                     </td>
                     <td>
-                        <textarea class="light-bg" name="" ></textarea>
+                        <textarea class="light-bg"
+                                  form="upload"
+                                  name="info"
+                        ></textarea>
                     </td>
                 </label>
             </tr>
@@ -54,7 +65,10 @@
                         </h1>
                     </td>
                     <td>
-                        <textarea class="light-bg" name="" ></textarea>
+                        <textarea class="light-bg"
+                                  name="tags"
+                                  form="upload"
+                        ></textarea>
                     </td>
                 </label>
             </tr>
@@ -69,3 +83,23 @@
         <img src="${path:img/scroll.png}" width="100%" />
     </section>
 </h-flex>
+
+<fly-item class="sec-bg round-border">
+    <h-flex>
+        <section>
+            Целия материал
+            <br />
+            <input name="full" form="upload"
+                   type="file" />
+        </section>
+        <section>
+            Демонстративен материал
+            <br />
+            <input name="demo" form="upload"
+                   type="file" />
+        </section>
+    </h-flex>
+    <button form="upload"
+            class="_100px button upload pos-center">
+    </button>
+</fly-item>
