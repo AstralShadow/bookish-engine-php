@@ -11,6 +11,8 @@ require "Extend/layoutResponseFactory.php";
 require "Extend/generateToken.php";
 require "Extend/redirect.php";
 require "Extend/Permissions.php";
+require "Extend/APIError.php";
+require "Extend/isValidString.php";
 
 require "Core/autoload.php";
 
