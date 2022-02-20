@@ -11,6 +11,7 @@ use Core\RequestMethods\Fallback;
 use Core\RequestMethods\StartUp;
 use function Extend\APIError;
 use function Extend\isValidString;
+use Extend\CSRFTokenManager as CSRF;
 
 use \Model\User;
 use \Model\Session;
@@ -23,6 +24,9 @@ class Resource
     #[POST]
     public static function createResource()
     {
+        if(!CSRF::weak_check())
+            return APIError(400, "Невалидна сесия.");
+
         $user = self::getUser();
         if(!$user)
             return APIError(401, "Само регистрирани " .
@@ -79,6 +83,9 @@ class Resource
     #[PUT("/{id}")]
     public static function modify(Request $req)
     {
+        if(!CSRF::weak_check())
+            return APIError(400, "Невалидна сесия.");
+
         $user = self::getUser();
         if(!$user)
             return APIError(401, "Не сте в профила си.");
@@ -110,6 +117,9 @@ class Resource
     #[DELETE("/{id}")]
     public static function delete($req)
     {
+        if(!CSRF::weak_check())
+            return APIError(400, "Невалидна сесия.");
+
         $user = self::getUser();
         if(!$user)
             return APIError(401, "Не сте в профила си.");
