@@ -9,8 +9,14 @@ use \Core\RequestMethods\POST;
 use \Core\RequestMethods\DELETE;
 use \Core\RequestMethods\FALLBACK;
 use \Core\RequestMethods\StartUp;
+
+use function Extend\APIError;
+use function Extend\isValidString;
+use Extend\CSRFTokenManager as CSRF;
+
 use \Model\User as MUser;
 use \Model\Session as MSession;
+
 
 /**
  * Description of Home
@@ -22,20 +28,14 @@ class Session
     #[GET]
     public static function getSessionData()
     {
-        $session = MSession::fromPOSTorCookie();
-        if (!isset($session)){
-            $response = new ApiResponse(404);
-            $response->echo([
-                "error" => "Невалидна сесия"
-                // Invalid session
-            ]);
-            return $response;
-        }
+        $session = MSession::current();
+        if(!isset($session))
+            return APIError(404, "Invalid session");
 
         $response = new ApiResponse(200);
         $response->echo([
             "user" => $session->user->Name,
-            "loginTime" => $session->Created,
+            "login_time" => $session->Created,
             "token" => $session->token()
         ]);
         return $response;
@@ -44,19 +44,13 @@ class Session
     #[POST]
     public static function login()
     {
-        if (
-            !isset($_POST["name"], $_POST["password"]) ||
-            !is_string($_POST["name"]) ||
-            !is_string($_POST["password"])
-        ){
-            $response = new ApiResponse(400);
-            $response->echo([
-                "error" => "Изпратете name и password" .
-                    " за да влезете"
-                // Send name and password to authenticate
-            ]);
-            return $response;
+        if(!isValidString($_POST["name"], 3) ||
+           !isValidString($_POST["password"], 6))
+        {
+            return APIError(400, "Непопълнено име" .
+                                 "или парола.");
         }
+
         $name = trim($_POST["name"]);
         $pwd = trim($_POST["password"]);
 
@@ -72,37 +66,29 @@ class Session
             return $response;
         }
 
-        $response = new ApiResponse(403);
-        $response->echo([
-            "error" => "Грешно име или парола" // Wrong name or password
-        ]);
-        return $response;
+        return APIError(403, "Грешно име или парола");
     }
 
     #[DELETE]
     public static function logout()
     {
-        $session = MSession::fromPOSTorCookie();
-        if (!isset($session)){
-            $response = new ApiResponse(404);
-            $response->echo([
-                "error" => "Сесията не е намерена" // Session not found
-            ]);
-            return $response;
-        }
+        $session = MSession::current();
 
+        if (!isset($session))
+            return APIError(404, "Session not found");
+
+        if(!CSRF::weak_check())
+            return APIError(400, "Invalid CSRF token");
+        
         MSession::delete($session->getId());
+
         return new ApiResponse(200);
     }
 
     #[Fallback]
     public static function fallback()
     {
-        $response = new ApiResponse(400);
-        $response->echo([
-            "error" => "Невалидна заявка" // Invalid request
-        ]);
-        return $response;
+        return APIError(400, "Invalid request");
     }
 
 

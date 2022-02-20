@@ -95,4 +95,24 @@ class User extends Entity
 
         return false;
     }
+
+    public function overwiev()
+    {
+        $data = [
+            "name" => $this->Name,
+            "avatar" => $this->avatarUri()
+        ];
+        return $data;
+    }
+
+    public function privateOverwiev()
+    {
+        $data = $this->overwiev();
+        return $data;
+    }
+
+    public function avatarUri() : string
+    {
+        return "none";
+    }
 }
