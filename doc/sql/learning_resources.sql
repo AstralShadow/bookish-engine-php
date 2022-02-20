@@ -56,6 +56,8 @@ CREATE TABLE Sessions
         REFERENCES Users(UserId)
 );
 
+CREATE INDEX idx_sessions ON Sessions (Token); 
+
 create table Roles(
 	RoleId int primary key auto_increment,
     Name nvarchar(80) not null,
@@ -114,12 +116,12 @@ create table Resources(
     Description text default null,
     CreateTime datetime not null default current_timestamp,
     
-    DataType int not null,
+    DataType int default null,
     DataName nvarchar(150) default null, # as the downloaded file name, if applicable (use for extension)
-    Data blob not null,
-    PreviewType int not null,
+    Data blob default null,
+    PreviewType int default null,
     PreviewName nvarchar(150) default null, # as the downloaded file name, if applicable (use for extension)
-    Preview blob not null,
+    Preview blob default null,
     
     ApproveNote text default null,
     ApprovedBy int default null,
