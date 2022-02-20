@@ -3,6 +3,7 @@ namespace Model;
 
 use Core\Entity;
 use Core\Attributes\Table;
+use Core\Attributes\Traceable;
 use Core\Attributes\PrimaryKey;
 use Core\Attributes\TraceLazyLoad;
 

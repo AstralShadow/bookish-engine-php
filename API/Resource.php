@@ -9,10 +9,11 @@ use Core\RequestMethods\POST;
 use Core\RequestMethods\DELETE;
 use Core\RequestMethods\Fallback;
 use Core\RequestMethods\StartUp;
-use Extend\APIError;
-use Extend\isValidString;
+use function Extend\APIError;
+use function Extend\isValidString;
 
-use \Model\User as MUser;
+use \Model\User;
+use \Model\Session;
 use \Model\Resource as MResource;
 
 
@@ -27,12 +28,13 @@ class Resource
             return APIError(401, "Само регистрирани " .
                 "потребители могат да създават ресурси");
 
-        if(isValidString($_POST["name"], 5))
+        if(!isValidString($_POST["name"], 5))
             return APIError(400, "Въведете име (name).");
 
-        $res = new Resource(trim($_POST["name"]), $user);
+        $res = new MResource(trim($_POST["name"]),
+                             $user);
 
-        $state = self::processResourceModification($res);
+        $state = self::applyModifications($res);
         $state->setCode(201);
         return $state;
     }
@@ -43,7 +45,7 @@ class Resource
     }
 
     private static
-    function applyModifications(Resource &$res)
+    function applyModifications(MResource &$resource)
     {
         $response = new ApiResponse(200);
         $modified = false;

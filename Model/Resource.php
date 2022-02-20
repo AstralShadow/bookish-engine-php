@@ -3,6 +3,7 @@ namespace Model;
 
 use Core\Entity;
 use Core\Attributes\Table;
+use Core\Attributes\Traceable;
 use Core\Attributes\PrimaryKey;
 use Core\Attributes\TraceLazyLoad;
 
@@ -18,7 +19,7 @@ use Model\User;
 
 #[TraceLazyLoad("\Model\Junction\ResourceTag", "Tags")]
 
-#[Table("Resource")]
+#[Table("Resources")]
 #[PrimaryKey("ResourceId")]
 class Resource extends Entity
 {

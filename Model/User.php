@@ -5,6 +5,7 @@ use Core\Entity;
 use Core\Attributes\Table;
 use Core\Attributes\PrimaryKey;
 use Core\Attributes\TraceLazyLoad;
+use Core\Attributes\Traceable;
 
 use Extend\Permissions;
 
@@ -86,7 +87,7 @@ class User extends Entity
 
     public function has(int $perm) : bool
     {
-        foreach($this->Roles as $link)
+        foreach($this->Roles() as $link)
         {
             if($link->Role->has($perm))
                 return true;

@@ -1,7 +1,7 @@
 <?php
 namespace Extend;
 
-use Core\ResponsesApiResponse;
+use Core\Responses\ApiResponse;
 
 function APIError($code, $error)
 {

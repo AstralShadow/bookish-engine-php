@@ -21,7 +21,7 @@ class UserRole extends Entity
     #[Traceable("Roles")]
     public User $User;
 
-    public \DateTime CreateTime;
+    public \DateTime $CreateTime;
     public ?string $Reason;
 
     #[Traceable("AssignedRoles")]
