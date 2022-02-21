@@ -47,8 +47,8 @@ class User extends Entity
     public string $Name;
     protected string $Password;
 
-    public ?FileType $AvatarType;
     public ?string $Avatar = null;
+    public ?string $AvatarMime;
     public \DateTime $CreateTime;
 
     public ?\DateTime $BlockTime = null;
@@ -102,6 +102,7 @@ class User extends Entity
             "name" => $this->Name,
             "avatar" => $this->avatarUri()
         ];
+
         return $data;
     }
 
@@ -111,8 +112,17 @@ class User extends Entity
         return $data;
     }
 
-    public function avatarUri() : string
+    public function avatarUri() : ?string
     {
-        return "none";
+        if(!isset($this->Avatar) ||
+            !file_exists($this->Avatar))
+        {
+            return null;
+        }
+
+        $time = filemtime($this->Avatar);
+
+        return "/api/user/{$this->Name}/avatar?" . $time;
     }
+
 }
