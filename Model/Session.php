@@ -60,7 +60,9 @@ class Session extends Entity
 
     public function saveInCookie() : void
     {
-        setcookie(self::COOKIE_NAME, $this->Token);
+        setcookie(self::COOKIE_NAME, $this->Token, [
+            "samesite" => "Strict"
+        ]);
     }
 
     public static function fromPOST() : ?Session
