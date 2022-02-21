@@ -15,13 +15,15 @@
                 ${role=Бандита}
             </span>
         </user-title>
+        <label class="upload button _64px">
+            <input form="avatar_form" name="avatar"
+                accept="image/png,image/jpeg,image/gif"
+                type="file" class="hidden" />
+        </label>
     </user-avatar>
 </header>
 <br />
 
-<form id="upload" method="POST" action="/api/resource">
-    <input type="hidden" name="csrf" value="${csrf}" />
-</form>
 
 <h-flex>
     <section class="round-border sec-bg white-text">
@@ -41,7 +43,7 @@
                                class="light-bg"
                                type="text"
                                required
-                               minlength=3
+                               minlength=5
                                maxlength=20/>
                     </td>
                 </label>
@@ -82,6 +84,8 @@
         <button id="open_upload"
                 class="_100px button upload pos-center">
         </button>
+        <br />
+        <span>${error=}</span>
     </section>
     <section class="round-border sec-bg text-center white-text">
         <h1>
@@ -114,5 +118,19 @@
     </button>
 </fly-item>
 
-<script src="${path:scripts/pages/user.js}" module>
-</script>
+
+
+<form id="avatar_form" method="POST"
+      enctype="multipart/form-data">
+    <input type="hidden" name="csrf" value="${csrf}" />
+</form>
+<form id="upload" method="POST"
+      enctype="multipart/form-data">
+    <input type="hidden" name="csrf" value="${csrf}" />
+</form>
+
+
+<script src="${path:scripts/user/resource_upload.js}"
+        type="module"> </script>
+<script src="${path:scripts/user/avatar_upload.js}"
+        type="module"> </script>

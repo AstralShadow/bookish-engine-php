@@ -2,9 +2,6 @@
 {
     visibility: hidden;
     opacity: 0;
-
-    -webkit-transition: opacity 600ms, visibility 600ms;
-            transition: opacity 600ms, visibility 600ms;
 }
 
 .shown

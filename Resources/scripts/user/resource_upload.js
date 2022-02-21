@@ -11,11 +11,8 @@ popup_btn.addEventListener("click", function()
     {
         if(step1_required_names.indexOf(el.name) != -1)
         {
-            console.log(el.checkValidity());
-            if(!el.checkValidity())
-            {
+            if(!el.reportValidity())
                 valid = false;
-            }
         }
     })
 

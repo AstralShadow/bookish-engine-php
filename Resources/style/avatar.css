@@ -4,14 +4,40 @@
 
 user-avatar {
     display: block;
-    background-image: url("../img/avatar.png");
-    background-size: cover;
-    background-repeat: no-repeat;
     background-color: var(--light-color);
+    background-image: url("../img/avatar.png");
+    background-size: cover, 48px 48px;
+    background-position: center, bottom;
+    background-repeat: no-repeat, no-repeat;
     border: 2px solid black;
     border-radius: 256px;
     overflow: visible;
+
     position: relative;
+}
+
+user-avatar > .upload
+{
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    transform: translate(-50%, -50%);
+
+    visibility: hidden;
+    opacity: 0;
+}
+
+user-avatar:hover > .upload
+{
+    visibility: visible;
+    opacity: 0.25;
+    -webkit-transition: visibility 0.6s, opacity 0.6s;
+            transition: visibility 0.6s, opacity 0.6s;
+}
+
+user-avatar > .upload:hover
+{
+    opacity: 1;
 }
 
 user-currency {
