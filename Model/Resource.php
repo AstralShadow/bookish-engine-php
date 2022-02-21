@@ -30,12 +30,14 @@ class Resource extends Entity
     public ?string $Description; // "info" in apis
     public \DateTime $CreateTime;
     
-    public ?FileType $DataType;
     public ?string $DataName;
+    public ?string $DataMime;
+    public int $DataSize = 0;
     public ?string $Data;
 
-    public ?FileType $PreviewType;
     public ?string $PreviewName;
+    public ?string $PreviewMime;
+    public int $PreviewSize = 0;
     public ?string $Preview;
 
     public \DateTime $ApproveTime;

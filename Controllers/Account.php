@@ -51,9 +51,9 @@ class Account
                           "Моля опитайте отново.");
         }
 
-        $api_response = \API\Session::login();
-        $code = $api_response->getCode();
-        $output = $api_response->getOutput();
+        $state = \API\Session::login();
+        $code = $state->getCode();
+        $output = $state->getOutput();
 
         if($code != 200)
             return $error($output["error"]);
@@ -66,7 +66,7 @@ class Account
                     location.replace("{$next}")
                 }, 1000);
             </script>
-            EOD;
+        EOD;
         return $error("Влязохте успешно.$flw");
     }
 
@@ -94,7 +94,7 @@ class Account
             return $response;
         };
 
-        if(CSRF::check())
+        if(!CSRF::check())
         {
             return $error("Невалидна сесия. " . 
                           "Моля опитайте отново.");
@@ -103,9 +103,9 @@ class Account
         if($_POST["password"] !== $_POST["password2"])
             return $error("Въвели сте различни пароли.");
 
-        $api_response = \API\User::createUser();
-        $code = $api_response->getCode();
-        $output = $api_response->getOutput();
+        $state = \API\User::createUser();
+        $code = $state->getCode();
+        $output = $state->getOutput();
 
         if($code != 200)
             return $error($output["error"]);

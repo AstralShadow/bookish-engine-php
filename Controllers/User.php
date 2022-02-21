@@ -8,6 +8,7 @@ use Core\RequestMethods\POST;
 use Core\RequestMethods\DELETE;
 use Core\RequestMethods\Fallback;
 use Core\RequestMethods\StartUp;
+use Core\RequestMethods\RequestMethod;
 
 use function Extend\layoutResponseFactory as Page;
 use function Extend\redirect;
@@ -32,13 +33,31 @@ class User
     }
 
     #[GET("/user")]
-    public static function index()
+    #[POST("/user")]
+    public static function index($r)
     {
         if(!isset(self::$user))
-            return redirect();
+            return redirect("./login?next=user");
             
         $response = Page("user.html", 200);
         $response->setValue("csrf", CSRF::get());
+
+        if($r->method() == RequestMethod::POST)
+        {
+            $state = \API\Resource::create();
+            $code = $state->getCode();
+            $data = $state->getOutput();
+            if($code >= 400)
+            {
+                $response->setValue("error",
+                                $data["error"] ?? $code);
+            }
+            if($code == 201)
+            {
+                $uri = "/resource/" . $data["id"];
+                $response->setValue("error", $uri);
+            }
+        }
 
         return $response;
     }

@@ -3,9 +3,10 @@ namespace Extend;
 
 use Core\Responses\ApiResponse;
 
-function APIError($code, $error)
+function APIError($code, $error = null)
 {
     $response = new ApiResponse($code);
-    $response->echo([ "error" => $error ]);
+    if($error)
+        $response->echo([ "error" => $error ]);
     return $response;
 };

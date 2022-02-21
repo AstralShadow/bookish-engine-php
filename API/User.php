@@ -48,7 +48,7 @@ class User
         $name = $req->name;
         $users = MUser::find(["name" => $name]);
         if (count($users) == 0)
-            return ApiResponse(404, "Няма такъв профил");
+            return APIError(404, "Няма такъв профил");
 
         $user = $users[0];
         $response = new ApiResponse(200);
@@ -81,6 +81,8 @@ class User
         foreach ($user->getSessions() as $session)
             MSession::delete($session);
         
+        if(!CSRF::weak_check())
+            return APIError(400, "Bad CSRF token.");
 
         MUser::delete($user->getId());
 

@@ -1,13 +1,16 @@
-drop database learning_res_simple;
-create database learning_res_simple;
+
 create user 'student_app_2'@'localhost' identified by 'student_app_2_password';
+
+drop database learning_res_simple;
+
+create database learning_res_simple;
 grant all privileges on learning_res_simple.* to 'student_app_2'@'localhost';
 # revoke privileges on learning_resources.* from 'student_app_2'@'localhost';
 flush privileges;
 
 use learning_res_simple;
 # Data types #
-
+/*
 create table FileTypes(
 	FileTypeId int primary key auto_increment,
     MimeType varchar(80) not null,
@@ -19,7 +22,7 @@ insert into FileTypes(MimeType, External) values
     ("image/jpeg", 0),
     ("application/*", 1);
 # More to be added later
-
+*/
 
 # Users and roles #
 
@@ -31,16 +34,16 @@ create table Users(
     # Email nvarchar(120) not null,
     # EmailConfirmed bool not null default false,
 
-	AvatarType int default null,
-    Avatar blob default null,
+	AvatarMime enum("image/jpeg", "image/png", "image/gif") default null,
+    Avatar nvarchar(200) default null,
     CreateTime datetime not null default current_timestamp,
 
     BlockTime datetime default null,
     BlockedBy int default null,
     BlockReason text default null,
     
-    Constraint UsersAvatarType foreign key(AvatarType)
-		references FileTypes(FileTypeId),
+    #Constraint UsersAvatarType foreign key(AvatarType)
+	#	references FileTypes(FileTypeId),
     constraint UsersBlockedBy foreign key(BlockedBy)
         references Users(UserId)
 );
@@ -116,12 +119,14 @@ create table Resources(
     Description text default null,
     CreateTime datetime not null default current_timestamp,
     
-    DataType int default null,
-    DataName nvarchar(150) default null, # as the downloaded file name, if applicable (use for extension)
-    Data blob default null,
-    PreviewType int default null,
-    PreviewName nvarchar(150) default null, # as the downloaded file name, if applicable (use for extension)
-    Preview blob default null,
+    Data varchar(200) default null,
+    DataName nvarchar(200) default null,
+    DataSize int default null,
+    DataMime varchar(200) default null,
+    Preview varchar(200) default null,
+    PreviewName nvarchar(200) default null,
+    PreviewSize int default 0,
+    PreviewMime varchar(200) default null,
     
     ApproveNote text default null,
     ApprovedBy int default null,
@@ -129,10 +134,10 @@ create table Resources(
     
 	Constraint ResourcesDataOwnedId foreign key(Owner)
 		references Users(UserId),
-    Constraint ResourcesDataType foreign key(DataType)
-		references FileTypes(FileTypeId),
-    Constraint ResourcesDataPreviewType foreign key(PreviewType)
-		references FileTypes(FileTypeId),
+    #Constraint ResourcesDataType foreign key(DataType)
+	#	references FileTypes(FileTypeId),
+    #Constraint ResourcesDataPreviewType foreign key(PreviewType)
+	#	references FileTypes(FileTypeId),
 	Constraint ResourcesDataApprovedBy foreign key(ApprovedBy)
 		references Users(UserId)
 );

@@ -11,6 +11,7 @@ use Core\RequestMethods\Fallback;
 use Core\RequestMethods\StartUp;
 use function Extend\APIError;
 use function Extend\isValidString;
+use function Extend\uploadFile;
 use Extend\CSRFTokenManager as CSRF;
 
 use \Model\User;
@@ -22,7 +23,7 @@ class Resource
 {
 
     #[POST]
-    public static function createResource()
+    public static function create()
     {
         if(!CSRF::weak_check())
             return APIError(400, "Невалидна сесия.");
@@ -68,7 +69,28 @@ class Resource
             $modified = true;
         }
 
-        // Data input
+
+        $file = uploadFile("full");
+        if($file != null)
+        {
+            $resource->Data = $file["uri"];
+            $resource->DataName = $file["name"];
+            $resource->DataSize = $file["size"];
+            $resource->DataMime = $file["mime"];
+            $modified = true;
+        }
+
+        $demo = uploadFile("demo");
+        if($demo != null)
+        {
+            $resource->Preview = $demo["uri"];
+            $resource->PreviewName = $demo["name"];
+            $resource->PreviewSize = $demo["size"];
+            $resource->PreviewMime = $demo["mime"];
+            $modified = true;
+        }
+
+
 
         if($modified)
             $resource->save();
