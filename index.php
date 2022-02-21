@@ -14,6 +14,8 @@ require "Extend/Permissions.php";
 require "Extend/APIError.php";
 require "Extend/isValidString.php";
 require "Extend/CSRFTokenManager.php";
+require "Extend/uploadFile.php";
+require "Extend/shrinkAvatar.php";
 
 require "Core/autoload.php";
 
