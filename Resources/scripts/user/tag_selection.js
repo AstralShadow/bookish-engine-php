@@ -17,6 +17,7 @@ input.contentEditable = true
 
 var tags = undefined
 var target_tag = -1
+var visible_tags = []
 var added_tags = []
 
 
@@ -61,7 +62,7 @@ async function load_tags(cache = true)
     
     tag_list.appendChild(new_tag)
 
-    tags.forEach(function(tag)
+    tags.forEach(function(tag, tag_id)
     {
         var option = document.createElement("tag-option")
         Object.keys(tag).forEach(function(key)
@@ -73,6 +74,15 @@ async function load_tags(cache = true)
             option.appendChild(item)
         })
         tag_list.appendChild(option)
+        
+        option.addEventListener("mousemove", function(){
+            set_target(tag_id)
+        })
+        option.addEventListener("mousedown", function(){
+            input.innerText = tag.name + "\n"
+            insert_tag()
+            input.innerText = ""
+        })
 
         tag.element = option
     })
@@ -85,11 +95,11 @@ input.addEventListener("input", function(e)
     if(text.indexOf("\n") > 0)
     {
         e.preventDefault()
-        insertTag()
+        insert_tag()
         this.innerText = ""
     }
 
-    showClosest(text)
+    show_closest(this.innerText)
 })
 
 tagarea.addEventListener("keydown", function(e)
@@ -98,16 +108,19 @@ tagarea.addEventListener("keydown", function(e)
     const BACKSPACE = 8
 
 
-    if(e.keyCode == UP)
+    if(e.keyCode == UP || e.keyCode == DOWN)
     {
-        if(target_tag >= 0)
-            set_target(target_tag - 1)
+        var index = visible_tags.indexOf(target_tag)
+        e.keyCode == DOWN ? index++ : index--
+
+        if(index < 0)
+            index = visible_tags.length - 1
+        if(index > visible_tags.length - 1)
+            index = 0
+
+        set_target(visible_tags[index])
     }
-    if(e.keyCode == DOWN)
-    {
-        if(target_tag < tags.length - 1)
-            set_target(target_tag + 1)
-    }
+
     if(e.keyCode == BACKSPACE && input.innerText == "")
     {
         tagarea.removeChild(tagarea.lastChild)
@@ -121,24 +134,28 @@ tagarea.addEventListener("keydown", function(e)
     }
 })
 
-async function insertTag()
+async function insert_tag()
 {
     if(target_tag == -1)
     {
         var text = input.innerText
-        var tag = text.split("\n")[0]
-        console.log("create", tag)
-        await create_tag(tag)
-        await load_tags(true)
+        let tag = text.split("\n")[0]
+        if(tag.length == 0)
+            return;
 
-        set_target(0)
-        while(tags[target_tag].name != tag)
-            set_target(target_tag + 1)
+        await create_tag(tag)
+        await load_tags(false)
+
+        var i = 0
+        while(tags[i] && tags[i].name != tag)
+            i++
+        set_target(i)
     }
 
     var tag = tags[target_tag]
     if(added_tags.indexOf(tag.name) >= 0)
         return;
+
     added_tags.push(tag.name);
 
     var element = document.createElement("tag-box")
@@ -152,7 +169,6 @@ async function insertTag()
     form_el.setAttribute("type", "hidden")
     form_el.setAttribute("name", "tags[]")
     element.appendChild(form_el)
-
 }
 
 function create_tag(tag)
@@ -164,17 +180,19 @@ function create_tag(tag)
     return ajax("POST", "/api/search/tags/create", data)
 }
 
-function showClosest(tag)
+function show_closest(tag)
 {
     fix_tag_list_design()
     new_tag.style.display = "none"
     new_name.innerText = "[+] " + tag
+    visible_tags.length = 0
     
-    if(tag == "")
+    if(tag.trim() == "")
     {
         for(let i = 0; i < tags.length; i++)
-            tags[i].element.style.display = "none"
+            tags[i].element.style.display = ""
         set_target(-1)
+        visible_tags.push(-1)
         return;
     }
 
@@ -189,6 +207,7 @@ function showClosest(tag)
             continue
         }
         tags[i].element.style.display = ""
+        visible_tags.push(i)
         
         if(current == tag)
         {
@@ -200,6 +219,7 @@ function showClosest(tag)
     {
         new_tag.style.display = ""
         set_target(-1)
+        visible_tags.push(-1)
     }
 }
 
@@ -212,13 +232,15 @@ function fix_tag_list_design()
 
 function set_target(index)
 {
-    (target_tag < 0 ? new_tag : tags[target_tag].element)
-        .classList.remove("selected")
+    var prev = target_tag < 0 ? new_tag
+                              : tags[target_tag].element
+    prev.classList.remove("selected")
 
     target_tag = index;
-    if(target_tag > tags.length)
+    if(target_tag >= tags.length)
         target_tag = -1
 
-    (target_tag < 0 ? new_tag : tags[target_tag].element)
-        .classList.add("selected")
+    var next = target_tag < 0 ? new_tag
+                              : tags[target_tag].element
+    next.classList.add("selected")
 }
