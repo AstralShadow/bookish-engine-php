@@ -1,25 +1,20 @@
-<header id="user_home_header">
+ <header id="user_home_header">
     <nav class="fleft hflex">
        <a href="#" class="_64px button config"></a>
        <a href="#" class="_64px button warning"></a>
     </nav>
-    <user-avatar class="_200px pos-center text-center" >
-        <user-currency class="_128px
+    <user-avatar class="_100px user-avatar text-center " >
+        <user-currency class="_100px
                               pos-right-out
-                              text-left"> 
+                              text-left fontsize"> 
             550x
         </user-currency>
-        <user-title class="pos-bottom-out pos-center">
+        <user-title class="pos-bottom-out pos-center fontsize">
             <span>
                 ${name=Гошко} <br />
                 ${role=Бандита}
             </span>
         </user-title>
-        <label class="upload button _64px">
-            <input form="avatar_form" name="avatar"
-                accept="image/png,image/jpeg,image/gif"
-                type="file" class="hidden" />
-        </label>
     </user-avatar>
 </header>
 <br />
@@ -27,9 +22,6 @@
 
 <h-flex>
     <section class="round-border sec-bg white-text">
-        <h1 class="text-center ">
-            Качи материал:
-        </h1>
         <table>
             <tr>
                 <label>
@@ -94,8 +86,12 @@
                 </label>
             </tr>
         </table>
-        <button id="open_upload"
-                class="_100px button upload pos-center">
+        <br/>
+        <button id="review"
+                class="button review pos-center fontsize">
+                <b>
+                Преглед
+                </b>
         </button>
         <br />
         <span>${error=}</span>

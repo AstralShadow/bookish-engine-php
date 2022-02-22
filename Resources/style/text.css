@@ -22,6 +22,10 @@
     color: white;
 }
 
+.fontsize {
+    font-size: 18px;
+}
+
 input, textarea, tag-area
 {
     color: black;

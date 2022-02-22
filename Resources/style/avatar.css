@@ -52,7 +52,7 @@ user-title {
     font-size: 200%;
     background: black;
     color: white;
-    width: 100%;
+    width: 120%;
     /*border-radius: 75px 75px 75px 10px/25px 25px 25px 25px;*/
     border-radius: 75px/25px;
     z-index: 40;
@@ -65,7 +65,7 @@ user-title::after {
     background: black;
     left: -5px;
     bottom: -10px;
-    width: 80px;
+    width: 85px;
     height: 40px;
     color: black;
     overflow: hidden;
