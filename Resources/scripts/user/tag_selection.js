@@ -16,6 +16,7 @@ const input = document.createElement("span")
 input.contentEditable = true
 input.tabIndex = 0
 tagarea.appendChild(input)
+const forbidden = [',', '+', ';', '.', '/', "\\"]
 
 var tags = []
 var target_tag = -1
@@ -100,6 +101,13 @@ async function load_tags(cache = true)
 
 input.addEventListener("input", function(e)
 {
+    forbidden.forEach(function(sym)
+    {
+        while(input.innerText.indexOf(sym) != -1)
+            input.innerText =
+                input.innerText.replace(sym, "")
+    })
+    
     var text = input.innerText
     if(text.indexOf("\n") > 0)
     {
@@ -109,6 +117,12 @@ input.addEventListener("input", function(e)
     }
 
     show_closest(this.innerText)
+})
+
+new_tag.addEventListener("mousedown", function()
+{
+    insert_tag()
+    this.innerText = ""
 })
 
 tagarea.addEventListener("keydown", function(e)

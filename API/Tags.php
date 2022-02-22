@@ -37,6 +37,11 @@ class Tags
         if(!isValidString($_POST["name"], 3))
             return APIError(400, "Invalid name");
 
+        $forbidden = [',', ';', '+', '/', '.', "\\"];
+        foreach($forbidden as $char)
+            if(strpos($_POST["name"], $char) !== false)
+                return APIError(400, "Invalid name");
+
         $name = trim($_POST["name"]);
         $info = isValidString($_POST["info"], 10) ?
                     trim($_POST["info"]) : null;
