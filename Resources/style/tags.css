@@ -1,4 +1,41 @@
-tag-option
+tag-select /* Списък с тагова */
+{
+    background-color: white;
+    overflow: hidden;
+    display: inline-block;
+    word-wrap: nowrap;
+
+}
+
+tag-option /* Таг в списък с тагове */
 {
     display: block;
+    color: black;
+
+}
+
+tag-name /* Име на таг в списъка */
+{
+    white-space: nowrap;
+}
+
+tag-info /* Описание за таг в списъка */
+{
+
+}
+
+tag-option.selected /* На фокус */
+{
+    font-weight: bold;
+}
+
+tag-area > span /* Където потребителя пише */
+{
+
+}
+
+tag-box /* Вече добавен */
+{
+    background: lime;
+    margin: 2px;
 }

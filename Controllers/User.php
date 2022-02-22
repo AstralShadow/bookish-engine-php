@@ -41,9 +41,8 @@ class User
             
         $response = Page("user.html", 200);
         $response->setValue("csrf", CSRF::get());
+        $response->setValue("name", self::$user->Name);
 
-        if($r->method() == RequestMethod::POST)
-       
         if($r->method() == RequestMethod::POST)
         {
             $state = \API\Resource::create();

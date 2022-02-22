@@ -25,6 +25,15 @@
     top: 100%;
 }
 
+.pos-bottom-out.right
+{
+    right: 0%;
+}
+.pos-bottom-out.left
+{
+    left: 0%;
+}
+
 .pos-bottom-out.pos-center {
     left: 50%;
     transform: translate(-50%, 0);
