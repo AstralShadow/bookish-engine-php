@@ -7,8 +7,11 @@ use Core\Attributes\PrimaryKey;
 use Core\Attributes\Traceable;
 use Core\Attributes\TraceLazyLoad;
 
+use Extend\Permissions;
+
 use Model\Resource;
 use Model\Tag;
+use Model\User;
 
 #[Table("ResourceTags")]
 #[PrimaryKey("Resource", "Tag")]
@@ -33,13 +36,11 @@ class ResourceTag extends Entity
                                 Tag $tag,
                                 User $proposer)
     {
-        $this->User = $user;
         $this->Resource = $res;
+        $this->Tag = $tag;
 
-        $this->AccureTime = new DateTime();
-        
-        $this->CurrencyValue = $price;
-        $this->ProvidedBy = $provider;
+        $this->ProposedBy = $proposer;
+        $this->ProposeTime = new \DateTime();
 
         $this->approve($proposer, false);
 
@@ -49,7 +50,11 @@ class ResourceTag extends Entity
 
     public function approve(User $user, bool $save = true)
     {
-        if($user->has(Permissions::CanApproveTags))
+        $owner = $this->Resource->Owner;
+        $perm = $user->has(Permissions::CanApproveTags)
+                || $user->getId() == $owner->getId();
+
+        if($perm)
         {
             $this->ApproveTime = new \DateTime();
             $this->ApprovedBy = $user;

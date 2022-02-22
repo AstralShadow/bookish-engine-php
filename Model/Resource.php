@@ -69,7 +69,7 @@ class Resource extends Entity
         }
     }
     
-    public function overwiev()
+    public function overview()
     {
         $data = [
             "name" => $this->Name,
@@ -86,7 +86,7 @@ class Resource extends Entity
             //"preview_size" =>
         ];
 
-        foreach($this->tags as $link)
+        foreach($this->Tags() as $link)
         {
             $data["tags"][] = $link->Tag->data();
         }

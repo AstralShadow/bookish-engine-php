@@ -16,7 +16,9 @@ use Extend\CSRFTokenManager as CSRF;
 
 use \Model\User;
 use \Model\Session;
+use \Model\Tag;
 use \Model\Resource as MResource;
+use \Model\Junction\ResourceTag;
 
 
 class Resource
@@ -90,10 +92,24 @@ class Resource
             $modified = true;
         }
 
-
-
         if($modified)
             $resource->save();
+
+
+        $tags = &$_POST["tags"];
+        $user = self::getUser();
+        if(isset($tags) && is_array($tags))
+        {
+            foreach($tags as $tag_name)
+            {
+                if(isValidString($tag_name, 1))
+                {
+                    $tag = Tag::findByName($tag_name);
+                    new ResourceTag($resource, $tag, $user);
+                }
+            }
+        }
+
 
         $response = new ApiResponse(200);
         $response->echo([

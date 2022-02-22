@@ -14,25 +14,32 @@ new_tag.appendChild(new_desc)
 
 const input = document.createElement("span")
 input.contentEditable = true
+input.tabIndex = 0
+tagarea.appendChild(input)
 
-var tags = undefined
+var tags = []
 var target_tag = -1
 var visible_tags = []
 var added_tags = []
 
 
 var shown = false
-tagarea.addEventListener("click", async function()
+tagarea.addEventListener("click", function()
 {
     tagarea.appendChild(input)
     input.focus()
+})
 
+input.addEventListener("focus", async function()
+{
+    tagarea.classList.add("focus")
     shown = true
     await load_tags()
     if(shown)
     {
         tag_list.classList.add("shown")
         fix_tag_list_design()
+        show_closest("")
     }
 })
 
@@ -40,12 +47,14 @@ input.addEventListener("blur", function()
 {
     shown = false
     tag_list.classList.remove("shown")
+    input.innerText = ""
+    tagarea.classList.remove("focus")
 })
 
 
 async function load_tags(cache = true)
 {
-    if(!tags || !cache)
+    if(!tags.length || !cache)
     {
         var req = await ajax("GET", "/api/search/tags")
         if(!req.data)
@@ -104,7 +113,7 @@ input.addEventListener("input", function(e)
 
 tagarea.addEventListener("keydown", function(e)
 {
-    const UP = 38, DOWN= 40
+    const UP = 38, DOWN = 40
     const BACKSPACE = 8
 
 
@@ -118,7 +127,10 @@ tagarea.addEventListener("keydown", function(e)
         if(index > visible_tags.length - 1)
             index = 0
 
-        set_target(visible_tags[index])
+        console.log(index)
+
+        if(visible_tags[index] != undefined)
+            set_target(visible_tags[index])
     }
 
     if(e.keyCode == BACKSPACE && input.innerText == "")
@@ -164,15 +176,17 @@ async function insert_tag()
     tagarea.appendChild(input)
     input.focus()
 
-    var form_el = document.createElement("index")
+    var form_el = document.createElement("input")
     form_el.setAttribute("form", form_id)
     form_el.setAttribute("type", "hidden")
     form_el.setAttribute("name", "tags[]")
+    form_el.setAttribute("value", tag.name)
     element.appendChild(form_el)
 }
 
 function create_tag(tag)
 {
+    if(tag.trim().length < 2) return;
     var data = new FormData()
     data.append("csrf", window.csrf)
     data.append("name", tag)
@@ -190,9 +204,11 @@ function show_closest(tag)
     if(tag.trim() == "")
     {
         for(let i = 0; i < tags.length; i++)
+        {
             tags[i].element.style.display = ""
+            visible_tags.push(i)
+        }
         set_target(-1)
-        visible_tags.push(-1)
         return;
     }
 
@@ -215,7 +231,7 @@ function show_closest(tag)
             exact_match = true
         }
     }
-    if(!exact_match)
+    if(!exact_match && tag.length > 2)
     {
         new_tag.style.display = ""
         set_target(-1)

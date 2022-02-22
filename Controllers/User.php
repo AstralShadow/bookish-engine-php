@@ -32,8 +32,8 @@ class User
             self::$user = self::$session->User;
     }
 
-    #[GET("/user")]
-    #[POST("/user")]
+    #[GET]
+    #[POST]
     public static function index($r)
     {
         if(!isset(self::$user))
@@ -48,15 +48,15 @@ class User
             $state = \API\Resource::create();
             $code = $state->getCode();
             $data = $state->getOutput();
-            if($code >= 400)
-            {
-                $response->setValue("error",
-                                $data["error"] ?? $code);
-            }
             if($code == 201)
             {
                 $uri = "/resource/" . $data["id"];
                 $response->setValue("error", $uri);
+            }
+            else
+            {
+                $msg = $data["error"] ?? $code;
+                $response->setValue("error", $msg);
             }
         }
 
