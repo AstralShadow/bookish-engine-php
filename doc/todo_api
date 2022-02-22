@@ -1,1 +1,7 @@
 Implement PUT handling for /api/user/avatar
+
+Do something better than pulling whole tags base when searching. Low priority, because i pull it anyway when a user requests it.
+
+Make better search algorythm. One that can't be used to DOS my servers.
+
+Actually, make a quick search one. Users see tags anyway, so such a sophisticated one is a little out of the question.

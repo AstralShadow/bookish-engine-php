@@ -17,47 +17,137 @@ use function Extend\uploadImage;
 use function Extend\shrinkAvatar;
 use Extend\CSRFTokenManager as CSRF;
 
-use \Model\User;
-use \Model\Session;
 use \Model\Tag;
+use \Model\Resource;
 
 
 class Search
 {
 
-    #[POST("/tags/create")]
-    public static function createTag()
+    #[GET("/{tags}")]
+    public static function find(Request $req)
     {
-        $user = Session::current()?->User;
-        if(!$user) return APIError(401);
+        $query = mb_strtolower($req->tags);
+        $tags = explode('+', $query);
+        $all_tags = Tag::find([]);
+        $likeliness = [];
+        $likeliness_sum = 0;
 
-        if(!CSRF::weak_check())
-            return APIError(400, "Bad CSRF token.");
+        foreach($all_tags as $tag)
+        {
+            $id = $tag->getId();
+            $name = $tag->Name;
 
-        if(!isValidString($_POST["name"], 3))
-            return APIError(400, "Invalid name");
+            $likeliness[$id] = 0;
+            foreach($tags as $target)
+            {
+                if(strlen($target) == 0)
+                    break;
 
-        $name = trim($_POST["name"]);
-        $info = isValidString($_POST["info"], 10) ?
-                    trim($_POST["info"]) : null;
-        
-        if(Tag::exists($name))
-            return APIError(409, "Already existing.");
+                if($target == $name)
+                {
+                    $likeliness[$id] = 1;
+                    break;
+                }
 
-        $tag = new Tag($user, $name, $info);
-        return new ApiResponse(200);
-    }
+                $pos = strpos($name, $target);
+                if($pos === false)
+                    continue;
 
-    #[GET("/tags")]
-    public static function listTags()
-    {
-        $data = [];
-        $tags = Tag::find([]);
-        foreach($tags as $tag)
-            $data[] = $tag->data();
+
+                $rate = strlen($target) / strlen($name);
+                if($rate > $likeliness[$id])
+                    $likeliness[$id] = $rate;
+            }
+            $likeliness_sum += $likeliness[$id];
+        }
+
+        if($likeliness_sum == 0)
+        {
+            $response = new ApiResponse(200);
+            $response->echo([]);
+            return $response;
+        }
+
+        $priority = [];
+        foreach($likeliness as $id => $rate)
+        {
+            $priority[] = [
+                "tag" => Tag::get($id),
+                "rate" => $rate
+            ];
+        }
+
+        usort($priority, function($a, $b) {
+            return $b["rate"] <=> $a["rate"];
+        });
+
+
+        $resources = [];
+
+        foreach($priority as $option)
+        {
+            $matched = 0;
+            $rate = $option["rate"] / $likeliness_sum;
+            
+            if($rate == 0)
+                continue;
+
+            $list = $option["tag"]->Resources();
+            foreach($list as $link)
+            {
+                if(!isset($link->ApproveTime))
+                    continue;
+
+                $resource = $link->Resource;
+                $id = $resource->getId();
+                if(!isset($resources[$id]))
+                {
+                    $resTags = $resource->Tags();
+                    $resources[$id] = [
+                        "id" => $id,
+                        "rate" => 0,
+                        "tags" => 0,
+                        "total_tags" => count($resTags),
+                    ];
+                }
+                $resources[$id]["rate"] += $rate;
+                $resources[$id]["tags"]++;
+            }
+        }
+
+        foreach($resources as $key => $val)
+        {
+            $tag_rate = sqrt($val["tags"] /
+                             $val["total_tags"]);
+            $val["rate"] *= $tag_rate;
+        }
+
+        usort($resources, function($a, $b){
+            return $b["rate"] <=> $a["rate"];
+        });
+
+
+        $limit = 100;
+        $max = $resources[0]["rate"];
+        $min = $max / 4;
+        $answer = [];
+
+        foreach($resources as $val)
+        {
+            if(count($answer) >= $limit)
+                break;
+
+            $resource = Resource::get($val["id"]);
+            
+            if($val["rate"] < $min)
+                break;
+            $answer[] = $resource->overview();
+        }
 
         $response = new ApiResponse(200);
-        $response->echo($data);
+        $response->setHeader("Cache-Control","no-store");
+        $response->echo($answer);
         return $response;
     }
 
