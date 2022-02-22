@@ -56,7 +56,7 @@ async function load_tags(cache = true)
 {
     if(!tags.length || !cache)
     {
-        var req = await ajax("GET", "/api/search/tags")
+        var req = await ajax("GET", "/api/tags")
         if(!req.data)
         {
             console.log("Failed loading flags")
@@ -191,7 +191,7 @@ function create_tag(tag)
     data.append("csrf", window.csrf)
     data.append("name", tag)
 
-    return ajax("POST", "/api/search/tags/create", data)
+    return ajax("POST", "/api/tags", data)
 }
 
 function show_closest(tag)
