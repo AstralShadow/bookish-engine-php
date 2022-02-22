@@ -43,6 +43,8 @@ class User
         $response->setValue("csrf", CSRF::get());
 
         if($r->method() == RequestMethod::POST)
+       
+        if($r->method() == RequestMethod::POST)
         {
             $state = \API\Resource::create();
             $code = $state->getCode();
