@@ -22,7 +22,7 @@ require "Core/autoload.php";
 $router = new Core\Router();
 $router->add("\Controllers\Home", "/");
 $router->add("\Controllers\Account", "/");
-$router->add("\Controllers\User", "/");
+$router->add("\Controllers\User", "/user");
 
 $router->add("\API\Session", "api/session");
 $router->add("\API\User", "api/user");

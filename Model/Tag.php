@@ -57,5 +57,12 @@ class Tag extends Entity
             "Name" => mb_strtolower($name)
         ]));
     }
+
+    public static function findByName($name) : ?Tag
+    {
+        return self::find([
+            "Name" => mb_strtolower($name)
+        ])[0];
+    }
 }
 
