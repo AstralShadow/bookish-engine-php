@@ -6,6 +6,7 @@ use \Core\Entity;
 use \Core\Attributes\Table;
 use \Core\Attributes\PrimaryKey;
 use \Core\Attributes\Traceable;
+use \Core\Attributes\TraceLazyLoad;
 use function \Extend\generateToken;
 
 
@@ -23,7 +24,7 @@ use function \Extend\generateToken;
 class Tag extends Entity
 {
     public string $Name;
-    public string? $Description;
+    public ?string $Description;
 
     #[Traceable("CreatedTags")]
     public User $Creator;
@@ -31,9 +32,9 @@ class Tag extends Entity
 
     public function __construct(User $user,
                                 string $name,
-                                string? $info = null)
+                                ?string $info = null)
     {
-        $this->Name = $name;
+        $this->Name = mb_strtolower($name);
         $this->Description = $info;
         $this->Creator = $user;
         $this->CreateTime = new \DateTime();
@@ -43,11 +44,18 @@ class Tag extends Entity
 
     public function data()
     {
-        $data = [ "name" => $this->Name ];
+        $data = [ "name" => mb_strtolower($this->Name) ];
         if(isset($this->Description))
             $data["info"] = $this->Description;
 
         return $data;
+    }
+
+    public static function exists($name) : bool
+    {
+        return count(self::find([
+            "Name" => mb_strtolower($name)
+        ]));
     }
 }
 

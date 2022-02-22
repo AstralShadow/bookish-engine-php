@@ -62,6 +62,18 @@ h-flex > * {
     float: right;
 }
 
+.pos_relative
+{
+    position: relative;
+}
+
+overlay-pin
+{
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    overflow: visible;
+}
 
 fly-item
 {

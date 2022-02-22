@@ -21,3 +21,8 @@
 .white-text {
     color: white;
 }
+
+input, textarea, tag-area
+{
+    color: black;
+}

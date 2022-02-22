@@ -15,44 +15,6 @@ hr {
     border: 1px solid black;
 }
 
-input[type=text] {
-    box-sizing: border-box;
-    border: 3px solid black;
-    border-radius: 120px/8px;
-    padding: 6px;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
-    outline: none;
-    float: right;
-    width: 75%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-
-input[type=text]:focus {
-    border: 3px solid #B4EDB8;
-}
-
-textarea {
-    box-sizing: border-box;
-    border: 3px solid black;
-    border-radius: 120px/8px;
-    padding: 6px;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
-    outline: none;
-    float: right;
-    resize: vertical;
-    min-height: 60px;
-    max-height: 170px;
-    width: 75%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
 table {
     width: 100%;
-}
-
-textarea:focus {
-    border: 3px solid var(--light-color);
 }

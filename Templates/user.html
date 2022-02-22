@@ -72,11 +72,23 @@
                             Категории:
                         </h1>
                     </td>
-                    <td>
-                        <textarea class="light-bg"
-                                  name="tags"
-                                  form="upload"
-                        ></textarea>
+                    <td class="pos_relative">
+                        <tag-area
+                             class="light-bg"
+                             name="tags"
+                             form="upload"
+                        > </tag-area>
+                        <overlay-pin
+                                class="pos-bottom-out">
+                            <tag-select
+                                class="hidden "
+                            >
+                                <tag-option selected>
+                                    <tag-name></tag-name>
+                                    <tag-info></tag-info>
+                                </tag-option>
+                            </tag-select>
+                        </overlay-pin>
                     </td>
                 </label>
             </tr>
@@ -130,7 +142,10 @@
 </form>
 
 
+${parse:js_csrf.html}
 <script src="${path:scripts/user/resource_upload.js}"
+        type="module"> </script>
+<script src="${path:scripts/user/tag_selection.js}"
         type="module"> </script>
 <script src="${path:scripts/user/avatar_upload.js}"
         type="module"> </script>

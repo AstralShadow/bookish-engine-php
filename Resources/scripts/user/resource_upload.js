@@ -1,4 +1,4 @@
-const form = document.querySelector("form#upload")
+export const form = document.querySelector("form#upload")
 const popup = document.querySelector("#file_upload")
 const popup_btn = document.querySelector("#open_upload")
 
@@ -21,5 +21,3 @@ popup_btn.addEventListener("click", function()
         popup.classList.add("shown")
     }
 })
-
-

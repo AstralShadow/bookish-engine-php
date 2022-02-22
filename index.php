@@ -27,7 +27,7 @@ $router->add("\Controllers\User", "/");
 $router->add("\API\Session", "api/session");
 $router->add("\API\User", "api/user");
 $router->add("\API\Resource", "api/resource");
-//$router->add("\API\Resource", "api/resource");
+$router->add("\API\Search", "api/search");
 
 $engine = new Core\Controller($router);
 
