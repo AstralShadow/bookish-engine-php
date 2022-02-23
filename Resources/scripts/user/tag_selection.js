@@ -112,7 +112,7 @@ input.addEventListener("input", function(e)
     })
     
     var text = input.innerText
-    if(text.indexOf("\n") > 0)
+    if(text.indexOf("\n") > -1)
     {
         e.preventDefault()
         insert_tag()
@@ -144,8 +144,6 @@ tagarea.addEventListener("keydown", function(e)
         if(index > visible_tags.length - 1)
             index = 0
 
-        console.log(index)
-
         if(visible_tags[index] != undefined)
             set_target(visible_tags[index])
     }
@@ -160,6 +158,10 @@ tagarea.addEventListener("keydown", function(e)
         }
         tagarea.appendChild(input)
         input.focus()
+
+        var ev = new Event("change")
+        ev.tags = [...added_tags]
+        tagarea.dispatchEvent(ev)
     }
 })
 
@@ -170,7 +172,7 @@ async function insert_tag()
         if(!enable_creating)
             return;
         var text = input.innerText
-        let tag = text.split("\n")[0]
+        let tag = text.replace("\n", "")
         if(tag.length == 0)
             return;
 
@@ -202,6 +204,11 @@ async function insert_tag()
     form_el.setAttribute("name", "tags[]")
     form_el.setAttribute("value", tag.name)
     element.appendChild(form_el)
+
+    var ev = new Event("change")
+    ev.tags = [...added_tags]
+    tagarea.dispatchEvent(ev)
+
 }
 
 function create_tag(tag)
@@ -229,7 +236,8 @@ function show_closest(tag)
             tags[i].element.style.display = ""
             visible_tags.push(i)
         }
-        set_target(-1)
+        if(enable_creating)
+            set_target(-1)
         return;
     }
 
@@ -256,8 +264,10 @@ function show_closest(tag)
     {
         if(enable_creating)
             new_tag.style.display = ""
-        set_target(-1)
-        visible_tags.push(-1)
+        set_target(enable_creating ? -1
+                        : (visible_tags[0] ?? -1))
+        if(!enable_creating)
+            visible_tags.push(-1)
     }
 }
 
@@ -270,14 +280,16 @@ function fix_tag_list_design()
 
 function set_target(index)
 {
+    if(index == -1 && !enable_creating)
+        index = 0
+
     var prev = target_tag < 0 ? new_tag
                               : tags[target_tag].element
     prev.classList.remove("selected")
 
     target_tag = index;
     if(target_tag >= tags.length)
-        target_tag = -1
-
+        target_tag = enable_creating ? -1 : 0
     var next = target_tag < 0 ? new_tag
                               : tags[target_tag].element
     next.classList.add("selected")
