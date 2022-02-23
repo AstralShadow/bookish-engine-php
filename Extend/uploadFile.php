@@ -75,7 +75,7 @@ function uploadFile(string $key,
     }
 
     return [
-        "name" => "$name.$ext",
+        "name" => "$name",
         "uri" => $target,
         "mime" => $mime,
         "size" => $size
