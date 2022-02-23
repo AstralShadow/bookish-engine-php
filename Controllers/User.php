@@ -41,7 +41,7 @@ class User
             
         $response = Page("user.html", 200);
         $response->setValue("csrf", CSRF::get());
-        $response->setValue("name", self::$user->Name);
+        $response->setValue("user", self::$user->Name);
 
         if($r->method() == RequestMethod::POST)
         {
@@ -51,7 +51,7 @@ class User
             if($code == 201)
             {
                 $uri = "/resource/" . $data["id"];
-                $response->setValue("error", $uri);
+                return redirect($uri);
             }
             else
             {

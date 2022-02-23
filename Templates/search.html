@@ -1,13 +1,15 @@
 <h-flex>
-    <div class="pos_relative">
+    <div>
         Филтриране:
-        <tag-area class="light-bg"
-                  name="tags"
-                  form="filter">
-        </tag-area>
-        <overlay-pin class="pos-bottom-out">
-            <tag-select class="hidden"> </tag-select>
-        </overlay-pin>
+        <div class="pos_relative">
+            <tag-area class="light-bg"
+                      name="tags"
+                      form="filter">
+            </tag-area>
+            <overlay-pin class="pos-bottom-out">
+                <tag-select class="hidden"> </tag-select>
+            </overlay-pin>
+        </div>
     </div>
     <header id="user_home_header" class="w200px">
         <user-avatar class="_100px right text-center" >
@@ -18,7 +20,7 @@
             </user-currency>
             <user-title class="pos-bottom-out pos-center fontsize">
                 <span>
-                    ${name=Гошко} <br />
+                    ${user=Гошко} <br />
                     ${role=Бандита}
                 </span>
             </user-title>
