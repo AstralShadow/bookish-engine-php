@@ -88,7 +88,6 @@ class Search
 
         foreach($priority as $option)
         {
-            $matched = 0;
             $rate = $option["rate"] / $likeliness_sum;
             
             if($rate == 0)
@@ -132,7 +131,6 @@ class Search
         $limit = 100;
         $max = $resources[0]["rate"];
         $min = $max / 10;
-        //$min = 0;
         $answer = [];
 
         foreach($resources as $val)
