@@ -1,10 +1,4 @@
-<header id="user_home_header">
-    <!--
-    <nav class="fleft hflex">
-        <a href="#" class="_64px button config"></a>
-        <a href="#" class="_64px button warning"></a>
-    </nav>
-    -->
+<h-flex>
     <div class="pos_relative">
         Филтриране:
         <tag-area class="light-bg"
@@ -15,234 +9,78 @@
             <tag-select class="hidden"> </tag-select>
         </overlay-pin>
     </div>
-    <user-avatar class="_100px right text-center" >
-        <user-currency class="_100px
-                              pos-right-out
-                              text-left fontsize"> 
-            550x
-        </user-currency>
-        <user-title class="pos-bottom-out pos-center fontsize">
-            <span>
-                ${name=Гошко} <br />
-                ${role=Бандита}
-            </span>
-        </user-title>
-    </user-avatar>
-</header>
-<br />
-
-<h-flex class="h-flex-search">
-    <section class="round-border flex pos-center sec-bg white-text">
-        <table>
-            <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Заглавие:
-                        </h1>
-                    </td>
-                    <td>
-                        <input name="name" form="upload"
-                               class="light-bg"
-                               type="text"
-                               required
-                               minlength=5
-                               maxlength=20/>
-                    </td>
-                </label>
-            </tr>
-            <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Описание:
-                        </h1>
-                    </td>
-                    <td>
-                        <textarea class="light-bg fright"
-                                  form="upload"
-                                  name="info"
-                                  required
-                                  minlength=10
-                        ></textarea>
-                    </td>
-                </label>
-            </tr>
-            <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Категории:
-                        </h1>
-                    </td>
-                    <td>
-                        <tag-area
-                             class="light-bg fright"
-                             name="tags"
-                        > </tag-area>
-                    </td>
-                </label>
-            </tr>
-        </table>
-        <br/>
-        <button id="review"
-                class="button review pos-center fontsize">
-                <b>
-                Преглед
-                </b>
-        </button>
-        <br />
-        <span>${error=}</span>
-    </section>
-    <section class="round-border pos-center flex sec-bg white-text">
-        <table>
-            <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Заглавие:
-                        </h1>
-                    </td>
-                    <td>
-                        <input name="name" form="upload"
-                               class="light-bg"
-                               type="text"
-                               required
-                               minlength=5
-                               maxlength=20/>
-                    </td>
-                </label>
-            </tr>
-            <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Описание:
-                        </h1>
-                    </td>
-                    <td>
-                        <textarea class="light-bg fright"
-                                  form="upload"
-                                  name="info"
-                                  required
-                                  minlength=10
-                        ></textarea>
-                    </td>
-                </label>
-            </tr>
-            <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Категории:
-                        </h1>
-                    </td>
-                    <td>
-                        <tag-area
-                             class="light-bg fright"
-                             name="tags"
-                        > </tag-area>
-                    </td>
-                </label>
-            </tr>
-        </table>
-        <br/>
-        <button id="review"
-                class="button review pos-center fontsize">
-                <b>
-                Преглед
-                </b>
-        </button>
-        <br />
-        <span>${error=}</span>
-    </section>
-    <section class="round-border pos-center flex sec-bg white-text">
-        <table>
-            <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Заглавие:
-                        </h1>
-                    </td>
-                    <td>
-                        <input name="name" form="upload"
-                               class="light-bg"
-                               type="text"
-                               required
-                               minlength=5
-                               maxlength=20/>
-                    </td>
-                </label>
-            </tr>
-            <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Описание:
-                        </h1>
-                    </td>
-                    <td>
-                        <textarea class="light-bg fright"
-                                  form="upload"
-                                  name="info"
-                                  required
-                                  minlength=10
-                        ></textarea>
-                    </td>
-                </label>
-            </tr>
-            <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Категории:
-                        </h1>
-                    </td>
-                    <td class="pos_relative">
-                        <tag-area
-                             class="light-bg fright"
-                             name="tags"
-                        > </tag-area>
-                    </td>
-                </label>
-            </tr>
-        </table>
-        <br/>
-        <button id="review"
-                class="button review pos-center fontsize">
-                <b>
-                Преглед
-                </b>
-        </button>
-        <br />
-        <span>${error=}</span>
-    </section>
-
+    <header id="user_home_header" class="w200px">
+        <user-avatar class="_100px right text-center" >
+            <user-currency class="_100px
+                                  pos-right-out
+                                  text-left fontsize"> 
+                550x
+            </user-currency>
+            <user-title class="pos-bottom-out pos-center fontsize">
+                <span>
+                    ${name=Гошко} <br />
+                    ${role=Бандита}
+                </span>
+            </user-title>
+        </user-avatar>
+    </header>
 </h-flex>
 
-<fly-item id="file_upload"
-          class="sec-bg round-border hidden">
-    <h-flex>
-        <section>
-            Целия материал
-            <br />
-            <input name="full" form="upload" required
-                   type="file" />
-        </section>
-        <section>
-            Демонстративен материал
-            <br />
-            <input name="demo" form="upload" required
-                   type="file" />
-        </section>
-    </h-flex>
-    <button form="upload"
-            class="_100px button upload pos-center"
-    >
-    </button>
-</fly-item>
-
+<h-flex class="wrap" id="search_results">
+    <section class="round-border sec-bg white-text search_result">
+        <table>
+            <tr>
+                <label>
+                    <td class="text-top">
+                        <h1>
+                            Заглавие:
+                        </h1>
+                    </td>
+                    <td>
+                        <input data-content="name"
+                               class="light-bg"
+                               type="text" />
+                    </td>
+                </label>
+            </tr>
+            <tr>
+                <label>
+                    <td class="text-top">
+                        <h1>
+                            Описание:
+                        </h1>
+                    </td>
+                    <td>
+                        <textarea class="light-bg fright"
+                                  data-content="info"
+                        ></textarea>
+                    </td>
+                </label>
+            </tr>
+            <tr>
+                <label>
+                    <td class="text-top">
+                        <h1>
+                            Категории:
+                        </h1>
+                    </td>
+                    <td>
+                        <tag-area class="light-bg fright"
+                        > </tag-area>
+                    </td>
+                </label>
+            </tr>
+        </table>
+        <div data-content="owner"> тествам полето </div>
+        <div data-content="created"> само за тест </div>
+        <br/>
+        <button class="button review pos-center fontsize">
+                <b>
+                Преглед
+                </b>
+        </button>
+    </section>
+</h-flex>
 
 
 <form id="filter"> </form>
