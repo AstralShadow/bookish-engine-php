@@ -1,28 +1,18 @@
- <header id="user_home_header">
+<header id="user_home_header">
     <!--
-        <nav class="fleft hflex">
-       <a href="#" class="_64px button config"></a>
-       <a href="#" class="_64px button warning"></a>
+    <nav class="fleft hflex">
+        <a href="#" class="_64px button config"></a>
+        <a href="#" class="_64px button warning"></a>
     </nav>
     -->
     <div class="pos_relative">
         Търсене:
-        <tag-area
-             class="light-bg"
-             name="tags"
-             form="upload"
-        > </tag-area>
-        <overlay-pin
-                class="pos-bottom-out">
-            <tag-select
-                class="hidden "
-            >
-                <tag-option
-                    class="selected">
-                    <tag-name></tag-name>
-                    <tag-info></tag-info>
-                </tag-option>
-            </tag-select>
+        <tag-area class="light-bg"
+                  name="tags"
+                  form="search">
+        </tag-area>
+        <overlay-pin class="pos-bottom-out">
+            <tag-select class="hidden"> </tag-select>
         </overlay-pin>
     </div>
     <user-avatar class="_100px right text-center" >
@@ -69,7 +59,7 @@
                         </h1>
                     </td>
                     <td>
-                        <textarea class="light-bg"
+                        <textarea class="light-bg fright"
                                   form="upload"
                                   name="info"
                                   required
@@ -85,24 +75,11 @@
                             Категории:
                         </h1>
                     </td>
-                    <td class="pos_relative">
+                    <td>
                         <tag-area
-                             class="light-bg"
+                             class="light-bg fright"
                              name="tags"
-                             form="upload"
                         > </tag-area>
-                        <overlay-pin
-                                class="pos-bottom-out">
-                            <tag-select
-                                class="hidden "
-                            >
-                                <tag-option
-                                    class="selected">
-                                    <tag-name></tag-name>
-                                    <tag-info></tag-info>
-                                </tag-option>
-                            </tag-select>
-                        </overlay-pin>
                     </td>
                 </label>
             </tr>
@@ -144,7 +121,7 @@
                         </h1>
                     </td>
                     <td>
-                        <textarea class="light-bg"
+                        <textarea class="light-bg fright"
                                   form="upload"
                                   name="info"
                                   required
@@ -160,24 +137,11 @@
                             Категории:
                         </h1>
                     </td>
-                    <td class="pos_relative">
+                    <td>
                         <tag-area
-                             class="light-bg"
+                             class="light-bg fright"
                              name="tags"
-                             form="upload"
                         > </tag-area>
-                        <overlay-pin
-                                class="pos-bottom-out">
-                            <tag-select
-                                class="hidden "
-                            >
-                                <tag-option
-                                    class="selected">
-                                    <tag-name></tag-name>
-                                    <tag-info></tag-info>
-                                </tag-option>
-                            </tag-select>
-                        </overlay-pin>
                     </td>
                 </label>
             </tr>
@@ -219,7 +183,7 @@
                         </h1>
                     </td>
                     <td>
-                        <textarea class="light-bg"
+                        <textarea class="light-bg fright"
                                   form="upload"
                                   name="info"
                                   required
@@ -237,22 +201,9 @@
                     </td>
                     <td class="pos_relative">
                         <tag-area
-                             class="light-bg"
+                             class="light-bg fright"
                              name="tags"
-                             form="upload"
                         > </tag-area>
-                        <overlay-pin
-                                class="pos-bottom-out">
-                            <tag-select
-                                class="hidden "
-                            >
-                                <tag-option
-                                    class="selected">
-                                    <tag-name></tag-name>
-                                    <tag-info></tag-info>
-                                </tag-option>
-                            </tag-select>
-                        </overlay-pin>
                     </td>
                 </label>
             </tr>
@@ -294,20 +245,8 @@
 
 
 
-<form id="avatar_form" method="POST"
-      enctype="multipart/form-data">
-    <input type="hidden" name="csrf" value="${csrf}" />
-</form>
-<form id="upload" method="POST"
-      enctype="multipart/form-data">
-    <input type="hidden" name="csrf" value="${csrf}" />
-</form>
+<form id="search"> </form>
 
 
-${parse:js_csrf.html}
-<script src="${path:scripts/user/resource_upload.js}"
-        type="module"> </script>
 <script src="${path:scripts/user/tag_selection.js}"
-        type="module"> </script>
-<script src="${path:scripts/user/avatar_upload.js}"
         type="module"> </script>

@@ -2,11 +2,13 @@ import { ajax } from "../utility/ajax.js"
 
 const tagarea = document.querySelector("tag-area")
 const tag_list = document.querySelector("tag-select")
-const form_id = tagarea.getAttribute("form")
+const form_id = tagarea.getAttribute("form") ?? null
 
 const new_tag = document.createElement("tag-option")
 const new_name = document.createElement("tag-name")
 const new_desc = document.createElement("tag-info")
+const enable_creating = window.csrf != undefined
+
 new_tag.classList.add("selected")
 // new_desc.innerText = "Създайте нов елемент"
 new_tag.appendChild(new_name)
@@ -70,7 +72,8 @@ async function load_tags(cache = true)
     while(tag_list.firstChild)
         tag_list.removeChild(tag_list.firstChild)
     
-    tag_list.appendChild(new_tag)
+    if(enable_creating )
+        tag_list.appendChild(new_tag)
 
     tags.forEach(function(tag, tag_id)
     {
@@ -164,6 +167,8 @@ async function insert_tag()
 {
     if(target_tag == -1)
     {
+        if(!enable_creating)
+            return;
         var text = input.innerText
         let tag = text.split("\n")[0]
         if(tag.length == 0)
@@ -191,7 +196,8 @@ async function insert_tag()
     input.focus()
 
     var form_el = document.createElement("input")
-    form_el.setAttribute("form", form_id)
+    if(form_id)
+        form_el.setAttribute("form", form_id)
     form_el.setAttribute("type", "hidden")
     form_el.setAttribute("name", "tags[]")
     form_el.setAttribute("value", tag.name)
@@ -200,6 +206,7 @@ async function insert_tag()
 
 function create_tag(tag)
 {
+    if(!enable_creating) return;
     if(tag.trim().length < 2) return;
     var data = new FormData()
     data.append("csrf", window.csrf)
@@ -247,7 +254,8 @@ function show_closest(tag)
     }
     if(!exact_match && tag.length > 2)
     {
-        new_tag.style.display = ""
+        if(enable_creating)
+            new_tag.style.display = ""
         set_target(-1)
         visible_tags.push(-1)
     }
