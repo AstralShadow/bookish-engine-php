@@ -12,6 +12,7 @@ use Core\RequestMethods\RequestMethod;
 
 use function Extend\layoutResponseFactory as Page;
 use function Extend\redirect;
+use function Extend\humanFilesize;
 use Extend\CSRFTokenManager as CSRF;
 
 use Model\Session;
@@ -41,8 +42,14 @@ class Resource
         $html->setValue("role", $user->roleName());
         $html->setValue("scrolls", $user->scrolls());
 
-        $data = $resource->overview();
+        $data = $resource->overview(true);
+        
         $data["tags"] = json_encode($data["tags"]);
+        $data["data_size"] = humanFilesize 
+            ($data["data_size"]);
+        $data["preview_size"] = humanFilesize 
+            ($data["preview_size"]);
+
         $html->setValues($data);
 
         return $html;

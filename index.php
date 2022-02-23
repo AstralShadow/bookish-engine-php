@@ -16,6 +16,7 @@ require "Extend/isValidString.php";
 require "Extend/CSRFTokenManager.php";
 require "Extend/uploadFile.php";
 require "Extend/shrinkAvatar.php";
+require "Extend/humanFilesize.php";
 
 require "Core/autoload.php";
 

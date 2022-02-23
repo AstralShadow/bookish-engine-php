@@ -69,7 +69,7 @@ class Resource extends Entity
         }
     }
     
-    public function overview()
+    public function overview(bool $full = false)
     {
         $created = $this->CreateTime->format('Y-m-d');
         $data = [
@@ -81,17 +81,21 @@ class Resource extends Entity
 
             "approved" => isset($this->ApproveTime),
             
-            "tags" => [],
-            "data_name" => $this->DataName,
-            //"data_size" => 0,
-
-            "preview_name" => $this->PreviewName
-            //"preview_size" =>
+            "tags" => []
         ];
 
         foreach($this->Tags() as $link)
-        {
             $data["tags"][] = $link->Tag->data();
+
+        if($full)
+        {
+            $data["data_name"] = $this->DataName;
+            $data["data_size"] = $this->DataSize;
+            $data["data_mime"] = $this->DataMime;
+
+            $data["preview_name"] = $this->PreviewName;
+            $data["preview_size"] = $this->DataSize;
+            $data["preview_mime"] = $this->DataMime;
         }
 
         return $data;
