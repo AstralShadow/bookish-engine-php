@@ -71,10 +71,13 @@ class Resource extends Entity
     
     public function overview()
     {
+        $created = $this->CreateTime->format('Y-m-d');
         $data = [
+            "id" => $this->getId(),
             "name" => $this->Name,
             "owner" => $this->Owner->Name,
-            "created" => $this->CreateTime,
+            "created" => $created,
+            "info" => $this->Description,
 
             "approved" => isset($this->ApproveTime),
             
