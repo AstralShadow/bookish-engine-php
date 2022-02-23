@@ -48,10 +48,13 @@
     height: 90%;
 }
 
+v-flex {
+    display: flex;
+    flex-direction: column;
+}
+
 h-flex {
     display: flex;
-    max-width: 100%;
-    min-width: 50%;
 }
 
 h-flex.wrap {
@@ -61,6 +64,19 @@ h-flex.wrap {
 h-flex > * {
     flex: 1;
     margin: 5px;
+}
+
+h-flex.near > * {
+    margin: 0px;
+}
+
+v-flex > * {
+    flex: 1;
+    margin: 5px;
+}
+
+v-flex.near > * {
+    margin: 0px;
 }
 
 .hflex {

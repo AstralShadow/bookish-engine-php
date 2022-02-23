@@ -92,12 +92,47 @@
         <br />
         <span>${error=}</span>
     </section>
-    <section class="round-border sec-bg text-center white-text">
-        <h1>
-            Разгледай <br />
-            материали
-        </h1>
-        <img src="${path:img/scroll.png}" width="100%" />
+    <turn-card class="round-border sec-bg
+                      text-center white-text">
+        <card-front>
+            <h1>
+                Разгледай <br />
+                материали
+            </h1>
+            <img src="${path:img/scroll.png}" width="100%" />
+        </card-front>
+        <card-back>
+            <v-flex class="size100 near">
+                <h-flex class="near">
+                    <a href="/resources/owned">
+                        <div class="rborder height100
+                                    text-vmiddle">
+                            <span>
+                                Твоите неща
+                            </span>
+                        </div>
+                    </a>
+                    <a href="/resources/bought">
+                        <div class="height100
+                                    text-vmiddle">
+                            <span>
+                                Достъпни неща
+                            </span>
+                        </div>
+                    </a>
+                </h-flex>
+                <h-flex class="near">
+                    <a href="/search">
+                        <div class="tborder height100
+                                    text-vmiddle">
+                            <span>
+                                Търси неща.
+                            </span>
+                        </div>
+                    </a>
+                </h-flex>
+            </v-flex>
+        </card-back>
     </section>
 </h-flex>
 

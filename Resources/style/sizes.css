@@ -7,4 +7,9 @@
 ._256px { height: 256px; width: 256px; }
 
 .width80 { min-width: 80%; }
+.width100 { min-width: 100%; }
 .w200px { min-width: 200px; }
+
+.height100 { min-height: 100%; }
+
+.size100 { min-height: 100%; min-width: 100%; }

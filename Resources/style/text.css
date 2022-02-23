@@ -30,3 +30,9 @@ input, textarea, tag-area
 {
     color: black;
 }
+
+.text-vmiddle {
+    align-items:center;
+    justify-content:center;
+    display: flex;
+}
