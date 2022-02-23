@@ -86,7 +86,7 @@ class Filter
 
 
         $limit = 100;
-        $max = $resources[0]["rate"];
+        $max = $resources[0]["rate"] ?? 0;
         $min = $max / 8;
         $answer = [];
 
