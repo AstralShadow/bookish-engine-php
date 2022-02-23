@@ -34,6 +34,8 @@ create table Users(
     # Email nvarchar(120) not null,
     # EmailConfirmed bool not null default false,
 
+    Scrolls int not null default 0,
+
 	AvatarMime enum("image/jpeg", "image/png", "image/gif") default null,
     Avatar nvarchar(200) default null,
     CreateTime datetime not null default current_timestamp,

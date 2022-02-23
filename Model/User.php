@@ -44,8 +44,11 @@ use Extend\Permissions;
 class User extends Entity
 {
 
+    const INITIAL_SCROLLS = 0;
+
     public string $Name;
     protected string $Password;
+    protected int $Scrolls;
 
     public ?string $Avatar = null;
     public ?string $AvatarMime;
@@ -63,6 +66,7 @@ class User extends Entity
         $this->Password =
             password_hash($password, PASSWORD_BCRYPT);
         $this->CreateTime = new \DateTime();
+        $this->Scrolls = self::INITIAL_SCROLLS;
         parent::__construct();
     }
 
@@ -127,7 +131,7 @@ class User extends Entity
 
     public function scrolls() : int
     {
-        return 5;
+        return $this->Scrolls;
     }
 
     public function roleName() : string
