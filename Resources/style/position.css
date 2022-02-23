@@ -8,11 +8,6 @@
     transform: translate(-50%, -50%);
 }
 
-.user-avatar{
-    left: 100%;
-    transform: translate(-170%);
-}
-
 .pos-center {
     margin: 0px auto;
 }
@@ -97,6 +92,7 @@ h-flex > * {
     position: relative;
 }
 
+
 overlay-pin
 {
     position: absolute;
@@ -112,3 +108,9 @@ fly-item
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
+user-avatar.right {
+    left: 100%;
+    transform: translate(-170%);
+}
+

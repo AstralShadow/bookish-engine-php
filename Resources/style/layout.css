@@ -1,0 +1,23 @@
+body {
+    background: url("../img/bg.jpg") no-repeat center center fixed;
+    background-size: cover;
+    /*
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bg.jpg', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/bg.jpg', sizingMethod='scale')";
+    */
+
+    text-align: center;
+    overflow: hidden;
+}
+
+main-container
+{
+    text-align: left;
+    display: inline-block;
+    background: var(--prim-color);
+    margin: 5% auto;
+    min-width: 300px;
+}
