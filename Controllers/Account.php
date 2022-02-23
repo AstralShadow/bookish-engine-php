@@ -58,7 +58,7 @@ class Account
         if($code != 200)
             return $error($output["error"]);
 
-        $next = $_GET["next"] ?? "./";
+        $next = $_GET["next"] ?? "./user";
 
         $flw = <<<EOD
             <script defer>
