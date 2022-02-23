@@ -55,6 +55,21 @@
 
 h-flex {
     display: flex;
+    max-width: 100%;
+    min-width: 50%;
+}
+
+
+.h-flex-search {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex{
+    flex: 50%;
+    max-width: 45%;
+    min-width: 350px;
 }
 
 h-flex > * {
