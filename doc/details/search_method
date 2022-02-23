@@ -1,8 +1,8 @@
 My current homebrew at 1AM search algorythm does this:
 
 First, checks for tag matching.
-Match rate is calculated as query_tag.length / tag.length
-    only when query_tag is found within tag
+Match rate is the sum of query_tag.length / tag.length
+for query_tags that are contained within tag.
 And i mean tag names, no descriptions included.
 This rate is called $likeliness
 
@@ -20,10 +20,7 @@ tags to get lower rating than these with less tags.
 The square root makes the algorythm less drastic.
 
 Finally, we sort the resources by their rates,
-and return first N with rate between the maximum one
-and one quarter of it.
-
-N being a hard-coded 100, because i'm tired.
+and return the first N results.
 
 
 Underline note:

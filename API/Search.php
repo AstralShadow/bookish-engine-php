@@ -28,7 +28,9 @@ class Search
     public static function find(Request $req)
     {
         $query = mb_strtolower($req->tags);
-        $tags = explode('+', $query);
+        $tags = array_map(function($a){
+            return urldecode($a);
+        }, explode('+', $query));
         $all_tags = Tag::find([]);
         $likeliness = [];
         $likeliness_sum = 0;
@@ -46,7 +48,7 @@ class Search
 
                 if($target == $name)
                 {
-                    $likeliness[$id] = 1;
+                    $likeliness[$id] += 1;
                     break;
                 }
 
@@ -56,8 +58,7 @@ class Search
 
 
                 $rate = strlen($target) / strlen($name);
-                if($rate > $likeliness[$id])
-                    $likeliness[$id] = $rate;
+                $likeliness[$id] += $rate;
             }
             $likeliness_sum += $likeliness[$id];
         }
@@ -120,7 +121,7 @@ class Search
         {
             $tag_rate = sqrt($val["tags"] /
                              $val["total_tags"]);
-            $val["rate"] *= $tag_rate;
+            $resources[$key]["rate"] *= $tag_rate;
         }
 
         usort($resources, function($a, $b){
@@ -130,7 +131,8 @@ class Search
 
         $limit = 100;
         $max = $resources[0]["rate"];
-        $min = $max / 4;
+        $min = $max / 10;
+        //$min = 0;
         $answer = [];
 
         foreach($resources as $val)
@@ -142,11 +144,13 @@ class Search
             
             if($val["rate"] < $min)
                 break;
-            $answer[] = $resource->overview();
+            $data = $resource->overview();
+            $data["likeliness"] = $val["rate"];
+            $answer[]  = $data;
         }
 
         $response = new ApiResponse(200);
-        $response->setHeader("Cache-Control","no-store");
+        $response->setHeader("cache-control", "no-cache");
         $response->echo($answer);
         return $response;
     }
