@@ -21,16 +21,19 @@ ${data_name=Не е качено}
 <br />
 ${data_size=0B} ${data_mime=unknown}
 <br />
-<button id="buy">buy</button>
+<a class="button" id="buy">Купи</a>
+<br />
 
-${previw_name=Не е качено}
-<br />
-${preview_size=0B} ${data_mime=unknown}
-<br />
-<button id="buy">buy</button>
-
-<br />
 ${preview_name=Не е качено}
+<br />
+${preview_size=0B} ${preview_mime=unknown}
+<br />
+<a class="button"
+   href="${preview_url}"
+   download="${preview_name}">
+    Изтегли демо
+</a>
+<br />
 
 
 ${parse:js_tags.html}

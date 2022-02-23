@@ -2,6 +2,7 @@
 namespace API;
 
 use \Core\Request;
+use \Core\Responses\InstantResponse;
 use \Core\Responses\ApiResponse;
 use Core\RequestMethods\GET;
 use Core\RequestMethods\PUT;
@@ -140,7 +141,7 @@ class Resource
     }
 
     #[GET("/{id}")]
-    public static function overwiev(Request $req)
+    public static function overview(Request $req)
     {
         $id = $req->id;
         $res = MResource::get($id);
@@ -149,6 +150,25 @@ class Resource
 
         $response = new ApiResponse(200);
         $response->echo($res->overview());
+        return $response;
+    }
+
+    #[GET("/{id}/preview")]
+    public static function downloadPreview(Request $req)
+    {
+        $id = $req->id;
+        $res = MResource::get($id);
+        if(!$res)
+            return APIError(404, "Няма такъв ресурс.");
+
+        $uri = $res->Preview ?? null;
+        if(!isset($uri) || !file_exists($uri))
+            return APIError(404);
+
+        $response = new InstantResponse(200);
+        $response->setHeader("content-type",
+                             $res->PreviewMime);
+        readfile($uri);
         return $response;
     }
 

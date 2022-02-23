@@ -94,8 +94,8 @@ class Resource extends Entity
             $data["data_mime"] = $this->DataMime;
 
             $data["preview_name"] = $this->PreviewName;
-            $data["preview_size"] = $this->DataSize;
-            $data["preview_mime"] = $this->DataMime;
+            $data["preview_size"] = $this->PreviewSize;
+            $data["preview_mime"] = $this->PreviewMime;
         }
 
         return $data;
