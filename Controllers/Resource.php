@@ -38,6 +38,8 @@ class Resource
         $html = Page("resource.html", 200);
 
         $html->setValue("user", $user->Name);
+        $html->setValue("role", $user->roleName());
+        $html->setValue("scrolls", $user->scrolls());
 
         $data = $resource->overview();
         $data["tags"] = json_encode($data["tags"]);

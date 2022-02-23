@@ -125,4 +125,14 @@ class User extends Entity
         return "/api/user/{$this->Name}/avatar?" . $time;
     }
 
+    public function scrolls() : int
+    {
+        return 5;
+    }
+
+    public function roleName() : string
+    {
+        return "Сянката";
+    }
+
 }

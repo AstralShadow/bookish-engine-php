@@ -41,7 +41,10 @@ class User
             
         $response = Page("user.html", 200);
         $response->setValue("csrf", CSRF::get());
-        $response->setValue("user", self::$user->Name);
+        $user = self::$user;
+        $response->setValue("user", $user->Name);
+        $response->setValue("role", $user->roleName());
+        $response->setValue("scrolls", $user->scrolls());
 
         if($r->method() == RequestMethod::POST)
         {
