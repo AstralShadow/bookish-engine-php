@@ -34,6 +34,11 @@
     left: 0%;
 }
 
+#file_upload
+{
+    z-index: 75; 
+    box-shadow: 20px 20px 10px black;
+}
 
 .pos-bottom-out.pos-center {
     left: 50%;

@@ -139,18 +139,34 @@
 
 <fly-item id="file_upload"
           class="sec-bg round-border hidden">
-    <h-flex>
+    <h-flex class="text-center fontsize">
         <section>
-            Целия материал
             <br />
-            <input name="full" form="upload" required
+            <b class="white-text">
+            Целия 
+            <br />материал
+            </b>
+            <br />
+            <br />
+            <label class="button review text-center pos-center">
+                Избери файл
+            <input class="hidden" name="full" form="upload" required
                    type="file" />
+            </label>
         </section>
         <section>
-            Демонстративен материал
             <br />
-            <input name="demo" form="upload" required
+            <b class="white-text">
+            Демонстративен 
+            <br />материал (демо)
+            </b>
+            <br />
+            <br />
+            <label class="button review text-center pos-center">
+                Избери файл
+            <input class="hidden" name="demo" form="upload" required
                    type="file" />
+            </label>
         </section>
     </h-flex>
     <button form="upload"
