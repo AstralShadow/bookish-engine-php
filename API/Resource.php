@@ -236,7 +236,10 @@ class Resource
 
         new UserResourceAccess($user, $res, $res->Price);
 
+        $res->Owner->Scrolls += $res->Price;
         $user->Scrolls -= $res->Price;
+
+        $res->Owner->save();
         $user->save();
 
         return new ApiResponse(200);
