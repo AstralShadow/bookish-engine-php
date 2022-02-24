@@ -44,7 +44,7 @@ class User
         $user = self::$user;
         $response->setValue("user", $user->Name);
         $response->setValue("role", $user->roleName());
-        $response->setValue("scrolls", $user->scrolls());
+        $response->setValue("scrolls", $user->Scrolls);
 
         if($r->method() == RequestMethod::POST)
         {

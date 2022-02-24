@@ -48,7 +48,7 @@ class User extends Entity
 
     public string $Name;
     protected string $Password;
-    protected int $Scrolls;
+    public int $Scrolls;
 
     public ?string $Avatar = null;
     public ?string $AvatarMime;
@@ -127,11 +127,6 @@ class User extends Entity
         $time = filemtime($this->Avatar);
 
         return "/api/user/{$this->Name}/avatar?" . $time;
-    }
-
-    public function scrolls() : int
-    {
-        return $this->Scrolls;
     }
 
     public function roleName() : string

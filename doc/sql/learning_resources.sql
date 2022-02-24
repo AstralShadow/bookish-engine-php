@@ -129,6 +129,8 @@ create table Resources(
     PreviewName nvarchar(200) default null,
     PreviewSize int default 0,
     PreviewMime varchar(200) default null,
+
+    Price int default 1,
     
     ApproveNote text default null,
     ApprovedBy int default null,

@@ -40,7 +40,7 @@ class Resource
 
         $html->setValue("user", $user->Name);
         $html->setValue("role", $user->roleName());
-        $html->setValue("scrolls", $user->scrolls());
+        $html->setValue("scrolls", $user->Scrolls);
 
         $data = $resource->overview(true);
         
