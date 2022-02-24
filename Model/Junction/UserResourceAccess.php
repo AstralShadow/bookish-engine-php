@@ -37,7 +37,7 @@ class UserResourceAccess extends Entity
         $this->User = $user;
         $this->Resource = $res;
 
-        $this->AccureTime = new DateTime();
+        $this->AccureTime = new \DateTime();
         
         $this->CurrencyValue = $price;
         $this->ProvidedBy = $provider;

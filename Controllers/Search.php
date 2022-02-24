@@ -28,7 +28,7 @@ class Search
         $response = Page("search.html", 200);
         $response->setValue("user", $user->Name);
         $response->setValue("role", $user->roleName());
-        $response->setValue("scrolls", $user->scrolls());
+        $response->setValue("scrolls", $user->Scrolls);
 
         return $response;
     }

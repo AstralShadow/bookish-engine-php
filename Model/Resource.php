@@ -40,6 +40,8 @@ class Resource extends Entity
     public int $PreviewSize = 0;
     public ?string $Preview;
 
+    public int $Price = 0;
+
     public \DateTime $ApproveTime;
     #[Traceable("ApprovedResources")]
     public ?User $ApprovedBy;
@@ -80,6 +82,7 @@ class Resource extends Entity
             "info" => $this->Description,
 
             "approved" => isset($this->ApproveTime),
+            "price" => $this->Price,
             
             "tags" => []
         ];

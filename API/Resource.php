@@ -183,15 +183,6 @@ class Resource
         return $response;
     }
 
-    private static function isAccured($user, $res)
-    {
-        $uid = $user->getId();
-        $rid = $res->getId();
-        $owned = $user == $res->Owner;
-        $read = UserResourceAccess::get($uid, $rid);
-        return (bool) $read || $owned;
-    }
-
     #[GET("/{id}/preview")]
     public static function downloadPreview(Request $req)
     {
@@ -222,8 +213,42 @@ class Resource
         $id = $req->id;
         $res = MResource::get($id);
         if(!$res)
-            return APIError(404, "Няма такъв ресурс.");
+            return APIError(404, "Няма такъв ресурс");
+
+        $uri = $res->Data ?? null;
+        if(!isset($uri) || !file_exists($uri))
+            return APIError(404, "Няма прикачен файл");
+
+        $user = Session::current()?->User;
+        if(!$user)
+            return APIError
+                (401, "Влез в профила си");
+        if(!CSRF::weak_check())
+            return APIError
+                (400, "Invalid CSRF token.");
+        if(self::isAccured($user, $res))
+            return APIError
+                (409, "Ресурса вече е закупен");
         
+        if($user->Scrolls < $res->Price)
+            return APIError
+                (401, "Нямате достатъчно свитъци");
+
+        new UserResourceAccess($user, $res, $res->Price);
+
+        $user->Scrolls -= $res->Price;
+        $user->save();
+
+        return new ApiResponse(200);
+    }
+
+    private static function isAccured($user, $res)
+    {
+        $uid = $user->getId();
+        $rid = $res->getId();
+        $owned = $user == $res->Owner;
+        $read = UserResourceAccess::get($uid, $rid);
+        return (bool) $read || $owned;
     }
 
     #[GET("/{id}/download")]
@@ -232,14 +257,18 @@ class Resource
         $id = $req->id;
         $res = MResource::get($id);
         if(!$res)
-            return APIError(404, "Няма такъв ресурс.");
+            return APIError(404, "Няма такъв ресурс");
 
         $uri = $res->Data ?? null;
-        if(!isset($uri) || !file_exists($uri))
+        if(!file_exists($uri))
             return APIError(404);
 
         $user = Session::current()?->User;
-        if(!$user || !self::isAccured($user, $res))
+        if(!$user)
+            return APIError
+                (401, "Влез в профила си");
+
+        if(!self::isAccured($user, $res))
             return APIError(402, "Изисква закупуване.");
 
         $name = addslashes($res->DataName);
