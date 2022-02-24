@@ -37,6 +37,7 @@ class Resource
             return redirect("/login?next=/resource/".$id);
 
         $html = Page("resource.html", 200);
+        $html->setValue("csrf", CSRF::get());
 
         $html->setValue("user", $user->Name);
         $html->setValue("role", $user->roleName());

@@ -225,7 +225,7 @@ class Resource
                 (401, "Влез в профила си");
         if(!CSRF::weak_check())
             return APIError
-                (400, "Invalid CSRF token");
+                (400, "Invalid CSRF token.");
         if(self::isAccured($user, $res))
             return APIError
                 (409, "Ресурса вече е закупен");

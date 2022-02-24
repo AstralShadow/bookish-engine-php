@@ -37,10 +37,13 @@ tuples.forEach(function(tuple)
     buy_btn.addEventListener("click", async function()
     {
         var data = new FormData()
-        var uri = "/api/resources/" + item_id + "/buy"
+        var uri = "/api/resource/" + item_id + "/buy"
         data.append("csrf", window.csrf)
+        feedback.innerText = "Обработване на заявката..."
 
         var result = await ajax("POST", uri, data)
+        feedback.innerText = result.data?.error ?? ""
+        update_state(item_id)
     })
 
 })
