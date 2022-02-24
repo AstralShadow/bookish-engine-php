@@ -1,6 +1,8 @@
 <?php
 namespace Extend;
 
+use \RuntimeException;
+
 /** Uploads file from $_FILES[$key]
  * @return ["uri", "mime", "size"]
  */
@@ -11,6 +13,7 @@ function uploadFile(string $key,
     if(!isset($_FILES[$key]['error']) ||
        is_array($_FILES[$key]['error']))
     {
+        var_dump($_FILES[$key]['error']);
         throw new RuntimeException
             ("Invalid input.");
     }
