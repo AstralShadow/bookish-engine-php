@@ -22,7 +22,7 @@ function uploadFile(string $key,
     {
         
         throw new RuntimeException
-            ("Invalid file: " + $_FILES[$key]['error']);
+            ("Invalid file: " . $_FILES[$key]['error']);
     }
 
     $size = $_FILES[$key]['size'];
