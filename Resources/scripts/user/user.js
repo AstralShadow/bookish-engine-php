@@ -5,6 +5,8 @@ const avatar = document.querySelector("user-avatar")
 export function setAvatar(uri)
 {
     avatar.style.backgroundImage = "url(\"" + uri + "\")"
+    if(!uri)
+        avatar.style.backgroundImage = ""
 }
 
 (async function()
