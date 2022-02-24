@@ -3,8 +3,32 @@ namespace Extend;
 
 use \RuntimeException;
 
+
+/** Returns file upload error message
+ * Thanks to Viktor and adam for this useful array
+ * https://www.php.net/manual/en/features.file-upload.errors.php#115746
+ */
+function getFileErrorMsg($error) : string
+{
+    $phpFileUploadErrors = array(
+        0 => 'There is no error, the file uploaded with success',
+        1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
+        2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
+        3 => 'The uploaded file was only partially uploaded',
+        4 => 'No file was uploaded',
+        6 => 'Missing a temporary folder',
+        7 => 'Failed to write file to disk.',
+        8 => 'A PHP extension stopped the file upload.',
+    );
+
+    if(isset($phpFileUploadErrors[$error]))
+        return $phpFileUploadErrors[$error];
+    return "Unknown error";
+}
+
+
 /** Uploads file from $_FILES[$key]
- * @return ["uri", "mime", "size"]
+ * @return ["name", "uri", "mime", "size"]
  */
 function uploadFile(string $key,
                     ?array $mimes = null,
@@ -22,7 +46,7 @@ function uploadFile(string $key,
     {
         
         throw new RuntimeException
-            ("Invalid file: " . $_FILES[$key]['error']);
+            (getFileErrorMsg($_FILES[$key]['error']));
     }
 
     $size = $_FILES[$key]['size'];
