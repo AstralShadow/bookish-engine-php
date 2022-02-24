@@ -34,8 +34,10 @@ class Tags
         if(!CSRF::weak_check())
             return APIError(400, "Bad CSRF token.");
 
+
         if(!isValidString($_POST["name"], 3))
             return APIError(400, "Invalid name");
+        $name = trim($_POST["name"]);
 
         $forbidden = [
             ',', '.',
@@ -44,10 +46,10 @@ class Tags
             "\n"
         ];
         foreach($forbidden as $char)
-            if(strpos($_POST["name"], $char) !== false)
-                return APIError(400, "Invalid name");
+            if(mb_strpos($name, $char) !== false)
+                return APIError(400,
+                    "Name contains invalid symbols");
 
-        $name = trim($_POST["name"]);
         $info = isValidString($_POST["info"], 10) ?
                     trim($_POST["info"]) : null;
         

@@ -92,7 +92,7 @@ async function load_tags(cache = true)
             set_target(tag_id)
         })
         option.addEventListener("mousedown", function(){
-            input.innerText = tag.name + "\n"
+            input.innerText = tag.name 
             insert_tag()
             input.innerText = ""
         })
@@ -111,14 +111,24 @@ input.addEventListener("input", function(e)
                 input.innerText.replace(sym, "")
     })
     
-    var text = input.innerText
-    if(text.indexOf("\n") > -1)
+    show_closest(this.innerText)
+})
+
+input.addEventListener("keydown", function(e)
+{
+    forbidden.forEach(function(sym)
+    {
+        while(input.innerText.indexOf(sym) != -1)
+            input.innerText =
+                input.innerText.replace(sym, "")
+    })
+
+    if(e.keyCode == 13)
     {
         e.preventDefault()
         insert_tag()
         this.innerText = ""
     }
-
     show_closest(this.innerText)
 })
 
@@ -171,17 +181,21 @@ async function insert_tag()
     {
         if(!enable_creating)
             return;
-        var text = input.innerText
-        let tag = text.replace("\n", "")
+        var tag = input.innerText.toLowerCase()
+        while(tag.indexOf("\n") != -1)
+            tag = tag.replace("\n", "")
         if(tag.length == 0)
             return;
 
         await create_tag(tag)
         await load_tags(false)
 
+        debugger;
         var i = 0
         while(tags[i] && tags[i].name != tag)
+        {
             i++
+        }
         set_target(i)
     }
 
@@ -224,6 +238,7 @@ function create_tag(tag)
 
 function show_closest(tag)
 {
+    tag = tag.toLowerCase()
     fix_tag_list_design()
     new_tag.style.display = "none"
     new_name.innerText = "[+] " + tag

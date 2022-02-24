@@ -5,7 +5,7 @@ function isValidString(&$input, $minLen = 0) : bool
 {
     return isset($input)
         && is_string($input)
-        && strlen(trim($input)) >= $minLen;
+        && mb_strlen(trim($input)) >= $minLen;
 }
 
 /*
