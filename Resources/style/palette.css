@@ -1,7 +1,8 @@
 :root {
-    --light-color: #B4EDB8;
-    --prim-color: #6ac66d;
-    --sec-color: #4e9556;
+    --light-color: #b1edff;
+    --prim-color:  #222055;
+    --sec-color: #09042e;
+    --border-color: rgb(195, 199, 255);
 }
 
 .prim-bg {

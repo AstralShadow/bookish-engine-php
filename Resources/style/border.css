@@ -3,30 +3,30 @@
 }
 
 .border {
-    border: 2px solid black;
+    border: 2px solid var(--border-color);
     padding: 6px;
 }
 
 .tborder {
-    border-top: 2px solid black;
+    border-top: 2px solid var(--border-color);
     padding-top: 6px;
 }
 
 .bborder {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid var(--border-color);
     padding-bottom: 6px;
 }
 
 .rborder {
-    border-right: 2px solid black;
+    border-right: 2px solid var(--border-color);
 }
 
 .lborder {
-    border-left: 2px solid black;
+    border-left: 2px solid var(--border-color);
 }
 
 .round-border {
-    border: 2px solid black;
+    border: 2px solid var(--border-color);
     border-radius: 125px/10px;
     padding: 10px;
 }

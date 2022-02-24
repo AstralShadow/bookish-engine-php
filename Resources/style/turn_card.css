@@ -3,7 +3,8 @@ turn-card {
 }
 
 card-front, card-back {
-    transition: visibility 0.5s, opacity 0.5s;
+    -webkit-transition: visibility 0.5s, opacity 0.5s;
+            transition: visibility 0.5s, opacity 0.5s;
 }
 
 card-front {
