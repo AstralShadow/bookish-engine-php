@@ -49,7 +49,8 @@ class CSRFTokenManager
         {
             self::$token = generateToken(42);
             setcookie(self::TOKEN_COOKIE, self::$token, [
-                'samesite' => 'Strict'
+                'SameSite' => 'Strict',
+                "Path" => "/"
             ]);
         }
 

@@ -61,7 +61,8 @@ class Session extends Entity
     public function saveInCookie() : void
     {
         setcookie(self::COOKIE_NAME, $this->Token, [
-            "samesite" => "Strict"
+            "SameSite" => "Strict",
+            "Path" => "/"
         ]);
     }
 
