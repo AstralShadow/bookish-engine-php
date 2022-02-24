@@ -1,6 +1,6 @@
 hr {
     margin: 0px;
-    border: 1px solid black;
+    border: 1px solid var(--border-color);
 }
 
 table {

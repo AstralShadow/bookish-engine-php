@@ -13,7 +13,7 @@
 }
 
 .button.review{
-    border-color: black;
+    border-color: var(--border-color);
     background-color: var(--light-color);
     width: 150px;
     height: 30px;
@@ -24,7 +24,7 @@
 }
 
 .button.upload, .button.warning {
-    border-color: black;
+    border-color: var(--border-color);
     background-color: var(--light-color);
 }
 

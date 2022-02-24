@@ -9,7 +9,7 @@ user-avatar {
     background-size: cover, 48px 48px;
     background-position: center, bottom;
     background-repeat: no-repeat, no-repeat;
-    border: 2px solid black;
+    border: 2px solid var(--border-color);
     border-radius: 256px;
     overflow: visible;
 

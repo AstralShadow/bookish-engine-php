@@ -99,6 +99,10 @@ v-flex.near > * {
     position: relative;
 }
 
+#pos-filters{
+    width: 100%;
+}
+
 
 overlay-pin
 {
