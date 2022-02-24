@@ -190,7 +190,6 @@ async function insert_tag()
         await create_tag(tag)
         await load_tags(false)
 
-        debugger;
         var i = 0
         while(tags[i] && tags[i].name != tag)
         {
