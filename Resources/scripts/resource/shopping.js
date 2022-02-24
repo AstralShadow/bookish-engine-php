@@ -26,26 +26,14 @@ buy_btns.forEach(function(buy_btn)
     })
 })
 
-tuples.forEach(async function(tuple)
+tuples.forEach(function(tuple)
 {
     const item_id = tuple.id
     const buy_btn = tuple.buy_btn
     const feedback = tuple.feedback
     const download_btn = tuple.download_btn
 
-    buy_btn.style.display = "none"
-    download_btn.style.display = "none"
-    var state = await fetch_state(item_id)
-
-    if(state.accured)
-    {
-        download_btn.style.display = ""
-    }
-    else
-    {
-        buy_btn.style.display = ""
-    }
-
+    update_state(item_id)
     buy_btn.addEventListener("click", async function()
     {
         var data = new FormData()
@@ -56,6 +44,22 @@ tuples.forEach(async function(tuple)
     })
 
 })
+
+async function update_state(item_id)
+{
+    const tuple = tuples.find(e => e.id == item_id)
+    const buy_btn = tuple.buy_btn
+    const download_btn = tuple.download_btn
+
+    buy_btn.style.display = "none"
+    download_btn.style.display = "none"
+    var state = await fetch_state(item_id)
+
+    if(state.accured)
+        download_btn.style.display = ""
+    else
+        buy_btn.style.display = ""
+}
 
 async function fetch_state(id)
 {

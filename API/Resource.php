@@ -177,16 +177,19 @@ class Resource
         
         $user = Session::current()?->User;
         if($user)
-        {
-            $uid = $user->getId();
-            $rid = $res->getId();
-            $owned = $user == $res->Owner;
-            $read = UserResourceAccess::get($uid, $rid);
-            $data["accured"] = (bool) $read || $owned;
-        }
+            $data["accured"] = self::isAccured($user, $res);
         
         $response->echo($data);
         return $response;
+    }
+
+    private static function isAccured($user, $res)
+    {
+        $uid = $user->getId();
+        $rid = $res->getId();
+        $owned = $user == $res->Owner;
+        $read = UserResourceAccess::get($uid, $rid);
+        return (bool) $read || $owned;
     }
 
     #[GET("/{id}/preview")]
@@ -201,9 +204,14 @@ class Resource
         if(!isset($uri) || !file_exists($uri))
             return APIError(404);
 
+        $name = addslashes($res->PreviewName);
+
         $response = new InstantResponse(200);
         $response->setHeader("content-type",
                              $res->PreviewMime);
+        $response->setHeader("content-disposition",
+            'attachment; filename="'.$name.'"');
+
         readfile($uri);
         return $response;
     }
@@ -218,13 +226,31 @@ class Resource
         
     }
 
-    #[POST("/{id}/download")]
+    #[GET("/{id}/download")]
     public static function downloadData(Request $req)
     {
         $id = $req->id;
         $res = MResource::get($id);
         if(!$res)
             return APIError(404, "Няма такъв ресурс.");
+
+        $uri = $res->Data ?? null;
+        if(!isset($uri) || !file_exists($uri))
+            return APIError(404);
+
+        $user = Session::current()?->User;
+        if(!$user || !self::isAccured($user, $res))
+            return APIError(402, "Изисква закупуване.");
+
+        $name = addslashes($res->DataName);
+
+        $response = new InstantResponse(200);
+        $response->setHeader("content-type",
+                             $res->DataMime);
+        $response->setHeader("content-disposition",
+            'attachment; filename="'.$name.'"');
+        readfile($uri);
+        return $response;
         
     }
 
