@@ -20,8 +20,9 @@ function uploadFile(string $key,
 
     if($_FILES[$key]['error'] != UPLOAD_ERR_OK)
     {
+        
         throw new RuntimeException
-            ("Invalid input.");
+            ("Invalid file: " + $_FILES[$key]['error']);
     }
 
     $size = $_FILES[$key]['size'];
