@@ -34,6 +34,16 @@
     left: 0%;
 }
 
+#tagarea-search{
+    width: 300px;
+}
+
+.w-h-search
+{
+    min-width: 50%;
+    max-width: 60%;
+}
+
 #file_upload
 {
     z-index: 75; 
@@ -102,6 +112,10 @@ v-flex.near > * {
 .pos_relative
 {
     position: relative;
+}
+
+#width-tagsearch{
+    width: 600px;
 }
 
 #pos-filters{

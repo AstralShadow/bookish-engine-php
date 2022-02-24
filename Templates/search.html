@@ -1,15 +1,19 @@
 <h-flex>
     <div>
+        <br/>
         <b class="white-text">
-        Филтриране:
+        Филтриране в "Нови материали":
         </b>
+        <br/>
+        <br/>
         <div class="pos_relative" id="pos-filters">
-            <tag-area class="light-bg"
+            <tag-area id="width-tagsearch"
+                      class="light-bg"
                       name="tags"
                       form="filter">
             </tag-area>
             <overlay-pin class="pos-bottom-out">
-                <tag-select class="hidden"> </tag-select>
+                <tag-select  class="hidden"> </tag-select>
             </overlay-pin>
         </div>
     </div>
@@ -32,48 +36,22 @@
 </h-flex>
 
 <h-flex class="wrap" id="search_results">
-    <section class="round-border sec-bg white-text search_result">
+    <section class="round-border sec-bg white-text text-center search_result">
         <table>
             <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Заглавие:
-                        </h1>
-                    </td>
-                    <td>
-                        <input data-content="name"
-                               class="light-bg"
-                               type="text" />
-                    </td>
-                </label>
+                <div data-content="name"
+                    class="w-h-search light-bg border round-border black-text text-center fontsize pos-center ">
+                </div>
+            </tr>
+            <br/>
+            <tr>
+                <div data-content="info"
+                    class=" light-bg border round-border black-text text-center fontsize pos-center ">
+                </div>
             </tr>
             <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Описание:
-                        </h1>
-                    </td>
-                    <td>
-                        <textarea class="light-bg fright"
-                                  data-content="info"
-                        ></textarea>
-                    </td>
-                </label>
-            </tr>
-            <tr>
-                <label>
-                    <td class="text-top">
-                        <h1>
-                            Категории:
-                        </h1>
-                    </td>
-                    <td>
-                        <tag-area class="light-bg fright"
-                        > </tag-area>
-                    </td>
-                </label>
+                <tag-area id="tagarea-search" class="light-bg"
+                > </tag-area>
             </tr>
         </table>
         <div data-content="owner"> тествам полето </div>

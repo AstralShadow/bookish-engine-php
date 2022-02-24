@@ -22,8 +22,15 @@
     color: white;
 }
 
+.black-text {
+    color: black;
+}
+
 .fontsize {
     font-size: 18px;
+}
+.bigfontsize {
+    font-size: 25px;
 }
 
 input, textarea, tag-area
@@ -36,3 +43,5 @@ input, textarea, tag-area
     justify-content:center;
     display: flex;
 }
+
+a { text-decoration: none; }

@@ -1,7 +1,7 @@
 <header id="user_home_header">
     <nav class="fleft hflex">
-       <a href="#" class="_64px button config"></a>
-       <a href="#" class="_64px button warning"></a>
+       <!--<a href="#" class="_64px button config"></a>
+       <a href="#" class="_64px button warning"></a>-->
     </nav>
     <user-avatar class="_200px pos-center text-center" >
         <user-currency class="_128px
@@ -16,7 +16,7 @@
                 ${role=Бандита}
             </span>
         </user-title>
-        <label class="upload button _64px">
+        <label class="upload button _64px ">
             <input form="avatar_form" name="avatar"
                 accept="image/png,image/jpeg,image/gif"
                 type="file" class="hidden" />
@@ -28,9 +28,10 @@
 
 <h-flex>
     <section class="round-border sec-bg white-text">
-        <h1 class="text-center ">
+        <h1 class="text-center bigfontsize">
             Качи материал:
         </h1>
+        <br />
         <table>
             <tr>
                 <label>
@@ -87,6 +88,8 @@
                 </label>
             </tr>
         </table>
+        <br />
+        <br />
         <button id="open_upload"
                 class="_100px button upload pos-center">
         </button>
@@ -108,16 +111,20 @@
                     <a href="/resources/owned">
                         <div class="rborder height100
                                     text-vmiddle">
-                            <span>
-                                Твоите неща
+                            <span class="white-text bigfontsize">
+                                Твоите 
+                                <br />материали 
+                                <br />(създадени от теб)
                             </span>
                         </div>
                     </a>
                     <a href="/resources/bought">
                         <div class="height100
                                     text-vmiddle">
-                            <span>
-                                Достъпни неща
+                            <span class="white-text bigfontsize">
+                                Достъпни 
+                                <br />материали 
+                                <br />(закупени от теб)
                             </span>
                         </div>
                     </a>
@@ -126,8 +133,10 @@
                     <a href="/search">
                         <div class="tborder height100
                                     text-vmiddle">
-                            <span>
-                                Търси неща.
+                            <span class="white-text bigfontsize">
+                                Търси 
+                                <br />нови материали 
+                                <br />(от други учащи)
                             </span>
                         </div>
                     </a>
