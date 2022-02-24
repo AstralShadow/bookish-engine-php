@@ -21,7 +21,10 @@ ${data_name=Не е качено}
 <br />
 ${data_size=0B} ${data_mime=unknown}
 <br />
-<a class="button" href="#" id="buy">Купи</a>
+<button class="button buy_item"
+   data-item-id="${id}">
+    Купи
+</button>
 <br />
 
 ${preview_name=Не е качено}
@@ -31,7 +34,9 @@ ${preview_size=0B} ${preview_mime=unknown}
 <a class="button"
    href="${preview_url}"
    download="${preview_name}">
-    Изтегли демо
+    <button>
+        Изтегли демо
+    </button>
 </a>
 <br />
 
@@ -39,4 +44,6 @@ ${preview_size=0B} ${preview_mime=unknown}
 ${parse:js_tags.html}
 ${parse:js_csrf.html}
 <script src="${path:scripts/resource/tags.js}"
+        type="module"> </script>
+<script src="${path:scripts/resource/shopping.js}"
         type="module"> </script>

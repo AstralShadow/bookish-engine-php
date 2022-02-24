@@ -1,4 +1,3 @@
-console.log(window.tags)
 const area = document.querySelector("#tags_container")
 
 window.tags.forEach(function(tag){

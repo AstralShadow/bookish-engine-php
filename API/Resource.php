@@ -140,6 +140,30 @@ class Resource
         return self::applyModifications($res);
     }
 
+    #[DELETE("/{id}")]
+    public static function delete($req)
+    {
+        if(!CSRF::weak_check())
+            return APIError(400, "Невалидна сесия.");
+
+        $user = self::getUser();
+        if(!$user)
+            return APIError(401, "Не сте в профила си.");
+
+        $id = $req->id;
+        $res = MResource::get($id);
+        if(!$res)
+            return APIError(404, "Няма такъв ресурс.");
+
+        if($res->Owner->getId() != $user->getId())
+            return APIError(403, "Не сте собственик.");
+
+        MResource::delete($res->getId());
+
+        return new ApiResponse(200);
+    }
+
+
     #[GET("/{id}")]
     public static function overview(Request $req)
     {
@@ -170,29 +194,6 @@ class Resource
                              $res->PreviewMime);
         readfile($uri);
         return $response;
-    }
-
-    #[DELETE("/{id}")]
-    public static function delete($req)
-    {
-        if(!CSRF::weak_check())
-            return APIError(400, "Невалидна сесия.");
-
-        $user = self::getUser();
-        if(!$user)
-            return APIError(401, "Не сте в профила си.");
-
-        $id = $req->id;
-        $res = MResource::get($id);
-        if(!$res)
-            return APIError(404, "Няма такъв ресурс.");
-
-        if($res->Owner->getId() != $user->getId())
-            return APIError(403, "Не сте собственик.");
-
-        MResource::delete($res->getId());
-
-        return new ApiResponse(200);
     }
 
     #[Fallback]
