@@ -50,6 +50,7 @@ class Resource
         $data["preview_size"] = humanFilesize 
             ($data["preview_size"]);
         $data["preview_url"] = "/api/resource/$id/preview";
+        $data["data_url"] = "/api/resource/$id/download";
 
         $html->setValues($data);
 

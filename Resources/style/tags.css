@@ -3,8 +3,6 @@ tag-select /* Списък с тагова */
     background-color: white;
     overflow: hidden;
     display: inline-block;
-    word-wrap: nowrap;
-
 }
 
 tag-option /* Таг в списък с тагове */

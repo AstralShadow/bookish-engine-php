@@ -20,10 +20,13 @@ use \Model\Session;
 use \Model\Tag;
 use \Model\Resource as MResource;
 use \Model\Junction\ResourceTag;
+use \Model\Junction\UserResourceAccess;
 
 
 class Resource
 {
+
+    /* Owner section */
 
     #[POST]
     public static function create()
@@ -31,7 +34,7 @@ class Resource
         if(!CSRF::weak_check())
             return APIError(400, "Невалидна сесия.");
 
-        $user = self::getUser();
+        $user = Session::current()?->User;
         if(!$user)
             return APIError(401, "Само регистрирани " .
                 "потребители могат да създават ресурси");
@@ -45,11 +48,6 @@ class Resource
         $state = self::applyModifications($res);
         $state->setCode(201);
         return $state;
-    }
-
-    private static function getUser() : ?User
-    {
-        return Session::current()?->User;
     }
 
     private static
@@ -98,7 +96,7 @@ class Resource
 
 
         $tags = &$_POST["tags"];
-        $user = self::getUser();
+        $user = Session::current()?->User;
         if(isset($tags) && is_array($tags))
         {
             foreach($tags as $tag_name)
@@ -125,7 +123,7 @@ class Resource
         if(!CSRF::weak_check())
             return APIError(400, "Невалидна сесия.");
 
-        $user = self::getUser();
+        $user = Session::current()?->User;
         if(!$user)
             return APIError(401, "Не сте в профила си.");
 
@@ -146,7 +144,7 @@ class Resource
         if(!CSRF::weak_check())
             return APIError(400, "Невалидна сесия.");
 
-        $user = self::getUser();
+        $user = Session::current()?->User;
         if(!$user)
             return APIError(401, "Не сте в профила си.");
 
@@ -164,6 +162,8 @@ class Resource
     }
 
 
+    /* Client section */
+
     #[GET("/{id}")]
     public static function overview(Request $req)
     {
@@ -173,8 +173,23 @@ class Resource
             return APIError(404, "Няма такъв ресурс.");
 
         $response = new ApiResponse(200);
-        $response->echo($res->overview());
+        $data = $res->overview();
+        
+        $user = Session::current()?->User;
+        if($user)
+            $data["accured"] = self::isAccured($user, $res);
+        
+        $response->echo($data);
         return $response;
+    }
+
+    private static function isAccured($user, $res)
+    {
+        $uid = $user->getId();
+        $rid = $res->getId();
+        $owned = $user == $res->Owner;
+        $read = UserResourceAccess::get($uid, $rid);
+        return (bool) $read || $owned;
     }
 
     #[GET("/{id}/preview")]
@@ -189,12 +204,57 @@ class Resource
         if(!isset($uri) || !file_exists($uri))
             return APIError(404);
 
+        $name = addslashes($res->PreviewName);
+
         $response = new InstantResponse(200);
         $response->setHeader("content-type",
                              $res->PreviewMime);
+        $response->setHeader("content-disposition",
+            'attachment; filename="'.$name.'"');
+
         readfile($uri);
         return $response;
     }
+
+    #[POST("/{id}/buy")]
+    public static function buy(Request $req)
+    {
+        $id = $req->id;
+        $res = MResource::get($id);
+        if(!$res)
+            return APIError(404, "Няма такъв ресурс.");
+        
+    }
+
+    #[GET("/{id}/download")]
+    public static function downloadData(Request $req)
+    {
+        $id = $req->id;
+        $res = MResource::get($id);
+        if(!$res)
+            return APIError(404, "Няма такъв ресурс.");
+
+        $uri = $res->Data ?? null;
+        if(!isset($uri) || !file_exists($uri))
+            return APIError(404);
+
+        $user = Session::current()?->User;
+        if(!$user || !self::isAccured($user, $res))
+            return APIError(402, "Изисква закупуване.");
+
+        $name = addslashes($res->DataName);
+
+        $response = new InstantResponse(200);
+        $response->setHeader("content-type",
+                             $res->DataMime);
+        $response->setHeader("content-disposition",
+            'attachment; filename="'.$name.'"');
+        readfile($uri);
+        return $response;
+        
+    }
+
+    /* Misc */
 
     #[Fallback]
     public static function fallback()
