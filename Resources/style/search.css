@@ -1,5 +1,5 @@
 .search_result{
-    flex: 50%;
-    max-width: 45%;
-    min-width: 350px;
+    flex: 30%;
+    max-width: 300px;
+    min-width: 200px;
 }

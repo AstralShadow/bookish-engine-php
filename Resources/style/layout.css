@@ -17,6 +17,8 @@ main-container
     text-align: left;
     display: inline-block;
     background: var(--prim-color);
-    margin: 5% auto;
-    min-width: 300px;
+    margin: 3% auto;
+    width: 1020px;
+    min-height: 200px;
+    max-height: 790px;
 }
