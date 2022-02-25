@@ -14,3 +14,10 @@ tags
 # Netbeans private project data
 nbproject/private/
 
+# Latex compilation
+*.aux
+*.log
+*.out
+*.pdf
+*.toc
+

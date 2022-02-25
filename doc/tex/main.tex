@@ -1,0 +1,62 @@
+\documentclass[12pt]{report}
+%\usepackage[a4paper,  margin=.8in]{geometry}
+\usepackage[a4paper, margin=1.5in]{geometry}
+
+% \subimport{relative path}{file}
+\usepackage{import}
+
+% Links
+\usepackage{hyperref}
+
+% Images
+\usepackage{graphicx}
+\usepackage{pdfpages}
+
+% Date
+\usepackage{datetime}
+
+% Code snippets
+\usepackage{listings}
+
+% Chapter title format
+\usepackage{titlesec}
+\titleformat{\chapter}[block]
+    {\normalfont\huge\bfseries}{\thechapter.}{1em}{\Huge}
+\titlespacing*{\chapter}{0pt}{-19pt}{0pt}
+
+% Language
+\usepackage{polyglossia}
+\setdefaultlanguage{bulgarian}
+\setotherlanguages{english}
+\PolyglossiaSetup{bulgarian}{indentfirst=true}
+
+%\usepackage[bulgarian]{babel}
+%\setmainfont{FreeSerif}
+%\setsansfont{FreeSans}
+%\setmainfont{LinuxLibertine}
+\setmainfont{Times New Roman}
+
+
+\newif\ifExtra
+%\Extratrue % Comment this to remove most reference links
+
+\newif\ifnoit
+\noittrue % Uncomment to get noit version. Don't run with extra.
+
+
+\input{private/title}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\newgeometry{margin=1in}
+
+\subimport{Intro/}{main}
+\subimport{SweetTalk/}{main}
+\subimport{RealWork/}{main}
+\subimport{Extra/}{main}
+\subimport{private/}{team}
+
+\end{document}
