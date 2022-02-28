@@ -5,6 +5,7 @@ const content = document.querySelector("#search_results")
 const sample = document.querySelector(".search_result")
 while(content.firstChild)
     content.removeChild(content.firstChild)
+sample.classList.remove("hidden")
 
 area.addEventListener("change", async function(e)
 {
@@ -30,6 +31,7 @@ function displayResource(data)
     var block = new_block ? sample.cloneNode(true)
                           : cache[data.id]
     content.appendChild(block)
+    block.classList.remove("hidden")
     
     var raw_keys = ["name", "owner", "created", "info"]
     raw_keys.forEach((key) => {
