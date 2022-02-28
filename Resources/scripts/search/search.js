@@ -10,8 +10,9 @@ sample.classList.remove("hidden")
 area.addEventListener("change", async function(e)
 {
     var query = e.tags.join("+")
+    const query_base = window.query_base
 
-    var result = await ajax("GET", "/api/filter/" + query)
+    var result = await ajax("GET", query_base + query)
     if(!result.data){
         console.log("ajax", result)
         return;
@@ -24,6 +25,12 @@ area.addEventListener("change", async function(e)
     resources.forEach(displayResource)
 })
 
+window.addEventListener("load", function(){
+    var ev = new Event("change")
+    ev.tags = []
+    area.dispatchEvent(ev)
+})
+
 var cache = {} 
 function displayResource(data)
 {
@@ -31,7 +38,6 @@ function displayResource(data)
     var block = new_block ? sample.cloneNode(true)
                           : cache[data.id]
     content.appendChild(block)
-    block.classList.remove("hidden")
     
     var raw_keys = ["name", "owner", "created", "info"]
     raw_keys.forEach((key) => {
