@@ -40,7 +40,7 @@ input.addEventListener("focus", async function()
     await load_tags()
     if(shown)
     {
-        tag_list.classList.add("shown")
+        tag_list.classList.remove("hidden")
         fix_tag_list_design()
         show_closest("")
     }
@@ -49,7 +49,7 @@ input.addEventListener("focus", async function()
 input.addEventListener("blur", function()
 {
     shown = false
-    tag_list.classList.remove("shown")
+    tag_list.classList.add("hidden")
     input.innerText = ""
     tagarea.classList.remove("focus")
 })

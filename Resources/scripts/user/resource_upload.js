@@ -2,7 +2,7 @@ export const form = document.querySelector("form#upload")
 const popup = document.querySelector("#file_upload")
 const popup_btn = document.querySelector("#open_upload")
 
-popup_btn.addEventListener("click", function()
+popup_btn.addEventListener("click", function(e)
 {
     const step1_required_names = ["name", "info", "tags"]
     var valid = true;
@@ -18,6 +18,13 @@ popup_btn.addEventListener("click", function()
 
     if(valid)
     {
-        popup.classList.add("shown")
+        popup.classList.remove("hidden")
     }
+    e.stopPropagation()
+})
+
+popup.addEventListener("click", e => e.stopPropagation())
+
+document.addEventListener("click", () => {
+    popup.classList.add("hidden")
 })
