@@ -136,6 +136,22 @@ class User
         $response->echo($resources);
         return $response;
     }
+    #[GET("/{name}/accured")]
+    public static function accured(Request $req)
+    {
+        $name = $req->name;
+        $users = MUser::find(["name" => $name]);
+        if (count($users) == 0)
+            return APIError(404);
+        
+        $user = $users[0];
+        $resources = [];
+        foreach($user->AccuredResources() as $r)
+            $resources[] = $r->Resource->overview();
+        $response = new ApiResponse(200);
+        $response->echo($resources);
+        return $response;
+    }
 
     #[GET]
     public static function privateData()

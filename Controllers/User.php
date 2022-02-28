@@ -71,7 +71,7 @@ class User
     {
         $user = Session::current()?->User;
         if(!$user)
-            return redirect("/login?next=/search");
+            return redirect("/login?next=/accured");
 
         $response = Page("search.html", 200);
         $response->setValue("user", $user->Name);
@@ -81,6 +81,25 @@ class User
             "Твоите материали");
         $response->setValue("source", json_encode(
             "/api/user/" . $user->Name . "/resources/"));
+
+        return $response;
+    }
+
+    #[GET("/accured")]
+    public static function accured()
+    {
+        $user = Session::current()?->User;
+        if(!$user)
+            return redirect("/login?next=/accured");
+
+        $response = Page("search.html", 200);
+        $response->setValue("user", $user->Name);
+        $response->setValue("role", $user->roleName());
+        $response->setValue("scrolls", $user->Scrolls);
+        $response->setValue("sourceName",
+            "Закупени материали");
+        $response->setValue("source", json_encode(
+            "/api/user/" . $user->Name . "/accured/"));
 
         return $response;
     }
