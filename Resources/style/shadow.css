@@ -1,0 +1,18 @@
+
+shadow-wrap {
+    position: relative;
+    display: block;
+    overflow-x: hidden;
+}
+
+inner-shadow {
+    display: block;
+    pointer-events: none;
+    position: absolute;
+    top: 0px;
+    left: -1em;
+    right: -1em;
+    bottom: 0px;
+    box-shadow: inset 0em 15px 15px var(--prim-color),
+                inset 0em -15px 15px var(--prim-color);
+}
