@@ -136,6 +136,42 @@ class User
         $response->echo($resources);
         return $response;
     }
+
+    #[GET("/{name}/resources/{tags}")]
+    public static function creationsSearch(Request $req)
+    {
+        $name = $req->name;
+        $users = MUser::find(["name" => $name]);
+        if (count($users) == 0)
+            return APIError(404);
+        
+        $user = $users[0];
+        $query = mb_strtolower($req->tags);
+        $keywords = array_map(function($a){
+            return urldecode($a);
+        }, explode('+', $query));
+
+
+        $extra = true;
+        $tags =
+            Search::keywordsToTags($keywords, $extra);
+
+        $owned = $user->OwnedResources();
+        $resources =
+            Search::findIn($tags, $owned, $extra);
+
+        $data = array_map(function($res)
+        {
+            return $res->overview();
+        }, $resources);
+        
+        $response = new ApiResponse(200);
+        $response->setHeader
+            ("cache-control", "no-cache");
+        $response->echo($data);
+        return $response;
+    }
+
     #[GET("/{name}/accured")]
     public static function accured(Request $req)
     {
@@ -152,6 +188,44 @@ class User
         $response->echo($resources);
         return $response;
     }
+
+    #[GET("/{name}/accured/{tags}")]
+    public static function accuredSearch(Request $req)
+    {
+        $name = $req->name;
+        $users = MUser::find(["name" => $name]);
+        if (count($users) == 0)
+            return APIError(404);
+        
+        $user = $users[0];
+        $query = mb_strtolower($req->tags);
+        $keywords = array_map(function($a){
+            return urldecode($a);
+        }, explode('+', $query));
+
+
+        $extra = true;
+        $tags =
+            Search::keywordsToTags($keywords, $extra);
+
+        $accured = array_map(function($link) {
+            return $link->Resource;
+        }, $user->AccuredResources());
+        $resources =
+            Search::findIn($tags, $accured, $extra);
+
+        $data = array_map(function($res)
+        {
+            return $res->overview();
+        }, $resources);
+        
+        $response = new ApiResponse(200);
+        $response->setHeader
+            ("cache-control", "no-cache");
+        $response->echo($data);
+        return $response;
+    }
+
 
     #[GET]
     public static function privateData()
