@@ -3,3 +3,11 @@
     max-width: 300px;
     min-width: 200px;
 }
+
+#search_results {
+    overflow-y: scroll;
+    max-height: 600px;
+    /* Padding for the shadow. */
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

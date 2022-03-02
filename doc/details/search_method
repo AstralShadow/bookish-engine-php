@@ -18,6 +18,9 @@ rate by sqrt($val["tags"] / $val["total_tags"]).
 This was done because i want resources with a lot of
 tags to get lower rating than these with less tags.
 The square root makes the algorythm less drastic.
+    Note: I'm dropping the sqrt part in last edit.
+    It's not bad, i just forgot it while refactoring.
+
 
 Finally, we sort the resources by their rates,
 and return the first N results.

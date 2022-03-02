@@ -5,12 +5,14 @@ const content = document.querySelector("#search_results")
 const sample = document.querySelector(".search_result")
 while(content.firstChild)
     content.removeChild(content.firstChild)
+sample.classList.remove("hidden")
 
 area.addEventListener("change", async function(e)
 {
     var query = e.tags.join("+")
+    const query_base = window.query_base
 
-    var result = await ajax("GET", "/api/filter/" + query)
+    var result = await ajax("GET", query_base + query)
     if(!result.data){
         console.log("ajax", result)
         return;
@@ -21,6 +23,12 @@ area.addEventListener("change", async function(e)
         content.removeChild(content.firstChild)
 
     resources.forEach(displayResource)
+})
+
+window.addEventListener("load", function(){
+    var ev = new Event("change")
+    ev.tags = []
+    area.dispatchEvent(ev)
 })
 
 var cache = {} 

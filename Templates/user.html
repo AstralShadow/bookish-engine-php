@@ -81,7 +81,7 @@
                         </tag-area>
                         <overlay-pin
                                 class="pos-bottom-out">
-                            <tag-select class="hidden">
+                            <tag-select class="shown hidden">
                             </tag-select>
                         </overlay-pin>
                     </td>
@@ -108,7 +108,7 @@
         <card-back>
             <v-flex class="size100 near">
                 <h-flex class="near">
-                    <a href="/resources/owned">
+                    <a href="/user/resources">
                         <div class="rborder height100
                                     text-vmiddle">
                             <span class="white-text bigfontsize">
@@ -118,7 +118,7 @@
                             </span>
                         </div>
                     </a>
-                    <a href="/resources/bought">
+                    <a href="/user/accured">
                         <div class="height100
                                     text-vmiddle">
                             <span class="white-text bigfontsize">
@@ -147,7 +147,7 @@
 </h-flex>
 
 <fly-item id="file_upload"
-          class="sec-bg round-border hidden">
+          class="sec-bg round-border shown hidden">
     <h-flex class="text-center fontsize">
         <section>
             <br />
@@ -159,8 +159,11 @@
             <br />
             <label class="button review text-center pos-center">
                 Избери файл
-            <input class="hidden" name="full" form="upload" required
-                   type="file" />
+                <input class="hidden"
+                       name="full"
+                       form="upload"
+                       required
+                       type="file" />
             </label>
         </section>
         <section>
@@ -173,8 +176,11 @@
             <br />
             <label class="button review text-center pos-center">
                 Избери файл
-            <input class="hidden" name="demo" form="upload" required
-                   type="file" />
+                <input class="hidden"
+                       name="demo"
+                       form="upload"
+                       required
+                       type="file" />
             </label>
         </section>
     </h-flex>

@@ -30,8 +30,7 @@ $router->add("\Controllers\Resource", "/resource");
 $router->add("\API\Session", "api/session");
 $router->add("\API\User", "api/user");
 $router->add("\API\Resource", "api/resource");
-$router->add("\API\Search", "api/search");
-$router->add("\API\Filter", "api/filter");
+$router->add("\API\Search", "api/");
 $router->add("\API\Tags", "api/tags");
 
 $engine = new Core\Controller($router);

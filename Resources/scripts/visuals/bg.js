@@ -23,7 +23,8 @@ function animation()
     r_x = (x + r_x * 15) / 16
     r_y = (y + r_y * 15) / 16
 
-    var pos = r_x + "px " + r_y + "px"
+    var pos = Math.round(r_x) + "px "
+            + Math.round(r_y) + "px"
     document.body.style.backgroundPosition = pos
 
 }

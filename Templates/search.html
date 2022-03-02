@@ -2,7 +2,7 @@
     <div>
         <br/>
         <b class="white-text">
-        Филтриране в "Продавани материали":
+	    Филтриране в "${sourceName=Продавани материали}":
         </b>
         <br/>
         <br/>
@@ -13,7 +13,8 @@
                       form="filter">
             </tag-area>
             <overlay-pin class="pos-bottom-out">
-                <tag-select  class="hidden"> </tag-select>
+                <tag-select class="shown hidden">
+                </tag-select>
             </overlay-pin>
         </div>
     </div>
@@ -35,39 +36,18 @@
     </header>
 </h-flex>
 
-<h-flex class="wrap" id="search_results">
-    <section class="round-border sec-bg white-text text-center search_result">
-        <table>
-            <tr>
-                <div data-content="name"
-                    class="w-h-search light-bg border round-border black-text text-center fontsize pos-center ">
-                </div>
-            </tr>
-            <br/>
-            <tr>
-                <div data-content="info"
-                    class=" light-bg border round-border black-text text-center fontsize pos-center ">
-                </div>
-            </tr>
-            <tr>
-                <tag-area id="tagarea-search" class=""
-                > </tag-area>
-            </tr>
-        </table>
-        <div data-content="owner"> тествам полето </div>
-        <div data-content="created"> само за тест </div>
-        <br/>
-        <button class="button review pos-center fontsize">
-                <b>
-                Преглед
-                </b>
-        </button>
-    </section>
-</h-flex>
-
+<shadow-wrap>
+    <inner-shadow> </inner-shadow>
+    <h-flex class="wrap" id="search_results">
+        ${parse:search_result_sample.html}
+    </h-flex>
+</shadow-wrap>
 
 <form id="filter"> </form>
 
+<script>
+    window.query_base = ${source="/api/filter/"}
+</script>
 
 <script src="${path:scripts/user/tag_selection.js}"
         type="module"> </script>
