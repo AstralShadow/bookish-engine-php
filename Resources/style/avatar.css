@@ -2,6 +2,10 @@
     padding-bottom: 32pt;
 }
 
+.h-flex{
+    flex: none;
+}
+
 user-avatar {
     display: block;
     background-color: var(--light-color);
@@ -45,6 +49,14 @@ user-currency {
     background-image: url("../img/currency.png");
     background-size: 100%;
     font-size: 200%;
+}
+
+buy-cost{
+    display: block;
+    background-image: url("../img/currency.png");
+    background-size: 100%;
+    font-size: 200%;
+    
 }
 
 user-title {

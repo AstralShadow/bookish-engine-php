@@ -1,3 +1,104 @@
+<h-flex>
+    <div data-content="name" id="size-data-content" class="h-flex text-center sec-bg border round-border pos-datacontent  white-text fontsize pos-center ">
+                Име на файл: ${name}
+                <br/>
+                От: ${owner}
+                <br/>
+                Дата: ${created}
+    </div>
+    <header id="user_home_header" class="h-flex w200px">
+        <user-avatar class="_100px right text-center" >
+            <user-currency class="_100px
+                                pos-right-out
+                                text-left fontsize
+                                white-text"> 
+                ${scrolls}x
+            </user-currency>
+            <user-title class="pos-bottom-out pos-center pos-bottom-out fontsize">
+                <span>
+                    ${user=Гошко} <br />
+                    ${role=Бандита}
+                </span>
+            </user-title>
+        </user-avatar>
+    </header>
+</h-flex>
+<h-flex class="wrap" id="search_results">
+        <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
+            <legend class="text-left white-text text-border">
+                <b>
+                Описание:
+                </b>
+            </legend>
+            ${info=Няма описание}
+        </fieldset>
+        <fieldset class="sec-bg border round-border black-text text-left fontsize">
+            <legend class="text-left white-text text-border">
+                <b>
+                Категории:
+                </b>
+            </legend>
+            <tag-area id="tags_container"></tag-area>
+        </fieldset>
+</h-flex>
+<br/>
+<div data-content="name"
+            class="light-bg border round-border black-text text-center fontsize pos-center ">
+        Тук ще има коментари и ще пишеш коментари, само ако си изтеглил пълния файл
+    </div>
+<h-flex class="text-center fontsize">
+    <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
+        <legend class="text-left white-text text-border">
+            <b>
+                Целия материал:
+            </b>
+        </legend>
+        <section class="white-text text-center pos-center">
+            Целия файл. Цената на този файл е: 
+            <br/>
+
+            <buy-cost id="user_home_header"
+                                class="_100px
+                                text-left fontsize
+                                white-text pos-center"> 
+            </buy-cost>
+
+            <br/>
+            <br/>
+            <a class="download_item" href="${data_url}" data-item-id="${id}" download="${data_name}">
+                <button class="button review  pos-center black-text fontsize text-center ">
+                    <b>
+                        Изтегли файл
+                    </b>
+                </button>
+            </a>
+        </section>
+    </fieldset>
+    <fieldset class="sec-bg border round-border black-text text-left fontsize">
+        <legend class="text-left white-text text-border">
+            <b>
+                Демо материал:
+            </b>
+        </legend>
+        <section class="white-text text-center">
+            Част от файла, която автора е решил да пусне безплатно (няма да Ви струва нищо да изтеглите това).
+            <br/>
+            <br/>
+            <a href="${preview_url}"
+                download="${preview_name}">
+                <button class="button review  pos-center black-text fontsize text-center ">
+                    <b>
+                        Изтегли демо
+                    </b>
+                </button>
+            </a>
+            <input class="hidden" name="demo" form="upload" required
+                type="file" />
+        </section>
+    </fieldset>
+</h-flex>
+
+
 <div class="white-text">
 Здравей, ${user}
 <br />
@@ -56,4 +157,7 @@ ${parse:js_csrf.html}
 <script src="${path:scripts/resource/tags.js}"
         type="module"> </script>
 <script src="${path:scripts/resource/shopping.js}"
+        type="module"> </script>
+
+        <script src="${path:scripts/user/user.js}"
         type="module"> </script>

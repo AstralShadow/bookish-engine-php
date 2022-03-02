@@ -12,6 +12,10 @@
     margin: 0px auto;
 }
 
+.pos-datacontent{
+    height: 100px;
+}
+
 .pos-left-out {
     position: absolute;
     top: 5%;
@@ -109,6 +113,7 @@ v-flex.near > * {
     float: right;
 }
 
+
 .pos_relative
 {
     position: relative;
@@ -144,3 +149,8 @@ user-avatar.right {
     transform: translate(-170%);
 }
 
+#size-data-content{
+    width: 300px;
+    height: 80px;
+    margin-top: 10px;
+}
