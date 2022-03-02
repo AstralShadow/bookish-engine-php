@@ -37,7 +37,7 @@ class Search
             $tags_raw[] = $tag;
         }
 
-        $tags = array_unique($tags_raw);
+        $tags = array_unique($tags_raw, SORT_REGULAR);
 
         if(!$extra)
             return $tags;
