@@ -16,11 +16,18 @@ tag-option /* Таг в списък с тагове */
     display: block;
     color: black;
 
+    -webkit-transition: 0.5s;
+            transition: 0.5s;
+
 }
 
 tag-name /* Име на таг в списъка */
 {
     white-space: nowrap;
+}
+
+tag-select{
+
 }
 
 tag-info /* Описание за таг в списъка */
@@ -30,8 +37,8 @@ tag-info /* Описание за таг в списъка */
 
 tag-option.selected /* На фокус */
 {
-    font-weight: bold;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    /*font-weight: bold;*/
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 -4px 8px 0 rgba(0, 0, 0, 0.19);
 }
 
 tag-area > span /* Където потребителя пише */
