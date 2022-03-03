@@ -1,6 +1,6 @@
 .button { cursor: pointer; }
 
-.button.upload, .button.config, .button.warning, .button.review {
+.button.upload,.button.login, .button.config, .button.warning, .button.review {
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -17,6 +17,13 @@
     background-color: var(--light-color);
     width: 150px;
     height: 30px;
+}
+
+.button.login{
+    border-color: var(--border-color);
+    background-color: var(--light-color);
+    width: 170px;
+    height: 25px;
 }
 
 .button.upload:active, .button.config:active, .button.warning:active {

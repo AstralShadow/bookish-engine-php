@@ -48,6 +48,10 @@
     max-width: 60%;
 }
 
+.w-login{
+    min-width: 300px;
+}
+
 #file_upload
 {
     z-index: 75; 

@@ -14,45 +14,74 @@
 <header>
     ${Title=Заглавие}
 </header>
-
-<form class="border sec-bg" method="post">
-    <header>
-        Регистрация:
-    </header>
-
-    <label>
-        Име:
-        <input name="name" type="text"
-               autocomplete="username" />
-    </label>
-    <br />
-    
-    <label>
-        Парола:
-        <input name="password" type="password"
-               autocomplete="new-password" />
-    </label>
-    <br />
-    
-    <label>
-        Повтори паролата:
-        <input name="password2" type="password"
-               autocomplete="new-password" />
-    </label>
-    <br />
-
+<fieldset data-content="info" method="post" class="sec-bg border round-border white-text text-left fright fontsize">
+    <legend class="text-left white-text text-border">
+        <b>
+            Регистрация:
+        </b>
+    </legend>
+    <table>
+        <tr>
+            <label>
+                <td class="text-center text-left">
+                    Име:
+                </td>
+                <td class="pos_relative w-login">
+                    <input name="name" autocomplete="username"
+                        class="light-bg input fright"
+                        type="text"
+                        required
+                        minlength=5
+                        maxlength=40/>
+                </td>
+            </label>
+        </tr>
+        <tr>
+            <label>
+                <td class="text-center text-left">
+                    Парола:
+                </td>
+                <td class="pos_relative w-login">
+                    <input name="password" 
+                    autocomplete="new-password" class="light-bg input fright"
+                        type="password"
+                        required
+                        minlength=5
+                        maxlength=40/>
+                </td>
+            </label>
+        </tr>
+        <tr>
+            <label>
+                <td class="text-center text-left">
+                    Повтори паролата:
+                </td>
+                <td class="pos_relative w-login">
+                    <input name="password2" type="password"
+                    autocomplete="new-password"
+                        class="light-bg input fright"
+                        required
+                        minlength=5
+                        maxlength=40/>
+                </td>
+            </label>
+        </tr>
+    </table>
+    <br/>
     <input name="csrf" type="hidden" value="${csrf}" />
-
-    <button type="submit">
-        Регистрирай се
+    <button class="button login  pos-center black-text fontsize text-center" type="submit">
+        <b>
+            Регистрирай се!
+        </b>
     </button>
-
     <br />
-    <span> ${error=} </span>
-</form>
-<footer>
-    Вече имаш регистрация? <br />
-    <a href="./login">
-        Влез в профила си!
-    </a>
-</footer>
+    <span>
+        ${error=}
+    </span>
+    <footer class="text-center">
+        Вече имаш регистрация? <br />
+        <a class="a" href="./login">
+            Влез в профила си!
+        </a>
+    </footer>
+</fieldset>
