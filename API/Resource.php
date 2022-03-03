@@ -190,7 +190,7 @@ class Resource
 
         $note = &$_POST["note"];
         if(isset($price) && is_numeric($price)
-           && intval($price > 0)
+           && intval($price) > 0)
         {
             $res->ApproveNote = $note;
         }
