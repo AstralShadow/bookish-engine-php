@@ -48,6 +48,10 @@
     max-width: 60%;
 }
 
+.w-register{
+    min-width: 300px;
+}
+
 .w-login{
     min-width: 300px;
 }
