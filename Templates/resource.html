@@ -1,27 +1,34 @@
 <h-flex>
-    <div data-content="name" id="size-data-content" class="h-flex text-center sec-bg border round-border pos-datacontent  white-text fontsize pos-center ">
-                Име на файл: ${name}
-                <br/>
-                От: ${owner}
-                <br/>
-                Дата: ${created}
-    </div>
-    <header id="user_home_header" class="h-flex w200px">
-        <user-avatar class="_100px right text-center" >
-            <user-currency class="_100px
-                                pos-right-out
-                                text-left fontsize
-                                white-text"> 
-                ${scrolls}x
-            </user-currency>
-            <user-title class="pos-bottom-out pos-center pos-bottom-out fontsize">
-                <span>
-                    ${user=Гошко} <br />
-                    ${role=Бандита}
-                </span>
-            </user-title>
-        </user-avatar>
-    </header>
+    <fieldset data-content="name" id="size-data-content" class="h-flex text-center sec-bg border round-border pos-datacontent  white-text fontsize pos-center ">
+        <legend class="text-left white-text text-border">
+            <b>
+                Заглавие:
+            </b>
+        </legend>
+            ${name}
+            <br/>
+            От: ${owner}
+            <br/>
+            Дата: ${created}
+    </fieldset>
+    <a href="/user" class="h-flex w0px pos_relative">
+        <header id="user_home_header" class="pos-left-out w200px">
+            <user-avatar class="_100px text-center" >
+                <user-currency class="_100px
+                                    pos-right-out
+                                    text-left fontsize
+                                    white-text"> 
+                    ${scrolls}x
+                </user-currency>
+                <user-title class="pos-bottom-out pos-center pos-bottom-out fontsize">
+                    <span>
+                        ${user=Гошко} <br />
+                        ${role=Бандита}
+                    </span>
+                </user-title>
+            </user-avatar>
+        </header>
+    </a>
 </h-flex>
 <h-flex class="wrap" id="search_results">
         <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
@@ -46,7 +53,7 @@
             class="light-bg border round-border black-text text-center fontsize pos-center ">
         Тук ще има коментари и ще пишеш коментари, само ако си изтеглил пълния файл
     </div>
-<h-flex class="text-center fontsize">
+<h-flex class="text-center wrap fontsize">
     <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
         <legend class="text-left white-text text-border">
             <b>
@@ -54,15 +61,15 @@
             </b>
         </legend>
         <section class="white-text text-center pos-center">
-            Целия файл. Цената на този файл е: 
-            <br/>
-
-            <buy-cost id="user_home_header"
+            <buy-cost
                                 class="_100px
-                                text-left fontsize
+                                text-left fright fontsize
                                 white-text pos-center"> 
+                                ${price}x
             </buy-cost>
-
+            Файл: ${data_name=Не е качено} 
+            <br/>
+            Размер: ${data_size=0B} (${data_mime=unknown})
             <br/>
             <br/>
             <a class="download_item" href="${data_url}" data-item-id="${id}" download="${data_name}">
@@ -72,6 +79,12 @@
                     </b>
                 </button>
             </a>
+            <button class="button review  pos-center black-text fontsize text-center buy_item"
+               data-item-id="${id}">
+               <b>
+                    Купи
+                </b>
+            </button>
         </section>
     </fieldset>
     <fieldset class="sec-bg border round-border black-text text-left fontsize">
@@ -81,7 +94,9 @@
             </b>
         </legend>
         <section class="white-text text-center">
-            Част от файла, която автора е решил да пусне безплатно (няма да Ви струва нищо да изтеглите това).
+            Файл: ${preview_name=Не е качено} 
+            <br/>
+            Размер: ${preview_size=0B} (${preview_mime=unknown})
             <br/>
             <br/>
             <a href="${preview_url}"
@@ -97,59 +112,6 @@
         </section>
     </fieldset>
 </h-flex>
-
-
-<div class="white-text">
-Здравей, ${user}
-<br />
-Ето го ресурса, който отвори:
-<br />
-<br />
-${name}
-<br />
-${info=Няма описание}
-<br />
-${owner}
-<br />
-${created}
-<br />
-
-<tag-area id="tags_container" class="light-bg"></tag-area>
-
-<br />
-<br />
-
-${data_name=Не е качено}
-<br />
-${data_size=0B} ${data_mime=unknown}
-<br />
-<button class="buy_item"
-   data-item-id="${id}">
-    Купи
-</button>
-<a class="download_item"
-   href="${data_url}"
-   data-item-id="${id}"
-   download="${data_name}">
-    <button>
-        Изтегли
-    </button>
-</a>
-<span class="buy_error" data-item-id="${id}"></span>
-<br />
-
-${preview_name=Не е качено}
-<br />
-${preview_size=0B} ${preview_mime=unknown}
-<br />
-<a href="${preview_url}"
-   download="${preview_name}">
-    <button>
-        Изтегли демо
-    </button>
-</a>
-<br />
-</div>
 
 
 ${parse:js_tags.html}

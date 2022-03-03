@@ -40,7 +40,7 @@ class Resource extends Entity
     public int $PreviewSize = 0;
     public ?string $Preview;
 
-    public int $Price = 0;
+    public int $Price = 1;
 
     public \DateTime $ApproveTime;
     #[Traceable("ApprovedResources")]
