@@ -1,4 +1,4 @@
-\documentclass[12pt]{report}
+\documentclass[12pt]{article}
 %\usepackage[a4paper,  margin=.8in]{geometry}
 \usepackage[a4paper, margin=1.5in]{geometry}
 
@@ -48,15 +48,86 @@
 
 \begin{document}
 
-\maketitle
-\tableofcontents
+%\maketitle
+%\tableofcontents
 
 \newgeometry{margin=1in}
 
-\subimport{Intro/}{main}
+\begin{center}
+    {\huge Проект \appId{}}
+\end{center}
+
+\section{Тема: \appTitle{}}
 \subimport{private/}{team}
-\subimport{SweetTalk/}{main}
-\subimport{RealWork/}{main}
-\subimport{Extra/}{main}
+
+\section{Резюме}
+\subsection{Цели}
+Проектът цели да насърчи и улесни изучаването на
+големи количества информация. Потребителите качват
+синтезирани и разбираеми ресурси, като в замяна
+получават шанса да свалят други такива.
+
+\subsection{Основни етапи в реализирането на проекта}
+\begin{itemize}
+    \item Създаване на фреймуърк
+    \item Измисляне на идея за проект
+    \item Планиране на архитектурата
+    \item Имплементация на интерфейса и контролерите
+    \item Тестване и подобряване
+\end{itemize}
+
+\subsection{Ниво на сложност на проекта}
+\begin{itemize}
+    \item Създаване на функционален фреймуърк
+    \item Имплементация на MVC, което позволява
+        преизползване на контролери
+    \item Създаване на ORM функционалност, кеширане
+        и оптимизиране на заявки до база данни
+    \item Създаване и използване на специализирана
+        система за динамизация на уеб-интерфейс
+    \item Обработване и филтриране на HTTP заявки
+    \item Създаване на RESTful API.
+    \item Имплементация на стандартни практики
+        за кибер сигурност
+\end{itemize}
+
+\subsection{Логическо и функционално описание на решението}
+\subimport{SweetTalk}{intro}
+
+\subsection{Реализация}
+\subimport{RealWorkCopy/}{main}
+
+%\subimport{Intro/}{main}
+%\subimport{private/}{team}
+%\subimport{SweetTalk/}{main}
+%\subimport{RealWork/}{main}
+%\subimport{Extra/}{main}
+
+\subsection{Описание на приложението}
+Приложението изисква потребителска регистрация за
+повечето функционалности. Тя може да бъде направена
+в уеб браузър чрез страницата за регистрация или
+чрез програмното API, което позволява възможността за
+създаване на различни потребителски интерфейси.
+
+Всеки потребител може да качва своите ресурси,
+специален екип от модератори ги одобрява, и
+всеки потребител може да замени свитъците, които е
+получил за своите ресурси, с ресурси, качени от
+други потребители на приложението.
+
+Приложението може да бъде достъпено на следващите адреси:
+
+\subsubsection{Уеб адрес}
+\input{Extra/private/uri}
+
+\subsubsection{Сорс код}
+\href
+    {https://github.com/AstralShadow/bookish-engine-php}
+    {https://github.com/AstralShadow/bookish-engine-php}
+
+\subsection{Заключение}
+\subimport{Intro/}{main}
+
 
 \end{document}
