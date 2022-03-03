@@ -187,6 +187,7 @@ class Resource
         {
             $res->Price = intval($price);
         }
+        $res->User->Scrolls += $res->Price;
 
         $note = &$_POST["note"];
         if(isset($price) && is_numeric($price)
@@ -289,9 +290,14 @@ class Resource
     {
         $uid = $user->getId();
         $rid = $res->getId();
+     
         $owned = $user == $res->Owner;
         $read = UserResourceAccess::get($uid, $rid);
-        return (bool) $read || $owned;
+
+        $permission = Permissions::CanApproveResources;
+        $moderator = $user->has($permission);
+
+        return (bool) $moderator || $read || $owned;
     }
 
     #[GET("/{id}/download")]
