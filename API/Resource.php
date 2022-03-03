@@ -181,6 +181,20 @@ class Resource
         if(!$user || !$user->has($permission))
             return APIError(403);
 
+        $price = &$_POST["price"];
+        if(isset($price) && is_numeric($price)
+           && intval($price) > 0)
+        {
+            $res->Price = intval($price);
+        }
+
+        $note = &$_POST["note"];
+        if(isset($price) && is_numeric($price)
+           && intval($price > 0)
+        {
+            $res->ApproveNote = $note;
+        }
+
         $res->approve($user);
         $http = new ApiResponse(200);
         $http->echo($res->overview());
