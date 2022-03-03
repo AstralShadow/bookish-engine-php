@@ -14,6 +14,7 @@ use function Extend\APIError;
 use function Extend\isValidString;
 use function Extend\uploadFile;
 use Extend\CSRFTokenManager as CSRF;
+use Extend\Permissions;
 
 use \Model\User;
 use \Model\Session;
@@ -159,6 +160,31 @@ class Resource
         MResource::delete($res->getId());
 
         return new ApiResponse(200);
+    }
+
+    
+    /* Moderator section */
+
+    #[POST("/{id}/approve")]
+    public static function approveResource(Request $req)
+    {
+        $id = $req->id;
+        $res = MResource::get($id);
+        if(!$res)
+            return APIError(404, "Няма такъв ресурс.");
+
+        if(!CSRF::weak_check())
+            return APIError(400, "Bad CSRF token.");
+
+        $permission = Permissions::CanApproveResources;
+        $user = Session::current()?->User;
+        if(!$user || !$user->has($permission))
+            return APIError(403);
+
+        $res->approve($user);
+        $http = new ApiResponse(200);
+        $http->echo($res->overview());
+        return $http;
     }
 
 
