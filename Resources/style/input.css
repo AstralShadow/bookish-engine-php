@@ -1,4 +1,4 @@
-input[type=text] {
+input[type=text], input[type=password] {
     min-width: 100px;
     box-sizing: border-box;
     border: 3px solid black;
@@ -13,7 +13,8 @@ input[type=text] {
 }
 
 
-input[type=text]:focus {
+input[type=text]:focus, 
+input[type=password]:focus {
     border: 3px solid var(--light-color);
 }
 

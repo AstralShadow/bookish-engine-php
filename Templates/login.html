@@ -1,35 +1,59 @@
 ﻿<header>
     ${Title=Заглавие}
 </header>
-<form class="border sec-bg" method="post">
-    <header>
-        Вход:
-    </header>
-
-    <label>
-        Име:
-        <input name="name" type="text"
-               autocomplete="username"/>
-    </label>
-    <br />
-
-    <label>
-        Парола:
-        <input name="password" type="password"
-               autocomplete="current-password" />
-    </label>
-    <br />
-
+<fieldset data-content="info" method="post" class="sec-bg border round-border white-text text-left fright fontsize">
+    <legend class="text-left white-text text-border">
+        <b>
+            Вход:
+        </b>
+    </legend>
+    <table>
+        <tr>
+            <label>
+                <td class="text-center text-left">
+                    Име:
+                </td>
+                <td class="pos_relative w-login">
+                    <input name="name" autocomplete="username"
+                        class="light-bg input fright"
+                        type="text"
+                        required
+                        minlength=5
+                        maxlength=40/>
+                </td>
+            </label>
+        </tr>
+        <tr>
+            <label>
+                <td class="text-center text-left">
+                    Парола:
+                </td>
+                <td class="pos_relative w-login">
+                    <input name="password" autocomplete="current-password"
+                        class="light-bg input fright"
+                        type="password"
+                        required
+                        minlength=5
+                        maxlength=40/>
+                </td>
+            </label>
+        </tr>
+    </table>
+    <br/>
     <input name="csrf" type="hidden" value="${csrf}" />
-
-    <button type="submit">Влез</button>
+    <button class="button login  pos-center black-text fontsize text-center" type="submit">
+        <b>
+            Влез
+        </b>
+    </button>
     <br />
-
-    <span>${error=}</span>
-</form>
-<footer>
-    Нямаш регистрация? <br />
-    <a href="./register">
-        Регистрирай се!
-    </a>
-</footer>
+    <span>
+        ${error=}
+    </span>
+    <footer class="text-center">
+        Нямаш регистрация? <br />
+        <a class="a" href="./register">
+            Регистрирай се!
+        </a>
+    </footer>
+</fieldset>

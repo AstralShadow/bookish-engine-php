@@ -3,6 +3,7 @@
     --prim-color:  #222055;
     --sec-color: #09042e;
     --border-color: rgb(195, 199, 255);
+    --link-visited-color: rgb(195, 199, 255);
 }
 
 .prim-bg {
@@ -15,4 +16,20 @@
 
 .light-bg {
     background-color: var(--light-color);
+}
+
+.a {
+    color: var(--light-color);
+}
+
+.a:hover {
+    color: #00c3ff;
+}
+
+.a:visited {
+    color: var(--link-visited-color);
+}
+
+.a:active {
+    color: #005e7a;
 }
