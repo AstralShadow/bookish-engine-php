@@ -20,4 +20,5 @@ main-container
     margin: 3% auto;
     min-height: 200px;
     max-height: 800px;
+    max-width: 1020px;
 }
