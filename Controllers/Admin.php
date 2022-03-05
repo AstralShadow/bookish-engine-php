@@ -12,22 +12,15 @@ use Core\RequestMethods\Fallback;
 use Core\RequestMethods\StartUp;
 
 
-class Home
+class Admin
 {
 
-    #[GET]
-    public static function index()
+    #[GET("/admin")]
+    public static function admin()
     {
-        return redirect("/login?next=/user");
-        $response = Page("index.html", 501);
+        $response = Page("admin.html", 501);
 
         return $response;
-    }
-
-    #[Fallback]
-    public static function notFound()
-    {
-        return Page("404.html");
     }
 
 }

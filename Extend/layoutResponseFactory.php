@@ -22,6 +22,13 @@ function layoutResponseFactory(string $file,
         $overview = $user->privateOverwiev();
         $overview["user"] = $overview["name"];
         unset($overview["name"]);
+        
+        if($user->has(Permissions::CanApproveResources))
+            $overview["can_approve"] = "";
+
+        if($user->has(Permissions::CanGiveRoles))
+            $overview["can_give_roles"] = "";
+
         $response->setValues($overview);
     }
 
