@@ -7,14 +7,21 @@
 ._200px { height: 200px; width: 200px; }
 ._256px { height: 256px; width: 256px; }
 
+
+.max_32px { max-height: 32px; max-width: 32px; }
+
 .width80 { min-width: 80%; }
+.width50 { min-width: 50%; }
 .width100 { min-width: 100%; }
 .w200px { min-width: 200px; }
 .w100px { min-width: 100px; }
 .h70px { min-height: 70px; }
 .h20px { min-height: 20px; }
 .mw100px { max-width: 100px; }
+.mh500px { max-height: 500px; }
+
 
 .height100 { min-height: 100%; }
+.height80 { min-height: 80%; }
 
 .size100 { min-height: 100%; min-width: 100%; }

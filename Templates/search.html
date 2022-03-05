@@ -1,23 +1,24 @@
 <h-flex>
-    <div>
-        <br/>
-        <b class="white-text">
-	    Филтриране в "${sourceName=Продавани материали}":
-        </b>
-        <br/>
-        <br/>
-        <div class="pos_relative" id="pos-filters">
-            <tag-area id="width-tagsearch"
-                      class="light-bg input"
-                      name="tags"
-                      form="filter">
-            </tag-area>
-            <overlay-pin class="pos-bottom-out">
-                <tag-select class="shown hidden">
-                </tag-select>
-            </overlay-pin>
+    <fieldset class="sec-bg border round-border black-text text-left fontsize">
+        <legend class="text-left white-text text-border">
+                <b>
+                    Филтриране в "${sourceName=Продавани материали}":
+                </b>
+            </legend>
+            <div>
+            <div class="pos_relative" id="pos-filters">
+                <tag-area id="width-tagsearch"
+                        class="light-bg input"
+                        name="tags"
+                        form="filter">
+                </tag-area>
+                <overlay-pin class="pos-bottom-out">
+                    <tag-select class="shown hidden">
+                    </tag-select>
+                </overlay-pin>
+            </div>
         </div>
-    </div>
+    </fieldset>
     <a href="/user" class="h-flex w0px pos_relative">
     <header id="user_home_header" class="w200px">
         <user-avatar class="_100px right text-center" >

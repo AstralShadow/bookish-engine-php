@@ -11,7 +11,7 @@
 @import "./input.css";
 @import "./tags.css";
 @import "./layout.css";
-/*@import "./scroll.css";*/
+@import "./scroll.css";
 @import "./search.css";
 @import "./turn_card.css";
 @import "./shadow.css";
