@@ -55,6 +55,9 @@ class Resource
     function applyModifications(MResource &$resource)
     {
         $response = new ApiResponse(200);
+        $answer = [
+            "id" => $resource->getId()
+        ];
         $modified = false;
 
         if(isValidString($_POST["name"]))
@@ -72,24 +75,34 @@ class Resource
         }
 
 
-        $file = uploadFile("full");
-        if($file != null)
-        {
-            $resource->Data = $file["uri"];
-            $resource->DataName = $file["name"];
-            $resource->DataSize = $file["size"];
-            $resource->DataMime = $file["mime"];
-            $modified = true;
+        try {
+            $file = uploadFile("full",
+                               size_limit: 20000000);
+            if($file != null)
+            {
+                $resource->Data = $file["uri"];
+                $resource->DataName = $file["name"];
+                $resource->DataSize = $file["size"];
+                $resource->DataMime = $file["mime"];
+                $modified = true;
+            }
+        } catch(Exception $e) {
+            $answer["file_error"] = $e->getMessage();
         }
 
-        $demo = uploadFile("demo");
-        if($demo != null)
-        {
-            $resource->Preview = $demo["uri"];
-            $resource->PreviewName = $demo["name"];
-            $resource->PreviewSize = $demo["size"];
-            $resource->PreviewMime = $demo["mime"];
-            $modified = true;
+        try {
+            $demo = uploadFile("demo",
+                               size_limit: 20000000);
+            if($demo != null)
+            {
+                $resource->Preview = $demo["uri"];
+                $resource->PreviewName = $demo["name"];
+                $resource->PreviewSize = $demo["size"];
+                $resource->PreviewMime = $demo["mime"];
+                $modified = true;
+            }
+        } catch(Exception $e) {
+            $answer["demo_error"] = $e->getMessage();
         }
 
         if($modified)
@@ -112,9 +125,7 @@ class Resource
 
 
         $response = new ApiResponse(200);
-        $response->echo([
-            "id" => $resource->getId()
-        ]);
+        $response->echo($answer);
         return $response;
     }
 

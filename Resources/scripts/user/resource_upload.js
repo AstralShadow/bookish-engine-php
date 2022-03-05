@@ -46,11 +46,12 @@ if(size_feedback && full && demo)
             if(file.size > limit)
             {
                 size_feedback.innerText =
-                    "Файлът не трябва да" + 
+                    "Файлът не трябва да " + 
                     "надвишава 20MB";
                 this.value = "";
                 span.innerText = "Избери файл"
-            } else
+            }
+            else
             {
                 span.innerText = file.name
             }
