@@ -29,6 +29,13 @@
     padding: 10px;
 }
 
+.comment-border{
+    border: 2px solid var(--border-color);
+    border-radius: 0px 125px 0px 125px/0px 10px 0px 10px;
+    padding: 5px;
+
+}
+
 .border-small{
     border: 2px solid var(--border-color);
     border-radius: 6px;

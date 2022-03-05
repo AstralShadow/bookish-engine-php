@@ -19,6 +19,7 @@
 .h20px { min-height: 20px; }
 .mw100px { max-width: 100px; }
 .mh500px { max-height: 500px; }
+.mh200px { max-height: 200px; }
 
 
 .height100 { min-height: 100%; }
