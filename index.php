@@ -30,6 +30,7 @@ $router->add("\Controllers\Resource", "/resource");
 
 $router->add("\API\Session", "api/session");
 $router->add("\API\User", "api/user");
+$router->add("\API\Admin", "api/admin");
 $router->add("\API\Resource", "api/resource");
 $router->add("\API\Search", "api/");
 $router->add("\API\Tags", "api/tags");
