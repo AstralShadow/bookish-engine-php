@@ -24,6 +24,13 @@ class Home
         return $response;
     }
 
+    #[GET("/admin")]
+    public static function admin()
+    {
+        $response = Page("admin.html", 501);
+
+        return $response;
+    }
 
     #[Fallback]
     public static function notFound()

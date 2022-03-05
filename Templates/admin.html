@@ -1,0 +1,88 @@
+<h-flex>
+    <fieldset class="sec-bg border round-border black-text text-left fontsize">
+        <legend class="text-left white-text text-border">
+            <b>
+                Търсене по име
+            </b>
+        </legend>
+        <div>
+            <div class="pos_relative" id="pos-filters">
+                <tag-area id="width-tagsearch" class="light-bg input" name="tags" form="filter">
+                </tag-area>
+                <overlay-pin class="pos-bottom-out">
+                    <tag-select class="shown hidden">
+                    </tag-select>
+                </overlay-pin>
+            </div>
+        </div>
+    </fieldset>
+    <a href="/user" class="h-flex w0px pos_relative">
+        <header id="user_home_header" class="w200px">
+            <user-avatar class="_100px right text-center">
+                <user-currency class="_100px
+                                  pos-right-out
+                                  text-left fontsize
+                                  white-text">
+                    ${scrolls}x
+                </user-currency>
+                <user-title class="pos-bottom-out pos-center fontsize">
+                    <span>
+                        ${user=Гошко} <br />
+                        ${role=Бандита}
+                    </span>
+                </user-title>
+            </user-avatar>
+        </header>
+    </a>
+</h-flex>
+
+<h-flex class="">
+    <fieldset data-content="name" class="text-center sec-bg border round-border 
+    white-text fontsize ">
+        <legend class="text-center white-text text-border fontsize">
+            <b>
+                Модератори
+            </b>
+        </legend>
+        <shadow-wrap>
+            <inner-shadow id="shadow-dark"> </inner-shadow>
+            <div class="mh500px y_scroll">
+                <h-flex id="search_results">
+                    <user-avatar class="max_32px text-center">
+                    </user-avatar>
+                    <span>
+                        ${user=Гошко} - ${role=Бандита}
+                    </span>
+                    <button class="button mw100px review
+                black-text fontsize text-center ">
+                        Премахни
+                    </button>
+                </h-flex>
+            </div>
+        </shadow-wrap>
+    </fieldset>
+    <fieldset data-content="name" class="text-center sec-bg border round-border
+        white-text fontsize">
+        <legend class="text-center white-text text-border">
+            <b>
+                Потребители
+            </b>
+        </legend>
+        <shadow-wrap>
+            <inner-shadow id="shadow-dark"> </inner-shadow>
+            <div class="mh500px y_scroll">
+            <h-flex id="search_results">
+                <user-avatar class="max_32px text-center">
+                </user-avatar>
+                <span>
+                    ${user=Гошко} - ${role=Бандита}
+                </span>
+                <button class="button mw100px review
+                black-text fontsize text-center ">
+                    Добави
+                </button>
+            </h-flex>
+        </div>
+        </shadow-wrap>
+    </fieldset>
+</h-flex>

@@ -46,12 +46,17 @@ input, textarea, tag-area
 
 .text-border{
     background: linear-gradient(to top, var(--sec-color), var(--prim-color));
-     border-radius: 20px / 5px;
+    border-radius: 20px / 5px;
     border-left: 2px solid var(--border-color);
     border-right: 2px solid var(--border-color);
     padding-top: 1px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+.text-border.to-black{
+    background: linear-gradient(to top, var(--sec-color), black);
+
 }
 
 fieldset{

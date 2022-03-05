@@ -1,21 +1,44 @@
-﻿<aside class="sec-bg round-border pos-right-out">
-    Изисквания за името:
-    <ul class="text-left">
-        <li> asd </li>
-    </ul>
-</aside>
-<aside class="sec-bg round-border pos-left-out">
-    Изисквания за паролата:
-    <ul class="text-left">
-        <li> asd </li>
-    </ul>
-</aside>
+﻿    <fieldset class="w-register pos-left-out sec-bg round-border white-text text-left fontsize">
+        <legend class="text-border to-black">
+            <b>
+                Изисквания за името:
+            </b>
+        </legend>
+        <ul class="text-left white-text">
+            <li> Да съдържа между 6 и 20 символа. </li>
+            <br/>
+            <li> Може да съдържа букви на латиница и на кирилица. </li>
+            <br/>
+            <li> Може да съдържа специални символи като: "-", "_", "*" и др. </li>
+        </ul>
+    </fieldset>
+    <fieldset class="w-register pos-right-out sec-bg round-border white-text text-left fontsize">
+        <legend class="text-border to-black">
+            <b>
+                Изисквания за паролата:
+            </b>
+        </legend>
+        <ul class="text-left white-text">
+            <li> Да съдържа между 12 и 50 символа. </li>
+            <br/>
+            <li> Да съдържа букви на латиница или на кирилица. </li>
+            <br/>
+            <li> Да съдържа малки и главни букви. </li>
+            <br/>
+            <li> Да съдържа поне 1 специален символ като: "-", "_", "*" и др. </li>
+            <br/>
+            <li> Да съдържа поне 1 цифра. </li>
+        </ul>
+    </fieldset>
 
-<header>
+<header class="text-center white-text">
     ${Title=Заглавие}
 </header>
+
+
+
 <form method="post">
-<fieldset data-content="info"  class="sec-bg border round-border white-text text-left fright fontsize">
+<fieldset data-content="info"  class="sec-bg border round-border white-text text-left fontsize">
     <legend class="text-left white-text text-border">
         <b>
             Регистрация:

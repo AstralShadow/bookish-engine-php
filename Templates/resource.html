@@ -1,23 +1,24 @@
 <h-flex>
-    <fieldset data-content="name" id="size-data-content" class="h-flex text-center sec-bg border round-border pos-datacontent  white-text fontsize pos-center ">
+    <fieldset data-content="name" id="size-data-content"
+        class="h-flex text-center sec-bg border round-border pos-datacontent  white-text fontsize pos-center ">
         <legend class="text-left white-text text-border">
             <b>
                 Заглавие:
             </b>
         </legend>
-            ${name}
-            <br/>
-            От: ${owner}
-            <br/>
-            Дата: ${created}
+        ${name}
+        <br />
+        От: ${owner}
+        <br />
+        Дата: ${created}
     </fieldset>
     <a href="/user" class="h-flex w0px pos_relative">
         <header id="user_home_header" class="pos-left-out w200px">
-            <user-avatar class="_100px text-center" >
+            <user-avatar class="_100px text-center">
                 <user-currency class="_100px
                                     pos-right-out
                                     text-left fontsize
-                                    white-text"> 
+                                    white-text">
                     ${scrolls}x
                 </user-currency>
                 <user-title class="pos-bottom-out pos-center pos-bottom-out fontsize">
@@ -31,30 +32,60 @@
     </a>
 </h-flex>
 <h-flex class="wrap" id="search_results">
-        <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
-            <legend class="text-left white-text text-border">
-                <b>
+    <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
+        <legend class="text-left white-text text-border">
+            <b>
                 Описание:
-                </b>
-            </legend>
-            ${info=Няма описание}
-        </fieldset>
-        <fieldset class="sec-bg border round-border black-text text-left fontsize">
-            <legend class="text-left white-text text-border">
-                <b>
+            </b>
+        </legend>
+        ${info=Няма описание}
+    </fieldset>
+    <fieldset class="sec-bg border round-border black-text text-left fontsize">
+        <legend class="text-left white-text text-border">
+            <b>
                 Категории:
-                </b>
-            </legend>
-            <tag-area id="tags_container"></tag-area>
-        </fieldset>
+            </b>
+        </legend>
+        <tag-area id="tags_container"></tag-area>
+    </fieldset>
 </h-flex>
-<br/>
-<!--
-    <div data-content="name"
-            class="light-bg border round-border black-text text-center fontsize pos-center ">
-        Тук ще има коментари и ще пишеш коментари, само ако си изтеглил пълния файл
+<fieldset class="sec-bg  border round-border white-text text-left fontsize pos-center">
+    <legend class="text-center white-text text-border">
+        <b>
+            Коментари: Искаш и ти да пишеш тук? Купи файла и го оцени тук ->
+        </b>
+    </legend>
+    <div data-content="name" class="mh200px y_scroll fontsize pos-center ">
+        <h-flex id="search_results">
+            <user-avatar class="max_32px text-center">
+            </user-avatar>
+            <span>
+                ${user=Гошко}
+                <br />- ${role=Бандита} -
+            </span>
+            <div class="width80 comment-border 
+            white-text prim-bg fontsize text-left">
+                Чужд коментар
+            </div>
+        </h-flex>
+        <h-flex id="search_results">
+            <user-avatar class="max_32px text-center">
+            </user-avatar>
+            <div class="width80 comment-border 
+            white-text prim-bg fontsize text-left">
+                Твой коментар
+            </div>
+        </h-flex>
+        
     </div>
--->
+    <h-flex id="search_results" class="tborder  pos-center">
+        <user-avatar class="max_32px text-center">
+        </user-avatar>
+        <input class="width80 comment-border 
+        white-text black-text light-bg fontsize text-left" type="text" />
+    </h-flex>
+
+</fieldset>
 <h-flex class="text-center wrap fontsize">
     <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
         <legend class="text-left white-text text-border">
@@ -63,17 +94,16 @@
             </b>
         </legend>
         <section class="white-text text-center pos-center">
-            <buy-cost
-                                class="_100px
+            <buy-cost class="_100px
                                 text-left fright fontsize
-                                white-text pos-center"> 
-                                ${price}x
+                                white-text pos-center">
+                ${price}x
             </buy-cost>
-            Файл: ${data_name=Не е качено} 
-            <br/>
+            Файл: ${data_name=Не е качено}
+            <br />
             Размер: ${data_size=0B} (${data_mime=unknown})
-            <br/>
-            <br/>
+            <br />
+            <br />
             <a class="download_item" href="${data_url}" data-item-id="${id}" download="${data_name}">
                 <button class="button review  pos-center black-text fontsize text-center ">
                     <b>
@@ -81,9 +111,8 @@
                     </b>
                 </button>
             </a>
-            <button class="button review  pos-center black-text fontsize text-center buy_item"
-               data-item-id="${id}">
-               <b>
+            <button class="button review  pos-center black-text fontsize text-center buy_item" data-item-id="${id}">
+                <b>
                     Купи
                 </b>
             </button>
@@ -96,32 +125,53 @@
             </b>
         </legend>
         <section class="white-text text-center">
-            Файл: ${preview_name=Не е качено} 
-            <br/>
+            Файл: ${preview_name=Не е качено}
+            <br />
             Размер: ${preview_size=0B} (${preview_mime=unknown})
-            <br/>
-            <br/>
-            <a href="${preview_url}"
-                download="${preview_name}">
+            <br />
+            <br />
+            <a href="${preview_url}" download="${preview_name}">
                 <button class="button review  pos-center black-text fontsize text-center ">
                     <b>
                         Изтегли демо
                     </b>
                 </button>
             </a>
-            <input class="hidden" name="demo" form="upload" required
-                type="file" />
+            <input class="hidden" name="demo" form="upload" required type="file" />
         </section>
     </fieldset>
 </h-flex>
+<form method="post">
+    <fieldset data-content="name"
+        class="h-flex width80 text-center sec-bg border round-border white-text fontsize pos-center ">
+        <legend class="text-center white-text text-border">
+            <b>
+                Оценка и бележка за материала
+            </b>
+        </legend>
+        <h-flex>
+            <textarea class="light-bg" form="upload" name="info" required minlength=10></textarea>
+            <buy-cost class="mw100px _100px
+                text-left fontsize
+                white-text pos-center">
+
+                <input class="_20_30px border-small light-bg" form="upload" name="price" type="number" required min=1
+                    max=10></input>
+                x
+            </buy-cost>
+        </h-flex>
+        <button class="button w200px review  pos-center black-text fontsize text-center ">
+            <b>
+                Одобри материал
+            </b>
+        </button>
+    </fieldset>
+</form>
 
 
 ${parse:js_tags.html}
 ${parse:js_csrf.html}
-<script src="${path:scripts/resource/tags.js}"
-        type="module"> </script>
-<script src="${path:scripts/resource/shopping.js}"
-        type="module"> </script>
+<script src="${path:scripts/resource/tags.js}" type="module"> </script>
+<script src="${path:scripts/resource/shopping.js}" type="module"> </script>
 
-        <script src="${path:scripts/user/user.js}"
-        type="module"> </script>
+<script src="${path:scripts/user/user.js}" type="module"> </script>

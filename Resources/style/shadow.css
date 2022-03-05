@@ -16,3 +16,9 @@ inner-shadow {
     box-shadow: inset 0em 15px 15px var(--prim-color),
                 inset 0em -15px 15px var(--prim-color);
 }
+
+#shadow-dark{
+    box-shadow: inset 0em 15px 15px var(--sec-color),
+    inset 0em -15px 15px var(--sec-color);
+
+}
