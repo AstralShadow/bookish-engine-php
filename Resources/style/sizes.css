@@ -1,3 +1,4 @@
+._20_30px { height: 20px; width: 30px; }
 ._32px { height: 32px; width: 32px; }
 ._48px { height: 48px; width: 48px; }
 ._64px { height: 64px; width: 64px; }
@@ -9,6 +10,10 @@
 .width80 { min-width: 80%; }
 .width100 { min-width: 100%; }
 .w200px { min-width: 200px; }
+.w100px { min-width: 100px; }
+.h70px { min-height: 70px; }
+.h20px { min-height: 20px; }
+.mw100px { max-width: 100px; }
 
 .height100 { min-height: 100%; }
 

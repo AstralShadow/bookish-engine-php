@@ -9,12 +9,10 @@
 
 .tborder {
     border-top: 2px solid var(--border-color);
-    padding-top: 6px;
 }
 
 .bborder {
     border-bottom: 2px solid var(--border-color);
-    padding-bottom: 6px;
 }
 
 .rborder {
@@ -29,6 +27,11 @@
     border: 2px solid var(--border-color);
     border-radius: 125px/10px;
     padding: 10px;
+}
+
+.border-small{
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
 }
 
 .round-border.pos-left-out {

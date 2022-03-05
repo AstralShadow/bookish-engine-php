@@ -16,11 +16,17 @@
                 ${role=Бандита}
             </span>
         </user-title>
-        <label class="upload button _64px ">
-            <input form="avatar_form" name="avatar"
-                accept="image/png,image/jpeg,image/gif"
-                type="file" class="hidden" />
-        </label>
+            <label class="upload button _64px pos_relative">
+                <input form="avatar_form" name="avatar"
+                    accept="image/png,image/jpeg,image/gif"
+                    type="file" class="hidden" />
+
+                <section class="round-border sec-bg white-text w100px h70px pos-right-out">
+                    
+                    Профилната снимка да е до 1 MB!
+                    
+                </section>
+            </label>
     </user-avatar>
 </header>
 <br />
@@ -109,7 +115,7 @@
             <v-flex class="size100 near">
                 <h-flex class="near">
                     <a href="/user/resources">
-                        <div class="rborder height100
+                        <div class="height100
                                     text-vmiddle">
                             <span class="white-text bigfontsize">
                                 Твоите 
@@ -119,7 +125,7 @@
                         </div>
                     </a>
                     <a href="/user/accured">
-                        <div class="height100
+                        <div class="height100 lborder
                                     text-vmiddle">
                             <span class="white-text bigfontsize">
                                 Достъпни 
@@ -131,15 +137,27 @@
                 </h-flex>
                 <h-flex class="near">
                     <a href="/search">
-                        <div class="tborder height100
+                        <div class="tborder  height100
                                     text-vmiddle">
                             <span class="white-text bigfontsize">
                                 Търси 
-                                <br />нови материали 
+                                <br />материали 
                                 <br />(от други учащи)
                             </span>
                         </div>
                     </a>
+                    <!-- {За модератор}
+                    <a href="">
+                        <div class="tborder height100 lborder
+                                    text-vmiddle">
+                            <span class="white-text bigfontsize">
+                                 Нови 
+                                <br />материали 
+                                <br />(за оценяване)
+                            </span>
+                        </div>
+                    </a>
+                -->
                 </h-flex>
             </v-flex>
         </card-back>
@@ -147,7 +165,7 @@
 </h-flex>
 
 <fly-item id="file_upload"
-          class="sec-bg round-border shown hidden">
+          class="sec-bg round-border text-center shown hidden">
     <h-flex class="text-center fontsize">
         <section>
             <br />
@@ -184,10 +202,17 @@
             </label>
         </section>
     </h-flex>
+    <br/>
     <button form="upload"
             class="_100px button upload pos-center"
     >
     </button>
+    <br/>
+    <!-- {при по-голям файл}
+    <b class="white-text fontsize">
+    Файла е твърде голям
+    </b>
+    -->
 </fly-item>
 
 
