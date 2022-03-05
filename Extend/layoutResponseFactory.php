@@ -3,6 +3,7 @@
 namespace Extend;
 
 use \Core\Responses\TemplateResponse;
+use Model\Session;
 
 function layoutResponseFactory(string $file,
                                int $code = 200)
@@ -14,6 +15,15 @@ function layoutResponseFactory(string $file,
         (file: "_layout.html", code: $code);
 
     $response->setValue("_page", $file);
+
+    $user = Session::current()?->User;
+    if($user)
+    {
+        $overview = $user->privateOverwiev();
+        $overview["user"] = $overview["name"];
+        unset($overview["name"]);
+        $response->setValues($overview);
+    }
 
     return $response;
 }

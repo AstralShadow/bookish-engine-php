@@ -104,6 +104,7 @@ class User extends Entity
     {
         $data = [
             "name" => $this->Name,
+            "role" => $this->roleName(),
             "avatar" => $this->avatarUri()
         ];
 
@@ -113,6 +114,7 @@ class User extends Entity
     public function privateOverwiev()
     {
         $data = $this->overwiev();
+        $data["scrolls"] = $this->Scrolls;
         return $data;
     }
 
@@ -131,7 +133,11 @@ class User extends Entity
 
     public function roleName() : string
     {
-        return "Сянката";
+        if($this->has(Permissions::CanGiveRoles))
+            return "Админ";
+        if($this->has(Permissions::CanApproveResources))
+            return "Модератор";
+        return "Потребител";
     }
 
 }

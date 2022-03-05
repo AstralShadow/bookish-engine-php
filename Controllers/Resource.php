@@ -39,10 +39,6 @@ class Resource
         $html = Page("resource.html", 200);
         $html->setValue("csrf", CSRF::get());
 
-        $html->setValue("user", $user->Name);
-        $html->setValue("role", $user->roleName());
-        $html->setValue("scrolls", $user->Scrolls);
-
         $data = $resource->overview(true);
         
         $data["tags"] = json_encode($data["tags"]);

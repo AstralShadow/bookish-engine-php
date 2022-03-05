@@ -21,30 +21,16 @@ use Model\User as MUser;
 class User
 {
 
-    public static ?MUser $user;
-    public static ?Session $session;
-
-    #[StartUp]
-    public static function load_user()
-    {
-        self::$session = Session::fromCookie();
-        if(isset(self::$session))
-            self::$user = self::$session->User;
-    }
-
     #[GET]
     #[POST]
     public static function index($r)
     {
-        if(!isset(self::$user))
+        $user = Session::current()?->User;
+        if(!isset($user))
             return redirect("./login?next=user");
             
         $response = Page("user.html", 200);
         $response->setValue("csrf", CSRF::get());
-        $user = self::$user;
-        $response->setValue("user", $user->Name);
-        $response->setValue("role", $user->roleName());
-        $response->setValue("scrolls", $user->Scrolls);
 
         if($r->method() == RequestMethod::POST)
         {
@@ -74,9 +60,6 @@ class User
             return redirect("/login?next=/accured");
 
         $response = Page("search.html", 200);
-        $response->setValue("user", $user->Name);
-        $response->setValue("role", $user->roleName());
-        $response->setValue("scrolls", $user->Scrolls);
         $response->setValue("sourceName",
             "Твоите материали");
         $response->setValue("source", json_encode(
@@ -93,9 +76,6 @@ class User
             return redirect("/login?next=/accured");
 
         $response = Page("search.html", 200);
-        $response->setValue("user", $user->Name);
-        $response->setValue("role", $user->roleName());
-        $response->setValue("scrolls", $user->Scrolls);
         $response->setValue("sourceName",
             "Закупени материали");
         $response->setValue("source", json_encode(
