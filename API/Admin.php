@@ -20,6 +20,8 @@ use Extend\CSRFTokenManager as CSRF;
 use \Model\Session;
 use \Model\Resource;
 use \Model\User;
+use \Model\Role;
+use \Model\Junction\UserRole;
 use \Extend\Permissions;
 
 class Admin
@@ -43,6 +45,60 @@ class Admin
         $response = new ApiResponse(200);
         $response->echo($data);
         return $response;
+    }
+
+    #[POST("/give_mod")]
+    public static function give_mod()
+    {
+        $user = Session::current()?->User;
+        $permission = Permissions::CanGiveRoles;
+        if(!$user || !$user->has($permission))
+            return APIError(403);
+
+        if(!CSRF::weak_check())
+            return APIError(400, "Bad CSRF token.");
+
+        $name =& $_POST["user"];
+        if(!isValidString($name))
+            return APIError(400, "Invalid name");
+
+        $target = User::find([ "Name" => trim($name) ]);
+        if(!count($target))
+            return APIError(404, "User not found");
+
+        $role = Role::find([ "Name" => "moderator" ]);
+        $link = UserRole::get($target[0], $role[0]);
+        if($link == null)
+            new UserRole($target[0], $role[0], $user);
+
+        return new ApiResponse(200);
+    }
+
+    #[POST("/take_mod")]
+    public static function take_mod()
+    {
+        $user = Session::current()?->User;
+        $permission = Permissions::CanGiveRoles;
+        if(!$user || !$user->has($permission))
+            return APIError(403);
+        
+        if(!CSRF::weak_check())
+            return APIError(400, "Bad CSRF token.");
+
+        $name =& $_POST["user"];
+        if(!isValidString($name))
+            return APIError(400, "Invalid name");
+
+        $target = User::find([ "Name" => trim($name) ]);
+        if(!count($target))
+            return APIError(404, "User not found");
+
+        $role = Role::find([ "Name" => "moderator" ]);
+        $link = UserRole::get($target[0], $role[0]);
+        if($link != null)
+            $link->delete($link);
+
+        return new ApiResponse(200);
     }
 
     #[GET("/new_resources")]

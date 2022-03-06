@@ -2,14 +2,16 @@
 namespace Controllers;
 
 use Core\Request;
-use function Extend\layoutResponseFactory as Page;
-use function Extend\redirect;
 use Core\RequestMethods\GET;
 use Core\RequestMethods\PUT;
 use Core\RequestMethods\POST;
 use Core\RequestMethods\DELETE;
 use Core\RequestMethods\Fallback;
 use Core\RequestMethods\StartUp;
+
+use function Extend\layoutResponseFactory as Page;
+use function Extend\redirect;
+use Extend\CSRFTokenManager as CSRF;
 
 use Model\Session;
 use Extend\Permissions;
@@ -26,6 +28,7 @@ class Admin
             return Page("404.html", 404);
 
         $response = Page("admin.html", 200);
+        $response->setValue("csrf", CSRF::get());
         
 
         return $response;
