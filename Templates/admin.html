@@ -7,12 +7,10 @@
         </legend>
         <div>
             <div class="pos_relative" id="pos-filters">
-                <tag-area id="width-tagsearch" class="light-bg input" name="tags" form="filter">
-                </tag-area>
-                <overlay-pin class="pos-bottom-out">
-                    <tag-select class="shown hidden">
-                    </tag-select>
-                </overlay-pin>
+                <input id="width-tagsearch" 
+                    class="light-bg input"
+                    type="text"
+                    form="filter"/>
             </div>
         </div>
     </fieldset>
@@ -37,8 +35,8 @@
 </h-flex>
 
 <h-flex class="">
-    <fieldset data-content="name" class="text-center sec-bg border round-border 
-    white-text fontsize ">
+    <fieldset class="text-center sec-bg border
+                     round-border white-text fontsize">
         <legend class="text-center white-text text-border fontsize">
             <b>
                 Модератори
@@ -61,8 +59,9 @@
             </div>
         </shadow-wrap>
     </fieldset>
-    <fieldset data-content="name" class="text-center sec-bg border round-border
-        white-text fontsize">
+    <fieldset class="text-center sec-bg
+                     border round-border
+                     white-text fontsize">
         <legend class="text-center white-text text-border">
             <b>
                 Потребители
@@ -88,4 +87,6 @@
 </h-flex>
 
 <script src="${path:scripts/user/user.js}"
+        type="module"> </script>
+<script src="${path:scripts/admin/searching.js}"
         type="module"> </script>

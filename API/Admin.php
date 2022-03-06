@@ -25,6 +25,26 @@ use \Extend\Permissions;
 class Admin
 {
 
+    #[GET("/users")]
+    public static function listUsers()
+    {
+        $user = Session::current()?->User;
+        $permission = Permissions::CanGiveRoles;
+        if(!$user || !$user->has($permission))
+            return APIError(403);
+
+        $users = User::find([]);
+        $data = [];
+        foreach($users as $user)
+        {
+            $data[] = $user->overview();
+        }
+
+        $response = new ApiResponse(200);
+        $response->echo($data);
+        return $response;
+    }
+
     #[GET("/new_resources")]
     public static function approvals()
     {
