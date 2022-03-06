@@ -16,7 +16,7 @@ fetch_users()
 
 name_input.addEventListener("input", function()
 {
-    search = this.innerText
+    search = this.value
     update_content()
 })
 
@@ -42,6 +42,10 @@ function update_content()
         }
         if(!user.element)
             create_user_element(user)
+
+        if(search != "")
+            if(user.name.indexOf(search) == -1)
+                return;
 
         if(user.role == "Потребител")
             noobs.appendChild(user.element)
