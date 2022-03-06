@@ -19,13 +19,14 @@ use Extend\CSRFTokenManager as CSRF;
 
 use \Model\Session;
 use \Model\Resource;
+use \Model\User;
 use \Extend\Permissions;
 
 class Admin
 {
 
     #[GET("/new_resources")]
-    public static function approvals(Request $req)
+    public static function approvals()
     {
         $user = Session::current()?->User;
         $approve_perm = Permissions::CanApproveResources;
@@ -43,7 +44,7 @@ class Admin
     #[GET("/new_resources/{tags}")]
     public static function approvalsSearch(Request $req)
     {
-        $user = Session::current()?->User;;
+        $user = Session::current()?->User;
         $approve_perm = Permissions::CanApproveResources;
         if(!$user || !$user->has($approve_perm))
             return APIError(403);

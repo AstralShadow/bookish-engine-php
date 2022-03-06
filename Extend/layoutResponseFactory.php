@@ -19,7 +19,7 @@ function layoutResponseFactory(string $file,
     $user = Session::current()?->User;
     if($user)
     {
-        $overview = $user->privateOverwiev();
+        $overview = $user->privateOverview();
         $overview["user"] = $overview["name"];
         unset($overview["name"]);
         

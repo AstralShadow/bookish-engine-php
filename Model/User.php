@@ -100,7 +100,7 @@ class User extends Entity
         return false;
     }
 
-    public function overwiev()
+    public function overview()
     {
         $data = [
             "name" => $this->Name,
@@ -111,9 +111,9 @@ class User extends Entity
         return $data;
     }
 
-    public function privateOverwiev()
+    public function privateOverview()
     {
-        $data = $this->overwiev();
+        $data = $this->overview();
         $data["scrolls"] = $this->Scrolls;
         return $data;
     }

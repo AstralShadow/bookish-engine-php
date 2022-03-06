@@ -25,7 +25,7 @@ class Admin
         if(!$user || !$user->has($admin_perm))
             return Page("404.html", 404);
 
-        $response = Page("admin.html", 501);
+        $response = Page("admin.html", 200);
         
 
         return $response;
