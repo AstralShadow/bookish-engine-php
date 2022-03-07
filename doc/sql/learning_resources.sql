@@ -132,7 +132,7 @@ create table Resources(
 
     Price int default 1,
     
-    Approved boolean default false;
+    Approved boolean default false,
     ApproveNote text default null,
     ApprovedBy int default null,
     ApproveTime datetime default null,

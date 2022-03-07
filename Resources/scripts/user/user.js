@@ -16,13 +16,22 @@ export function setAvatar(uri)
     })
 }
 
-(async function()
+export async function sync()
 {
+    
     const request = await ajax("GET", "/api/user");
     const data = request.data
 
     if(!data) return;
 
     setAvatar(data.avatar)
+    setScrolls(data.scrolls)
+}
+sync()
 
-})()
+function setScrolls(num)
+{
+    const pos = document.querySelector("user-currency")
+    pos.innerText = num + "x"
+}
+

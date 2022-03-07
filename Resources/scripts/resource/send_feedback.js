@@ -27,5 +27,8 @@ async function attempt_submit()
         ("#feedback_form_feedback")
     if(req.data?.error)
         status_bar.innerText = req.data.error
+    else
+        input.value = ""
+
     fetch_data()
 }

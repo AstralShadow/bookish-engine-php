@@ -1,4 +1,5 @@
 import { ajax } from "../utility/ajax.js"
+import { sync } from "../user/user.js"
 
 const buy_btns = document.querySelectorAll(".buy_item")
 const feedbacks = Array.from(document.querySelectorAll
@@ -44,6 +45,7 @@ tuples.forEach(function(tuple)
         var result = await ajax("POST", uri, data)
         feedback.innerText = result.data?.error ?? ""
         update_state(item_id)
+        sync()
     })
 
 })

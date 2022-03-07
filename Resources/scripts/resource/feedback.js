@@ -2,7 +2,7 @@ import { ajax } from "../utility/ajax.js"
 
 const container = document.querySelector
                       ("#feedback_container")
-const no_comment = document.querySelector("#no_comment")
+const no_comment = document.querySelector("#no_comments")
 const other_fb = document.querySelector(".other_feedback")
 const your_fb = document.querySelector(".your_feedback")
 
@@ -34,7 +34,6 @@ function render()
             element = your_fb.cloneNode(1)
         else
             element = other_fb.cloneNode(1)
-        console.log(data)
 
         var avatar = element.querySelector("user-avatar")
         if(avatar && data.user.avatar)

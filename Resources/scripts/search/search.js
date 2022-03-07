@@ -22,7 +22,8 @@ area.addEventListener("change", async function(e)
     while(content.firstChild)
         content.removeChild(content.firstChild)
 
-    resources.forEach(displayResource)
+   Object.keys(resources)
+         .forEach((k) => displayResource(resources[k]))
 })
 
 window.addEventListener("load", function(){
