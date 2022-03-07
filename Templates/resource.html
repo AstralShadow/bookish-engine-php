@@ -137,37 +137,11 @@
                     </b>
                 </button>
             </a>
-            <input class="hidden" name="demo" form="upload" required type="file" />
         </section>
     </fieldset>
 </h-flex>
-<form method="post">
-    <fieldset data-content="name"
-        class="h-flex width80 text-center sec-bg border round-border white-text fontsize pos-center ">
-        <legend class="text-center white-text text-border">
-            <b>
-                Оценка и бележка за материала
-            </b>
-        </legend>
-        <h-flex>
-            <textarea class="light-bg" form="upload" name="info" required minlength=10></textarea>
-            <buy-cost class="mw100px _100px
-                text-left fontsize
-                white-text pos-center">
 
-                <input class="_20_30px border-small light-bg" form="upload" name="price" type="number" required min=1
-                    max=10></input>
-                x
-            </buy-cost>
-        </h-flex>
-        <button class="button w200px review  pos-center black-text fontsize text-center ">
-            <b>
-                Одобри материал
-            </b>
-        </button>
-    </fieldset>
-</form>
-
+${parse:${approve_element=resource_approve_form.html}}
 
 ${parse:js_tags.html}
 ${parse:js_csrf.html}

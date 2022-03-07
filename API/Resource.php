@@ -198,7 +198,7 @@ class Resource
         {
             $res->Price = intval($price);
         }
-        $res->User->Scrolls += $res->Price;
+        $res->Owner->Scrolls += $res->Price;
 
         $note = &$_POST["note"];
         if(isset($price) && is_numeric($price)

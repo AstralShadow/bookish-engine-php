@@ -14,6 +14,7 @@ use function Extend\layoutResponseFactory as Page;
 use function Extend\redirect;
 use function Extend\humanFilesize;
 use Extend\CSRFTokenManager as CSRF;
+use Extend\Permissions;
 
 use Model\Session;
 use Model\User;
@@ -24,6 +25,7 @@ class Resource
 {
 
     #[GET("/{id}")]
+    #[POST("/{id}")]
     public static function index(Request $req)
     {
         $id = $req->id;
@@ -38,6 +40,16 @@ class Resource
 
         $html = Page("resource.html", 200);
         $html->setValue("csrf", CSRF::get());
+        if($user->has(Permissions::CanApproveResources))
+        {
+            if(isset($_POST["price"]))
+            {
+                $answer = \API\Resource
+                    ::approveResource($req);
+                $html->setValue("approve_feedback",
+                    $answer->error ?? "Успешно одобрен");
+            }
+        }
 
         $data = $resource->overview(true);
         
@@ -48,6 +60,9 @@ class Resource
             ($data["preview_size"]);
         $data["preview_url"] = "/api/resource/$id/preview";
         $data["data_url"] = "/api/resource/$id/download";
+
+        if($data["approved"])
+            $data["approve_element"] = "empty.html";
 
         $html->setValues($data);
 

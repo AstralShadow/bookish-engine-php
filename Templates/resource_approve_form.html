@@ -1,0 +1,46 @@
+<form method="post">
+    <fieldset class="h-flex width80 text-center
+                     sec-bg border round-border
+                     white-text fontsize pos-center">
+
+        <legend class="text-center
+                 white-text
+                       text-border">
+            <b>
+                Оценка и бележка за материала
+            </b>
+        </legend>
+
+        <h-flex>
+            <textarea class="light-bg" name="note"
+            ></textarea>
+            <buy-cost class="mw100px _100px
+                text-left fontsize
+                white-text pos-center">
+
+                <input class="_20_30px
+                              border-small light-bg"
+                       name="price"
+                       type="number"
+                       required
+                       min=1
+                       value=2
+                       max=10
+                > </input> x
+            </buy-cost>
+        </h-flex>
+        <input type="hidden" name="csrf" value="${csrf}"/>
+
+        <button class="button w200px review
+                       pos-center black-text
+                       fontsize text-center">
+            <b>
+                Одобри материал
+            </b>
+        </button>
+        <br />
+        <span>
+            ${approve_feedback=}
+        </span>
+    </fieldset>
+</form>

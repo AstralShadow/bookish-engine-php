@@ -25,6 +25,8 @@ function layoutResponseFactory(string $file,
         
         if($user->has(Permissions::CanApproveResources))
             $overview["can_approve"] = "";
+        else
+            $overview["approve_element"] = "empty.html";
 
         if($user->has(Permissions::CanGiveRoles))
             $overview["can_give_roles"] = "";
