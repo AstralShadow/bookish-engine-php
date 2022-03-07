@@ -1,15 +1,15 @@
-Users page
- Ratings
- Fix login / register requirements
+
 
 Resource
- ratings
+ Ratings [Alaka]
+
+Security
+ XSS filters
+ ClamAV scanning
+
 
 Full test
 
-Security
- ClamAV scanning
- XSS filters
 
 Refactoring
  starting with HTML & CSS,

@@ -27,10 +27,12 @@ class User
     #[POST]
     public static function createUser()
     {
-        if(!isValidString($_POST["name"], 3) ||
-           !isValidString($_POST["password"], 6))
+        $name =& $_POST["name"];
+        $pwd =& $_POST["password"];
+        if(!isValidString($name, 3) || strlen($name) > 40
+        || !isValidString($pwd, 6) || strlen($pwd) > 40)
         {
-            return APIError(400, "Въведете име+парола");
+            return APIError(400, "Невалидни данни.");
         }
 
         $name = trim($_POST["name"]);
@@ -244,6 +246,8 @@ class User
     #[DELETE]
     public static function deleteUser()
     {
+        return APIError(501, "Not implemented");
+
         $session = MSession::current();
         if (!isset($session))
             return APIError(401, "Required to login");

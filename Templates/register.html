@@ -5,7 +5,7 @@
             </b>
         </legend>
         <ul class="text-left white-text">
-            <li> Да съдържа между 6 и 20 символа. </li>
+            <li> Да съдържа между 6 и 40 символа. </li>
             <br/>
             <li> Може да съдържа букви на латиница и на кирилица. </li>
             <br/>
@@ -18,16 +18,21 @@
                 Изисквания за паролата:
             </b>
         </legend>
-        <ul class="text-left white-text">
-            <li> Да съдържа между 12 и 50 символа. </li>
+        <ul class="text-left white-text" style="margin: 0px">
+            <li>
+                Да съдържа между 6 и 40 символа,
+                по възможност разнообразни.
+            </li>
             <br/>
-            <li> Да съдържа букви на латиница или на кирилица. </li>
-            <br/>
-            <li> Да съдържа малки и главни букви. </li>
-            <br/>
-            <li> Да съдържа поне 1 специален символ като: "-", "_", "*" и др. </li>
-            <br/>
-            <li> Да съдържа поне 1 цифра. </li>
+            <li>
+            Да не съвпада с паролата на
+            банковата Ви сметка. Ние криптираме
+            паролите с BCrypt, но ако използвате
+            една и съща парола на всякъде,
+            никакво количество кибер-сигурност
+            няма да Ви предпази от белята,
+            която си търсите.
+            </li>
         </ul>
     </fieldset>
 
@@ -49,7 +54,7 @@
                         class="light-bg input fright"
                         type="text"
                         required
-                        minlength=5
+                        minlength=3
                         maxlength=40/>
                 </td>
             </label>
@@ -64,7 +69,7 @@
                     autocomplete="new-password" class="light-bg input fright"
                         type="password"
                         required
-                        minlength=5
+                        minlength=6
                         maxlength=40/>
                 </td>
             </label>
@@ -79,7 +84,7 @@
                     autocomplete="new-password"
                         class="light-bg input fright"
                         required
-                        minlength=5
+                        minlength=6
                         maxlength=40/>
                 </td>
             </label>
