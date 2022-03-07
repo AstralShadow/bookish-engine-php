@@ -19,6 +19,9 @@ use Model\User;
 
 #[TraceLazyLoad("\Model\Junction\ResourceTag", "Tags")]
 
+#[TraceLazyLoad("\Model\Junction\ResourceRating",
+                    "Rating")]
+
 #[Table("Resources")]
 #[PrimaryKey("ResourceId")]
 class Resource extends Entity

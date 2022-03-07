@@ -171,13 +171,26 @@ create table ResourceFeedback(
     User int not null,
     CreateTime datetime not null default current_timestamp,
 
-    Message text,
-    Rating tinyint not null, # values between 0 and 100, implementation defined
+    Message text not null,
     # Public bool not null default true, # May change that to more sophiscated comment section
 
     Constraint ResourceFeedbacksResourceId foreign key(Resource)
         references Resources(ResourceId),
     Constraint ResourceFeedbacksUserID foreign key(User)
+        references Users(UserId)
+);
+
+create table ResourceRatings(
+    Resource int not null,
+    User int not null,
+
+    Rating tinyint not null,
+
+    Constraint ResourceRatingResourceId
+        foreign key(Resource)
+        references Resources(ResourceId),
+    Constraint ResourceRatingUserID
+        foreign key(User)
         references Users(UserId)
 );
 

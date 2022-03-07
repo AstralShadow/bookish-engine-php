@@ -1,5 +1,5 @@
 <?php
-namespace Model;
+namespace Model\Junction;
 
 use Core\Entity;
 use Core\Attributes\Table;
@@ -11,28 +11,26 @@ use Model\Resource;
 use Model\User;
 
 
-#[Table("ResourceFeedback")]
-#[PrimaryKey("ResourceFeedbackId")]
-class ResourceFeedback extends Entity
+#[Table("ResourceRatings")]
+#[PrimaryKey("Resource", "User")]
+class ResourceRating extends Entity
 {
 
-    [Traceable("Feedback")]
+    [Traceable("Rating")]
     public Resource $Resource;
 
-    [Traceable("ProvidedFeedback")]
+    [Traceable("ProvidedRating")]
     public User $User;
 
-    public \DateTime $CreateTime;
-    public string $Message;
+    public int $Rating;
 
     public function __construct(Resource $resource
                                 User $user,
-                                string $msg)
+                                int $rating)
     {
         $this->Resource = $resource;
         $this->User = $user;
-        $this->Message = $msg;
-        $this->CreateTime = new \DateTime();
+        $this->Rating = $rating;
 
         parent::__construct();
     }

@@ -19,6 +19,9 @@ use Extend\Permissions;
 #[TraceLazyLoad("\Model\Junction\UserResourceAccess",
                     "ProvidedResources")]
 
+#[TraceLazyLoad("\Model\Junction\ResourceRating",
+                    "ProvidedRating")]
+
 #[TraceLazyLoad("\Model\ResourceFeedback",
                     "ProvidedFeedback")]
 
