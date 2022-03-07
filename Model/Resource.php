@@ -79,12 +79,24 @@ class Resource extends Entity
     public function overview(bool $full = false)
     {
         $created = $this->CreateTime->format('Y-m-d');
+        $rates = $this->Rating();
+        $rate_sum = 0;
+        foreach($rates as $data)
+            $rate_sum += $data->Rating;
+    
+        $rating = count($rates) ?
+            $rate_sum / count($rates) :
+            null;
+
         $data = [
             "id" => $this->getId(),
             "name" => $this->Name,
             "owner" => $this->Owner->Name,
             "created" => $created,
             "info" => $this->Description,
+            
+            "rating" => $rating,
+            "rate_count" => count($rates),
 
             "approved" => $this->Approved,
             "price" => $this->Price,

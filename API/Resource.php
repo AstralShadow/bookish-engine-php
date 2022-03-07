@@ -20,8 +20,10 @@ use \Model\User;
 use \Model\Session;
 use \Model\Tag;
 use \Model\Resource as MResource;
+use \Model\ResourceFeedback;
 use \Model\Junction\ResourceTag;
 use \Model\Junction\UserResourceAccess;
+use \Model\Junction\ResourceRating;
 
 
 class Resource
@@ -199,6 +201,7 @@ class Resource
             $res->Price = intval($price);
         }
         $res->Owner->Scrolls += $res->Price;
+        $res->Owner->save();
 
         $note = &$_POST["note"];
         if(isValidString($note))
@@ -231,6 +234,59 @@ class Resource
         $response->echo($data);
         return $response;
     }
+
+    #[GET("/{id}/feedback")]
+    public static function getFeedback(Request $req)
+    {
+        $id = $req->id;
+        $res = MResource::get($id);
+        if(!$res)
+            return APIError(404, "Няма такъв ресурс.");
+
+        $user = Session::current()?->User;
+
+        $data = [];
+        foreach($res->Feedback() as $feedback)
+        {
+            $overview = $feedback->overview();
+            if($feedback->User->getId()
+                == $user?->getId())
+            {
+                $overview["hide_name"] = true;
+            }
+            $data[] = $overview;
+        }
+
+        $http = new ApiResponse(200);
+        $http->echo($data);
+        return $http;
+    }
+
+    #[POST("/{id}/feedback")]
+    public static function giveFeedback(Request $req)
+    {
+        $id = $req->id;
+        $res = MResource::get($id);
+        if(!$res)
+            return APIError(404, "Няма такъв ресурс.");
+
+        $user = Session::current()?->User;
+        if(!$user)
+            return APIError(401, "Влез в профила си");
+        if(!CSRF::weak_check())
+            return APIError(400, "Bad CSRF token");
+        if(!self::isAccured($user, $res))
+            return APIError(402, "Payment required");
+
+        $msg = &$_POST["text"];
+        if(!isValidString($msg, 10))
+            return APIError(400, "Bad feedback message");
+
+        $fb = new ResourceFeedback($res, $user, $msg);
+
+        return new ApiResponse(200);
+    }
+
 
     #[GET("/{id}/preview")]
     public static function downloadPreview(Request $req)
@@ -294,7 +350,7 @@ class Resource
         return new ApiResponse(200);
     }
 
-    private static function isAccured($user, $res)
+    public static function isAccured($user, $res)
     {
         $uid = $user->getId();
         $rid = $res->getId();

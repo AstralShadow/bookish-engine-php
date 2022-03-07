@@ -2,15 +2,18 @@ Users page
  Comments
  Ratings
  Approvals
+ Update scrolls count when buying stuff
 
-Next is splitting user feedback to feedback and ratings
-Then i do ratings (if html is ready)
-and then i do feedback
+Resource
+ ratings
+ feedback
 
-Check if resource shopping works.
-Actually, do a full test of everything.
+Full test
 
-And then i actually will add XSS filters
+Security
+ ClamAV scanning
+ XSS filters
 
-
-ClamAV scanning
+Refactoring
+ starting with HTML & CSS,
+ but actually all stuff needs it...

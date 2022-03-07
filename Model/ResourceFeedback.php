@@ -37,4 +37,15 @@ class ResourceFeedback extends Entity
         parent::__construct();
     }
 
+    public function overview()
+    {
+        $created = $this->CreateTime->format('Y-m-d');
+        $data = [
+            "user" => $this->User->overview(),
+            "created" => $created,
+            "message" => $this->Message
+        ];
+        return $data;
+    }
+
 }

@@ -61,6 +61,12 @@ class Resource
         $data["preview_url"] = "/api/resource/$id/preview";
         $data["data_url"] = "/api/resource/$id/download";
 
+        if(\API\Resource::isAccured($user, $resource))
+        {
+            $data["not_bought_note"] = "";
+            $data["hide_new_feedback"] = "";
+        }
+
         if($data["approved"])
             $data["approve_element"] = "empty.html";
 

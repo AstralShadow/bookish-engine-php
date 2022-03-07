@@ -1,6 +1,8 @@
 <h-flex>
-    <fieldset data-content="name" id="size-data-content"
-        class="h-flex text-center sec-bg border round-border pos-datacontent  white-text fontsize pos-center ">
+    <fieldset id="size-data-content"
+        class="h-flex text-center sec-bg border
+               round-border pos-datacontent white-text
+               fontsize pos-center ">
         <legend class="text-left white-text text-border">
             <b>
                 Заглавие:
@@ -33,7 +35,7 @@
 </h-flex>
 
 <h-flex class="wrap" id="search_results">
-    <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
+    <fieldset class="sec-bg border round-border white-text text-left fontsize">
         <legend class="text-left white-text text-border">
             <b>
                 Описание:
@@ -51,47 +53,64 @@
     </fieldset>
 </h-flex>
 
-<fieldset class="sec-bg border round-border white-text text-left fontsize pos-center">
+<fieldset class="sec-bg border round-border white-text
+                 text-left fontsize pos-center">
     <legend class="text-center white-text text-border">
         <b>
-            Коментари: Искаш и ти да пишеш тук? Купи файла и го оцени тук ->
+            Коментари:
+            ${not_bought_note= Искаш и ти да пишеш тук?
+            Купи файла и го оцени тук -> }
         </b>
     </legend>
-    <div data-content="name"
-         class="mh200px y_scroll fontsize pos-center">
-        <h-flex class="resource_feedback">
+    <div class="mh200px y_scroll fontsize pos-center"
+         id="feedback_container">
+        <span id="no_comments">
+            Няма налични коментари
+        </span>
+        <h-flex class="resource_feedback other_feedback">
             <user-avatar class="_32px"
                          style="flex: unset;">
             </user-avatar>
-            <span style="flex: unset;">
+            <span style="flex: unset;" class="user_name">
                 ${user=Гошко}
                 <br />- ${role=Бандита} -
             </span>
-            <div class="flex: 1; comment-border 
+            <div class="flex: 1; comment-border message
             white-text prim-bg fontsize text-left">
                 Чужд коментар
             </div>
         </h-flex>
-        <h-flex class="resource_feedback">
+        <h-flex class="resource_feedback your_feedback">
             <user-avatar class="max_32px text-center">
             </user-avatar>
-            <div class="width80 comment-border 
+            <div class="width80 comment-border message
             white-text prim-bg fontsize text-left">
                 Твой коментар
             </div>
         </h-flex>
     </div>
 
-    <h-flex class="tborder pos-center">
-        <user-avatar class="max_32px text-center">
-        </user-avatar>
-        <input class="width80 comment-border 
-        white-text black-text light-bg fontsize text-left" type="text" />
-    </h-flex>
+    <form id="feedback_form">
+        <h-flex class="tborder pos-center
+                       ${hide_new_feedback=d_hidden}">
+            <user-avatar class="my_avatar
+                                max_32px text-center">
+            </user-avatar>
+            <input class="width80 comment-border 
+                          white-text black-text light-bg
+                          fontsize text-left"
+                   id="user_comment"
+                   minlength=10
+                   type="text" 
+                   id="new_comment" />
+        </h-flex>
+        <br />
+        <span id="feedback_form_feedback"></span>
+    </form>
 </fieldset>
 
 <h-flex class="text-center wrap fontsize">
-    <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
+    <fieldset class="sec-bg border round-border white-text text-left fontsize">
         <legend class="text-left white-text text-border">
             <b>
                 Целия материал:
@@ -109,17 +128,19 @@
             <br />
             <br />
             <a class="download_item" href="${data_url}" data-item-id="${id}" download="${data_name}">
-                <button class="button review  pos-center black-text fontsize text-center ">
+                <button class="button review pos-center black-text fontsize text-center ">
                     <b>
                         Изтегли файл
                     </b>
                 </button>
             </a>
-            <button class="button review  pos-center black-text fontsize text-center buy_item" data-item-id="${id}">
+            <button class="button review pos-center black-text fontsize text-center buy_item" data-item-id="${id}">
                 <b>
                     Купи
                 </b>
             </button>
+            <span class="buy_error" data-item-id="${id}">
+            </span>
         </section>
     </fieldset>
     <fieldset class="sec-bg border round-border black-text text-left fontsize">
@@ -134,8 +155,11 @@
             Размер: ${preview_size=0B} (${preview_mime=unknown})
             <br />
             <br />
-            <a href="${preview_url}" download="${preview_name}">
-                <button class="button review  pos-center black-text fontsize text-center ">
+            <a href="${preview_url}"
+               download="${preview_name}">
+                <button class="button review pos-center
+                               black-text fontsize
+                               text-center">
                     <b>
                         Изтегли демо
                     </b>
@@ -149,8 +173,15 @@ ${parse:${approve_element=resource_approve_form.html}}
 
 ${parse:js_tags.html}
 ${parse:js_csrf.html}
-<script src="${path:scripts/resource/tags.js}" type="module"> </script>
-<script src="${path:scripts/resource/shopping.js}" type="module"> </script>
-<script src="${path:scripts/resource/feedback.js}" type="module"> </script>
+${parse:js_id.html}
+<script src="${path:scripts/resource/tags.js}"
+        type="module"> </script>
+<script src="${path:scripts/resource/shopping.js}"
+        type="module"> </script>
+<script src="${path:scripts/resource/feedback.js}"
+        type="module"> </script>
+<script src="${path:scripts/resource/send_feedback.js}"
+        type="module"> </script>
 
-<script src="${path:scripts/user/user.js}" type="module"> </script>
+<script src="${path:scripts/user/user.js}"
+        type="module"> </script>
