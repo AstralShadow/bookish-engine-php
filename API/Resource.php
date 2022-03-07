@@ -201,11 +201,8 @@ class Resource
         $res->Owner->Scrolls += $res->Price;
 
         $note = &$_POST["note"];
-        if(isset($price) && is_numeric($price)
-           && intval($price) > 0)
-        {
+        if(isValidString($note))
             $res->ApproveNote = $note;
-        }
 
         $res->approve($user);
         $http = new ApiResponse(200);
