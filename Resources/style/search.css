@@ -4,7 +4,7 @@
     min-width: 200px;
 }
 
-#search_results {
+#search_results, .shadowed_content {
     overflow-y: auto;
     max-height: 600px;
     /* Padding for the shadow. */

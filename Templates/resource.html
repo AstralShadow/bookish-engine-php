@@ -31,6 +31,7 @@
         </header>
     </a>
 </h-flex>
+
 <h-flex class="wrap" id="search_results">
     <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
         <legend class="text-left white-text text-border">
@@ -49,14 +50,16 @@
         <tag-area id="tags_container"></tag-area>
     </fieldset>
 </h-flex>
-<fieldset class="sec-bg  border round-border white-text text-left fontsize pos-center">
+
+<fieldset class="sec-bg border round-border white-text text-left fontsize pos-center">
     <legend class="text-center white-text text-border">
         <b>
             Коментари: Искаш и ти да пишеш тук? Купи файла и го оцени тук ->
         </b>
     </legend>
-    <div data-content="name" class="mh200px y_scroll fontsize pos-center ">
-        <h-flex id="search_results">
+    <div data-content="name"
+         class="mh200px y_scroll fontsize pos-center">
+        <h-flex class="resource_feedback">
             <user-avatar class="_32px"
                          style="flex: unset;">
             </user-avatar>
@@ -69,7 +72,7 @@
                 Чужд коментар
             </div>
         </h-flex>
-        <h-flex id="search_results">
+        <h-flex class="resource_feedback">
             <user-avatar class="max_32px text-center">
             </user-avatar>
             <div class="width80 comment-border 
@@ -77,16 +80,16 @@
                 Твой коментар
             </div>
         </h-flex>
-        
     </div>
-    <h-flex id="search_results" class="tborder  pos-center">
+
+    <h-flex class="tborder pos-center">
         <user-avatar class="max_32px text-center">
         </user-avatar>
         <input class="width80 comment-border 
         white-text black-text light-bg fontsize text-left" type="text" />
     </h-flex>
-
 </fieldset>
+
 <h-flex class="text-center wrap fontsize">
     <fieldset data-content="info" class="sec-bg border round-border white-text text-left fontsize">
         <legend class="text-left white-text text-border">
@@ -148,5 +151,6 @@ ${parse:js_tags.html}
 ${parse:js_csrf.html}
 <script src="${path:scripts/resource/tags.js}" type="module"> </script>
 <script src="${path:scripts/resource/shopping.js}" type="module"> </script>
+<script src="${path:scripts/resource/feedback.js}" type="module"> </script>
 
 <script src="${path:scripts/user/user.js}" type="module"> </script>

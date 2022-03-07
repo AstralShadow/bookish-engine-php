@@ -45,7 +45,8 @@
         </legend>
         <shadow-wrap>
             <inner-shadow id="shadow-dark"> </inner-shadow>
-            <div class="mh500px y_scroll" id="mods_list">
+            <div class="mh500px y_scroll shadowed_content"
+                 id="mods_list">
                 <h-flex>
                     <user-avatar style="flex: unset;"
                                  class="_32px">
@@ -71,20 +72,22 @@
         </legend>
         <shadow-wrap>
             <inner-shadow id="shadow-dark"> </inner-shadow>
-            <div class="mh500px y_scroll" id="noobs_list">
-            <h-flex>
-                <user-avatar style="flex: unset;"
-                             class="_32px">
-                </user-avatar>
-                <span>
-                    ${user=Гошко} - ${role=Бандита}
-                </span>
-                <button class="button mw100px review
-                        black-text fontsize text-center">
-                    Добави
-                </button>
-            </h-flex>
-        </div>
+            <div class="mh500px y_scroll shadowed_content"
+                 id="noobs_list">
+                <h-flex>
+                    <user-avatar style="flex: unset;"
+                                 class="_32px">
+                    </user-avatar>
+                    <span>
+                        ${user=Гошко} - ${role=Бандита}
+                    </span>
+                    <button class="button mw100px review
+                            black-text fontsize
+                            text-center">
+                        Добави
+                    </button>
+                </h-flex>
+            </div>
         </shadow-wrap>
     </fieldset>
 </h-flex>
