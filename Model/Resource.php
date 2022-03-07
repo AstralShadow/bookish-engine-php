@@ -45,7 +45,7 @@ class Resource extends Entity
 
     public int $Price = 1;
 
-    public bool $Approved = false;
+    public bool $Approved;
     public ?\DateTime $ApproveTime;
     #[Traceable("ApprovedResources")]
     public ?User $ApprovedBy;
@@ -57,9 +57,6 @@ class Resource extends Entity
         $this->Name = $name;
         $this->Owner = $owner;
         $this->CreateTime = new \DateTime();
-
-        $this->approve($owner, false);
-
         parent::__construct();
     }
 
