@@ -16,15 +16,15 @@ use Model\User;
 class ResourceRating extends Entity
 {
 
-    [Traceable("Rating")]
+    #[Traceable("Rating")]
     public Resource $Resource;
 
-    [Traceable("ProvidedRating")]
+    #[Traceable("ProvidedRating")]
     public User $User;
 
     public int $Rating;
 
-    public function __construct(Resource $resource
+    public function __construct(Resource $resource,
                                 User $user,
                                 int $rating)
     {

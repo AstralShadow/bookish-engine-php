@@ -16,16 +16,16 @@ use Model\User;
 class ResourceFeedback extends Entity
 {
 
-    [Traceable("Feedback")]
+    #[Traceable("Feedback")]
     public Resource $Resource;
 
-    [Traceable("ProvidedFeedback")]
+    #[Traceable("ProvidedFeedback")]
     public User $User;
 
     public \DateTime $CreateTime;
     public string $Message;
 
-    public function __construct(Resource $resource
+    public function __construct(Resource $resource,
                                 User $user,
                                 string $msg)
     {
