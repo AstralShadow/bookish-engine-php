@@ -1,3 +1,21 @@
-Comments
-Personal lists
-Documentation
+[done] Admin panel
+
+Users page
+ Comments
+ Ratings
+ Approvals
+
+Make user avatars circle in admin and resource pages.
+
+[done] I'm working on admin page user filtering.
+[done] Next is making users mods or no-mods.
+
+Then i'll be doing resource approvals
+Next is splitting user feedback to feedback and ratings
+Then i do ratings (if html is ready)
+and then i do feedback
+
+And then i actually will add XSS filters
+
+
+ClamAV scanning

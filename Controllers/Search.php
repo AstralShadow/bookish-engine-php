@@ -26,9 +26,6 @@ class Search
             return redirect("/login?next=/search");
 
         $response = Page("search.html", 200);
-        $response->setValue("user", $user->Name);
-        $response->setValue("role", $user->roleName());
-        $response->setValue("scrolls", $user->Scrolls);
 
         return $response;
     }

@@ -208,7 +208,10 @@ class Search
         $data = array_map(function($res)
         {
             return $res->overview();
-        }, $resources);
+        }, array_filter($resources, function($r)
+        {
+            return isset($r->ApproveTime);
+        }));
 
         $response = new ApiResponse(200);
         $response->setHeader
@@ -233,7 +236,10 @@ class Search
         $data = array_map(function($res)
         {
             return $res->overview();
-        }, $resources);
+        }, array_filter($resources, function($r)
+        {
+            return isset($r->ApproveTime);
+        }));
 
         $response = new ApiResponse(200);
         $response->setHeader

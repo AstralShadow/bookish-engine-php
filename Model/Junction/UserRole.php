@@ -36,7 +36,7 @@ class UserRole extends Entity
         $this->Role = $role;
         $this->Reaspon = $reason;
         $this->AssignedBy = $assigner;
-        $this->created = new DateTime();
+        $this->CreateTime = new \DateTime();
         parent::__construct();
     }
 

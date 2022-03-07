@@ -29,8 +29,14 @@
 .fontsize {
     font-size: 18px;
 }
+
 .bigfontsize {
     font-size: 25px;
+}
+
+.text-ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 input, textarea, tag-area
@@ -65,3 +71,4 @@ fieldset{
 }
 
 a { text-decoration: none; }
+

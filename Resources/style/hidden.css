@@ -21,3 +21,8 @@
     -webkit-transition: opacity 600ms, visibility 600ms;
             transition: opacity 600ms, visibility 600ms;
 }
+
+.d_hidden
+{
+   display: none; 
+}

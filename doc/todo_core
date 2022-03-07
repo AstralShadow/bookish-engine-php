@@ -1,2 +1,4 @@
 implement mysql COLLATE instead mb_strtolower for tags
 Still, check support for it before that.
+
+Implement PUT requests

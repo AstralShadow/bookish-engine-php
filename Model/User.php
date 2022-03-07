@@ -100,19 +100,21 @@ class User extends Entity
         return false;
     }
 
-    public function overwiev()
+    public function overview()
     {
         $data = [
             "name" => $this->Name,
+            "role" => $this->roleName(),
             "avatar" => $this->avatarUri()
         ];
 
         return $data;
     }
 
-    public function privateOverwiev()
+    public function privateOverview()
     {
-        $data = $this->overwiev();
+        $data = $this->overview();
+        $data["scrolls"] = $this->Scrolls;
         return $data;
     }
 
@@ -131,7 +133,11 @@ class User extends Entity
 
     public function roleName() : string
     {
-        return "Сянката";
+        if($this->has(Permissions::CanGiveRoles))
+            return "Админ";
+        if($this->has(Permissions::CanApproveResources))
+            return "Модератор";
+        return "Потребител";
     }
 
 }

@@ -95,7 +95,7 @@ class User
 
         $user = $users[0];
         $response = new ApiResponse(200);
-        $response->echo($user->overwiev());
+        $response->echo($user->overview());
         return $response;
     }
 
@@ -237,7 +237,7 @@ class User
         $user = $session->User;
 
         $response = new ApiResponse(200);
-        $response->echo($user->privateOverwiev());
+        $response->echo($user->privateOverview());
         return $response;
     }
 

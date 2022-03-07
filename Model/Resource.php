@@ -42,7 +42,8 @@ class Resource extends Entity
 
     public int $Price = 1;
 
-    public \DateTime $ApproveTime;
+    public bool $Approved = false;
+    public ?\DateTime $ApproveTime;
     #[Traceable("ApprovedResources")]
     public ?User $ApprovedBy;
     public ?string $ApproveNote;
@@ -63,6 +64,7 @@ class Resource extends Entity
     {
         if($user->has(Permissions::CanApproveResources))
         {
+            $this->Approved = true;
             $this->ApproveTime = new \DateTime();
             $this->ApprovedBy = $user;
 
@@ -81,7 +83,7 @@ class Resource extends Entity
             "created" => $created,
             "info" => $this->Description,
 
-            "approved" => isset($this->ApproveTime),
+            "approved" => $this->Approved,
             "price" => $this->Price,
             
             "tags" => []
@@ -102,6 +104,11 @@ class Resource extends Entity
         }
 
         return $data;
+    }
+
+    public static function new_resources()
+    {
+        return self::find(["Approved" => false]);
     }
 
 }

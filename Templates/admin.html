@@ -7,12 +7,10 @@
         </legend>
         <div>
             <div class="pos_relative" id="pos-filters">
-                <tag-area id="width-tagsearch" class="light-bg input" name="tags" form="filter">
-                </tag-area>
-                <overlay-pin class="pos-bottom-out">
-                    <tag-select class="shown hidden">
-                    </tag-select>
-                </overlay-pin>
+                <input id="width-tagsearch" 
+                    class="light-bg input"
+                    type="text"
+                    form="filter"/>
             </div>
         </div>
     </fieldset>
@@ -36,18 +34,19 @@
     </a>
 </h-flex>
 
-<h-flex class="">
-    <fieldset data-content="name" class="text-center sec-bg border round-border 
-    white-text fontsize ">
-        <legend class="text-center white-text text-border fontsize">
+<h-flex>
+    <fieldset class="text-center sec-bg border
+                     round-border white-text fontsize">
+        <legend class="text-center white-text
+                       text-border fontsize">
             <b>
                 Модератори
             </b>
         </legend>
         <shadow-wrap>
             <inner-shadow id="shadow-dark"> </inner-shadow>
-            <div class="mh500px y_scroll">
-                <h-flex id="search_results">
+            <div class="mh500px y_scroll" id="mods_list">
+                <h-flex>
                     <user-avatar class="max_32px text-center">
                     </user-avatar>
                     <span>
@@ -61,8 +60,9 @@
             </div>
         </shadow-wrap>
     </fieldset>
-    <fieldset data-content="name" class="text-center sec-bg border round-border
-        white-text fontsize">
+    <fieldset class="text-center sec-bg
+                     border round-border
+                     white-text fontsize">
         <legend class="text-center white-text text-border">
             <b>
                 Потребители
@@ -70,15 +70,15 @@
         </legend>
         <shadow-wrap>
             <inner-shadow id="shadow-dark"> </inner-shadow>
-            <div class="mh500px y_scroll">
-            <h-flex id="search_results">
+            <div class="mh500px y_scroll" id="noobs_list">
+            <h-flex>
                 <user-avatar class="max_32px text-center">
                 </user-avatar>
                 <span>
                     ${user=Гошко} - ${role=Бандита}
                 </span>
                 <button class="button mw100px review
-                black-text fontsize text-center ">
+                        black-text fontsize text-center">
                     Добави
                 </button>
             </h-flex>
@@ -86,3 +86,9 @@
         </shadow-wrap>
     </fieldset>
 </h-flex>
+
+${parse:js_csrf.html}
+<script src="${path:scripts/user/user.js}"
+        type="module"> </script>
+<script src="${path:scripts/admin/searching.js}"
+        type="module"> </script>
