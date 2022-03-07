@@ -1,6 +1,7 @@
 .button { cursor: pointer; }
 
-.button.upload,.button.login, .button.config, .button.warning, .button.review {
+.button.upload,.button.login, .button.config,
+.button.warning, .button.review {
     background-size: auto 100%;
     background-repeat: no-repeat;
     background-color: transparent;
@@ -26,7 +27,8 @@
     height: 25px;
 }
 
-.button.upload:active, .button.config:active, .button.warning:active {
+.button.upload:active, .button.config:active,
+.button.warning:active, .button.logout:active {
     border-width: 3px;
 }
 
@@ -46,4 +48,11 @@
 
 .button.warning {
     background-image: url("../img/warning.png");
+}
+
+.button.logout {
+    background-image: url("../img/logout.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    display: block;
 }
