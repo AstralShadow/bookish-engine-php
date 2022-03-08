@@ -131,7 +131,7 @@ class User extends Entity
 
         $time = filemtime($this->Avatar);
 
-        return "/api/user/{$this->Name}/avatar?" . $time;
+        return "/api/user/" . urlencode($this->Name) . "/avatar?" . $time;
     }
 
     public function roleName() : string

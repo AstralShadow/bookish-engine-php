@@ -63,7 +63,9 @@ class User
         $response->setValue("sourceName",
             "Твоите материали");
         $response->setValue("source", json_encode(
-            "/api/user/" . $user->Name . "/resources/"));
+            "/api/user/" .
+            urlencode($user->Name) .
+            "/resources/"));
 
         return $response;
     }
@@ -79,7 +81,9 @@ class User
         $response->setValue("sourceName",
             "Закупени материали");
         $response->setValue("source", json_encode(
-            "/api/user/" . $user->Name . "/accured/"));
+            "/api/user/" .
+            urlencode($user->Name) .
+            "/accured/"));
 
         return $response;
     }
