@@ -52,7 +52,7 @@ class Resource
         }
 
         $data = $resource->overview(true);
-        foreach(["name", "owner", "info"] as $key)
+        foreach(["name", "owner", "info", "data_name", "preview_name"] as $key)
             $data[$key] = htmlspecialchars($data[$key]);
         
         $data["tags"] = json_encode($data["tags"]);
