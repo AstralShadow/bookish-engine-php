@@ -7,6 +7,7 @@ use \Core\Attributes\Table;
 use \Core\Attributes\PrimaryKey;
 use \Core\Attributes\Traceable;
 use function \Extend\generateToken;
+use function \Extend\setCookie;
 
 
 #[Table("Sessions")]
@@ -60,10 +61,7 @@ class Session extends Entity
 
     public function saveInCookie() : void
     {
-        setcookie(self::COOKIE_NAME, $this->Token, [
-            "SameSite" => "Strict",
-            "Path" => "/"
-        ]);
+        setCookie(self::COOKIE_NAME, $this->Token);
     }
 
     public static function fromPOST() : ?Session

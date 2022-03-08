@@ -17,6 +17,7 @@ require "Extend/CSRFTokenManager.php";
 require "Extend/uploadFile.php";
 require "Extend/shrinkAvatar.php";
 require "Extend/humanFilesize.php";
+require "Extend/setCookie.php";
 
 require "Core/autoload.php";
 
