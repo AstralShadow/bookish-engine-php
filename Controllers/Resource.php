@@ -52,6 +52,8 @@ class Resource
         }
 
         $data = $resource->overview(true);
+        foreach(["name", "owner", "info"] as $key)
+            $data[$key] = htmlspecialchars($data[$key]);
         
         $data["tags"] = json_encode($data["tags"]);
         $data["data_size"] = humanFilesize 

@@ -15,12 +15,13 @@ function layoutResponseFactory(string $file,
         (file: "_layout.html", code: $code);
 
     $response->setValue("_page", $file);
+    $response->setValue("Title", "Свитъците");
 
     $user = Session::current()?->User;
     if($user)
     {
         $overview = $user->privateOverview();
-        $overview["user"] = $overview["name"];
+        $overview["user"] = htmlspecialchars($overview["name"]);
         unset($overview["name"]);
         
         if($user->has(Permissions::CanApproveResources))
